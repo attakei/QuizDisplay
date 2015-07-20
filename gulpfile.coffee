@@ -1,7 +1,7 @@
 gulp   = require('gulp')
 coffee = require('gulp-coffee')
 react = require('gulp-react')
-webpack = require('gulp-webpack')
+webpack = require('webpack-stream')
 
 
 gulp.task 'default', ['build']
