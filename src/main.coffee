@@ -1,8 +1,9 @@
 Promise = require 'bluebird'
 Promise.resolve require './globals'
-Arda = require 'arda'
+
+InitContext = require('./init/index').InitContext
 
 
 window.addEventListener 'DOMContentLoaded', ->
   App.router = new Arda.Router Arda.DefaultLayout, document.body
-  # App.router.pushContext(InitContext, {maxPlayers: 8})
+  App.router.pushContext(InitContext, {maxPlayers: 8})
