@@ -1,6 +1,29 @@
+# --------------------------------------
+#
+# 初期設定Context系パッケージ
+#
+# --------------------------------------
 ProgressContext = require('../progress/index').ProgressContext
 
 
+# InitComponent用mixn
+@InitController =
+  getInitialState: ->
+    {}
+
+  handleSubmit: ->
+    formData = {}
+    formData.programName = @linkState('programName').value
+    formData.players = []
+    for i in [0..@props.maxPlayers]
+      val_ = @linkState('player[' + i + ']').value
+      val_ = '' if typeof val_ == "undefined"
+      formData.players.push(val_)
+
+    @dispatch('submit', formData)
+
+
+# 初期化画面用Context
 class @InitContext extends Arda.Context
   component:
     require('./component')

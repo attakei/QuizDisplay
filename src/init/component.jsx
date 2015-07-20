@@ -1,20 +1,8 @@
-InitComponent = React.createClass({
-    mixins: [Arda.mixin, React.addons.LinkedStateMixin],
-    getInitialState: function() {
-        return {
-        };
-    },
-    handleSubmit: function() {
-        var formData = {};
-        formData['programName'] = this.linkState('programName').value;
-        formData['players'] = [];
-        for (var i = 0; i < this.props.maxPlayers; i++) {
-            var val_ = this.linkState('player[' + i + ']').value;
-            if (typeof val_ === "undefined") val_ = '';
-            formData['players'].push(val_);
-        }
-        this.dispatch('submit', formData);
-    },
+var InitController = require('./index').InitController
+
+
+module.exports = React.createClass({
+    mixins: [Arda.mixin, React.addons.LinkedStateMixin, InitController],
     render: function(){
         var playerNameForms = [];
         for (var i=0; i < this.props.maxPlayers; i++) {
@@ -43,6 +31,3 @@ InitComponent = React.createClass({
         );
     }
 });
-
-
-module.exports = InitComponent
