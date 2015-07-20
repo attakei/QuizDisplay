@@ -13,7 +13,7 @@ gulp.task 'default', ['build']
 gulp.task 'build', (callback) ->
   runSequence(
     'compile',
-    'webpack',
+    ['webpack', 'copy:index', 'copy:vendor'],
     callback
   )
 
@@ -35,6 +35,14 @@ gulp.task 'compile:coffee', ->
   gulp.src('src/**/*.coffee')
     .pipe(coffee())
     .pipe(gulp.dest(config.dest.compile))
+
+gulp.task 'copy:index', ->
+  gulp.src('src/index.html')
+    .pipe(gulp.dest(config.dest.package))
+
+gulp.task 'copy:vendor', ->
+  gulp.src('vendor/*', { base: 'vendor' })
+    .pipe(gulp.dest(config.dest.package + '/lib'))
 
 gulp.task 'webpack', ->
   gulp.src(config.webpack.entry)
