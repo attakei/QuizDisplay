@@ -12,7 +12,7 @@ ProgressComponent = React.createClass({
                 var playerIdTag = <p className="text-center">{i}</p>;
             }
             players.push(
-                <div className="col-md-1" onClick={this.tryAnswer} data-playerid={i} data-answer={this.props.players[i].isAnswer}>
+                <div className="col-md-1 player_column" onClick={this.tryAnswer} data-playerid={i} data-answer={this.props.players[i].isAnswer}>
                     {playerIdTag}
                     <p className="text-center">{this.props.players[i].name}</p>
                     <p className="text-center">○1</p>
