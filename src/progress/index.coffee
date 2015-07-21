@@ -15,6 +15,7 @@
   tryAnswer: (e) ->
     elm = @_findColumnNode(e)
     console.debug(elm.getAttribute('data-playerid') + ': try answer.')
+    @dispatch 'try-answer', elm.getAttribute('data-playerid')
 
 
 class Player
@@ -35,3 +36,14 @@ class @ProgressContext extends Arda.Context
     programName: props.programName
     players: state.players
     quizCount: state.quizCount
+
+  delegate: (subscribe) ->
+    super
+
+    subscribe 'try-answer', (playerId) ->
+      hasAnswer = @state.players.some (val, idc, arr) ->
+        return val.isAnswer
+      if hasAnswer
+        console.debug('already answers')
+      @state.players[playerId].isAnswer = true
+
