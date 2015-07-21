@@ -6,7 +6,7 @@ ProgressContext = require('./progress/index').ProgressContext
 
 form =
   programName: '7○3✕'
-  players: ['テスト太郎', 'クイズ花子']
+  playerNames: ['テスト太郎', 'クイズ花子']
 
 
 window.addEventListener 'DOMContentLoaded', ->

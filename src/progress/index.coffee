@@ -17,13 +17,21 @@
     console.debug(elm.getAttribute('data-playerid') + ': try answer.')
 
 
+class Player
+  constructor: (name) ->
+    @name = name
+    @isAnswer = false
+
 
 class @ProgressContext extends Arda.Context
   component:
     require('./component')
+
   initState: (props) ->
     quizCount: 0
+    players: (new Player(name) for name in props.playerNames)
+
   expandComponentProps: (props, state) ->
     programName: props.programName
-    playerNames: props.players
+    players: state.players
     quizCount: state.quizCount
