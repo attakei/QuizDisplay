@@ -10,6 +10,14 @@ config = require('./config')
 
 gulp.task 'default', ['build']
 
+
+gulp.task 'develop', (callback) ->
+  config.webpack.entry = config.dest.compile + '/sub.js'
+  runSequence(
+    'build',
+    callback
+  )
+
 gulp.task 'build', (callback) ->
   runSequence(
     'compile',
