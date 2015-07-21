@@ -5,7 +5,17 @@
 # --------------------------------------
 
 
-@ProgressController = {}
+@ProgressController =
+  _findColumnNode: (e) ->
+    elm = e.target
+    if elm.getAttribute != 'col-md-1'
+      elm = elm.parentNode
+    return elm
+
+  tryAnswer: (e) ->
+    elm = @_findColumnNode(e)
+    console.debug(elm.getAttribute('data-playerid') + ': try answer.')
+
 
 
 class @ProgressContext extends Arda.Context
