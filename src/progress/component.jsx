@@ -1,5 +1,8 @@
+var ProgressController = require('./index').ProgressController
+
+
 ProgressComponent = React.createClass({
-    mixins: [Arda.mixin],
+    mixins: [Arda.mixin, ProgressController],
     render: function(){
         var players = [];
         for (var i = 0; i < this.props.players.length; i++) {
