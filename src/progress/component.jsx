@@ -44,7 +44,7 @@ ProgressComponent = React.createClass({
     <div className="container">
       <div className="row">
         正誤操作
-        <button type="button" className="btn btn-default">リセット</button>
+        <button type="button" className="btn btn-default" onClick={this.resetAnswer}>リセット</button>
         <button type="button" className="btn btn-primary">正解</button>
         <button type="button" className="btn btn-danger">誤答</button>
       </div>

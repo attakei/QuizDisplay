@@ -17,6 +17,9 @@
     console.debug(elm.getAttribute('data-playerid') + ': try answer.')
     @dispatch 'try-answer', elm.getAttribute('data-playerid')
 
+  resetAnswer: ->
+    @dispatch 'reset-answer'
+
 
 class Player
   constructor: (name) ->
@@ -49,5 +52,12 @@ class @ProgressContext extends Arda.Context
         return
       players_ = @state.players
       players_[playerId].isAnswer = true
+      @update => players: players_
+
+    subscribe 'reset-answer', ->
+      # 誰か一人でも解答権を持っている場合は、処理を進めない
+      players_ = @state.players
+      for player in players_
+        player.isAnswer = false
       @update => players: players_
 
