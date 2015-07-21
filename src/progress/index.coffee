@@ -41,9 +41,13 @@ class @ProgressContext extends Arda.Context
     super
 
     subscribe 'try-answer', (playerId) ->
+      # 誰か一人でも解答権を持っている場合は、処理を進めない
       hasAnswer = @state.players.some (val, idc, arr) ->
         return val.isAnswer
       if hasAnswer
         console.debug('already answers')
-      @state.players[playerId].isAnswer = true
+        return
+      players_ = @state.players
+      players_[playerId].isAnswer = true
+      @update => players: players_
 
