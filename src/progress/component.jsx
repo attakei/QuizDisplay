@@ -5,10 +5,10 @@ ProgressComponent = React.createClass({
     mixins: [Arda.mixin, ProgressController],
     render: function(){
         var players = [];
-        for (var i = 0; i < this.props.players.length; i++) {
+        for (var i = 0; i < this.props.playerNames.length; i++) {
             players.push(
                 <div className="col-md-1">
-                    <p className="text-center">{this.props.players[i]}</p>
+                    <p className="text-center">{this.props.playerNames[i]}</p>
                     <p className="text-center">○1</p>
                     <p className="text-center">○1</p>
                 </div>
