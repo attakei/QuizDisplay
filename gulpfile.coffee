@@ -18,6 +18,10 @@ gulp.task 'develop', (callback) ->
     callback
   )
 
+gulp.task 'watch', ['develop'], (callback) ->
+  gulp.watch('./src/**', ['develop']);
+
+
 gulp.task 'build', (callback) ->
   runSequence(
     'compile',
