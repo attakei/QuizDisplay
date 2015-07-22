@@ -9,7 +9,7 @@ class @Player
     @numOfWrongs = 0
 
   displayPositive: ->
-    '○ ' + @numOfRights
+    '◯ ' + @numOfRights
 
   displayNegative: ->
     '✕ ' + @numOfWrongs
