@@ -38,12 +38,8 @@ gulp.task 'develop', (callback) ->
     callback
   )
 
-gulp.task 'watch', ['develop'], (callback) ->
-  runSequence(
-    'develop',
-    gulp.watch('./src/**', ['develop']),
-    callback
-  )
+gulp.task 'watch', (callback) ->
+  gulp.watch('./src/**', ['develop'])
 
 
 gulp.task 'build', (callback) ->
