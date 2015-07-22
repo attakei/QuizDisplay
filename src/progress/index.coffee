@@ -50,11 +50,15 @@ class @ProgressContext extends Arda.Context
           player.isAnswer = true
         return player
       console.log players_
-      @update => players: players_
+      @update (state) =>
+        state.players= players_
+        return state
 
     subscribe 'reset-answer', ->
       players_ = @state.players
       for player in players_
         player.isAnswer = false
-      @update => players: players_
+      @update (state) =>
+        state.players= players_
+        return state
 
