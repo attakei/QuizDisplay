@@ -6,10 +6,16 @@
 Player2 = require('../models/player').Player
 
 
-JudgePanel_jade = require("jade-react!./ProgressComponent.jade")
+JudgePanel_jade = require("jade-react!./JudgePanel.jade")
 JudgePanel = React.createClass
    render: ->
       require("jade-react!./JudgePanel.jade") @
+
+
+ViewControlPanel_jade = require("jade-react!./ViewControlPanel.jade")
+ViewControlPanel = React.createClass
+   render: ->
+      require("jade-react!./ViewControlPanel.jade") @
 
 
 ProgressController =
@@ -44,6 +50,7 @@ ProgressComponent = React.createClass
    mixins: [Arda.mixin, ProgressController]
    render: ->
       @JudgePanel = JudgePanel
+      @ViewControlPanel = ViewControlPanel
       ProgressComponent_jade @
       # ({self: this, props: this.props, state: this.state, JudgePanel: JudgePanel})
 
