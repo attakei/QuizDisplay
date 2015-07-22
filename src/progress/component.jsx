@@ -21,9 +21,9 @@ Player = React.createClass({
 });
 
 
-JudgePanelJade = require("jade-react!./JudgePanel.jade");
+JudgePanel_jade = require("jade-react!./JudgePanel.jade");
 JudgePanel = React.createClass({
-    render: JudgePanelJade
+    render: JudgePanel_jade
 });
 
 ViewControlPanel_jade = require("jade-react!./ViewControlPanel.jade");
