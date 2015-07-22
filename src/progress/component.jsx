@@ -12,8 +12,8 @@ Player = React.createClass({
         <div className="col-md-1" onClick={this.props.tryAnswer} data-playerid={this.props.player.id} data-answer={this.props.player.isAnswer}>
             {playerIdTag}
             <p className="text-center">{this.props.player.name}</p>
-            <p className="text-center">○1</p>
-            <p className="text-center">○1</p>
+            <p className="text-center">{this.props.player.displayPositive()}</p>
+            <p className="text-center">{this.props.player.displayNegative()}</p>
         </div>
         );
     }

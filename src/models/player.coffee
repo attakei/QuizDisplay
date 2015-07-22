@@ -5,3 +5,9 @@ class @Player
     @id = id
     @name = name
     @isAnswer = false
+
+  displayPositive: ->
+    '○ 1'
+
+  displayNegative: ->
+    '✕ 1'
