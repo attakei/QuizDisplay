@@ -34,6 +34,7 @@ gulp.task 'compile', (callback) ->
     [
       'compile:jsx'
       ,'compile:coffee'
+      ,'compile:jade'
     ]
     callback
   )
@@ -49,8 +50,10 @@ gulp.task 'compile:coffee', ->
     .pipe(gulp.dest(config.dest.compile))
 
 gulp.task 'compile:jade', ->
-  gulp.src('src/**/*.jade')
+  gulp.src('src/*.jade')
     .pipe(jade())
+    .pipe(gulp.dest(config.dest.compile))
+  gulp.src('src/**/*.jade')
     .pipe(gulp.dest(config.dest.compile))
 
 
