@@ -1,23 +1,8 @@
 var ProgressController = require('./index').ProgressController
 
-
+Player_jade = require("jade-react!./Player.jade");
 Player = React.createClass({
-    render: function(){
-        if (this.props.player.isAnswer) {
-            var playerIdTag = <p className="text-center" style={{backgroundColor: 'yellow'}}>{this.props.player.id}</p>;
-        } else {
-            var playerIdTag = <p className="text-center">{this.props.player.id}</p>;
-        }
-        return (
-        <div className="col-md-1" onClick={this.props.tryAnswer} data-playerid={this.props.player.id} data-answer={this.props.player.isAnswer}>
-            {playerIdTag}
-            <p className="text-center">{this.props.player.name}</p>
-            {/* TODO: カラーリングは後でLESSに書く */}
-            <p className="text-center" style={{color: 'blue', fontWeight:'bold'}}>{this.props.player.displayPositive()}</p>
-            <p className="text-center" style={{color: 'red', fontWeight:'bold'}}>{this.props.player.displayNegative()}</p>
-        </div>
-        );
-    }
+    render: Player_jade
 });
 
 
