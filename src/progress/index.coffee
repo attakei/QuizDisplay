@@ -3,6 +3,7 @@
 # 進行表示Context系パッケージ
 #
 # --------------------------------------
+Player = require('../models/player').Player
 
 
 @ProgressController =
@@ -15,16 +16,21 @@
   tryAnswer: (e) ->
     elm = @_findColumnNode(e)
     console.debug(elm.getAttribute('data-playerid') + ': try answer.')
-    @dispatch 'try-answer', elm.getAttribute('data-playerid')
+    @dispatch 'try-answer', parseInt(elm.getAttribute('data-playerid'))
+
+  answerRight: ->
+    console.debug '正解'
+    @dispatch 'answer-right'
+
+  answerWrong: ->
+    console.debug '誤答'
+    @dispatch 'answer-wrong'
+
+  throughAnswer: ->
+    @dispatch 'through-answer'
 
   resetAnswer: ->
     @dispatch 'reset-answer'
-
-
-class Player
-  constructor: (name) ->
-    @name = name
-    @isAnswer = false
 
 
 class @ProgressContext extends Arda.Context
@@ -33,31 +39,57 @@ class @ProgressContext extends Arda.Context
 
   initState: (props) ->
     quizCount: 0
-    players: (new Player(name) for name in props.playerNames)
+    players: (new Player(idx, name) for name, idx in props.playerNames)
 
   expandComponentProps: (props, state) ->
     programName: props.programName
     players: state.players
     quizCount: state.quizCount
 
+  findAnswerPlayer: ->
+    answerPlayers_ = (player for player in @state.players when player.isAnswer)
+    if answerPlayers_.length != 1
+      return null
+    return answerPlayers_[0]
+
   delegate: (subscribe) ->
     super
 
     subscribe 'try-answer', (playerId) ->
       # 誰か一人でも解答権を持っている場合は、処理を進めない
-      hasAnswer = @state.players.some (val, idc, arr) ->
-        return val.isAnswer
-      if hasAnswer
+      if @findAnswerPlayer() != null
         console.debug('already answers')
         return
-      players_ = @state.players
-      players_[playerId].isAnswer = true
-      @update => players: players_
+      players_ = @state.players.map (player) ->
+        if player.id == playerId
+          player.isAnswer = true
+        return player
+      @update (state) =>
+        state.players= players_
+        return state
+
+    subscribe 'answer-right', ->
+      answerPlayer = @findAnswerPlayer()
+      answerPlayer.isAnswer = false
+      answerPlayer.doRight()
+      @state.quizCount++;
+      @update (state) => state
+
+    subscribe 'answer-wrong', ->
+      answerPlayer = @findAnswerPlayer()
+      answerPlayer.isAnswer = false
+      answerPlayer.doWrong()
+      @state.quizCount++;
+      @update (state) => state
+
+    subscribe 'through-answer', ->
+      @state.quizCount++;
+      @update (state) => state
 
     subscribe 'reset-answer', ->
-      # 誰か一人でも解答権を持っている場合は、処理を進めない
       players_ = @state.players
       for player in players_
         player.isAnswer = false
-      @update => players: players_
-
+      @update (state) =>
+        state.players= players_
+        return state
