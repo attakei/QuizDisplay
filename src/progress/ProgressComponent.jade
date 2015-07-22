@@ -15,5 +15,7 @@ div
     div(class='row')
       - each player in props.players
         Player(player=player, tryAnswer=tryAnswer)
+    div(class='row')
+      hr
     JudgePanel(resetAnswer=resetAnswer, answerRight=answerRight, answerWrong=answerWrong, throughAnswer=throughAnswer)
     ViewControlPanel
