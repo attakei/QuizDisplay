@@ -26,6 +26,9 @@ Player = require('../models/player').Player
     console.debug '誤答'
     @dispatch 'answer-wrong'
 
+  throughAnswer: ->
+    @dispatch 'through-answer'
+
   resetAnswer: ->
     @dispatch 'reset-answer'
 
@@ -76,6 +79,10 @@ class @ProgressContext extends Arda.Context
       answerPlayer = @findAnswerPlayer()
       answerPlayer.isAnswer = false
       answerPlayer.doWrong()
+      @state.quizCount++;
+      @update (state) => state
+
+    subscribe 'through-answer', ->
       @state.quizCount++;
       @update (state) => state
 
