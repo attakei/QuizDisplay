@@ -3,10 +3,10 @@
 # 進行表示Context系パッケージ
 #
 # --------------------------------------
-Player = require('../models/player').Player
+Player2 = require('../models/player').Player
 
 
-@ProgressController =
+ProgressController =
   _findColumnNode: (e) ->
     elm = e.target
     if elm.getAttribute != 'col-md-1'
@@ -33,13 +33,37 @@ Player = require('../models/player').Player
     @dispatch 'reset-answer'
 
 
+Player = React.createClass
+    render: ->
+      require("jade-react!./Player.jade") @
+
+
+JudgePanel = React.createClass
+   render: ->
+      require("jade-react!./JudgePanel.jade") @
+
+
+ViewControlPanel = React.createClass
+   render: ->
+      require("jade-react!./ViewControlPanel.jade") @
+
+
+ProgressComponent = React.createClass
+   mixins: [Arda.mixin, ProgressController]
+   render: ->
+      @JudgePanel = JudgePanel
+      @ViewControlPanel = ViewControlPanel
+      @Player = Player
+      require("jade-react!./ProgressComponent.jade") @
+
+
 class @ProgressContext extends Arda.Context
-  component:
-    require('./component')
+  component: ProgressComponent
+    # require('./component')
 
   initState: (props) ->
     quizCount: 0
-    players: (new Player(idx, name) for name, idx in props.playerNames)
+    players: (new Player2(idx, name) for name, idx in props.playerNames)
 
   expandComponentProps: (props, state) ->
     programName: props.programName
