@@ -49,7 +49,6 @@ class @ProgressContext extends Arda.Context
         if player.id == playerId
           player.isAnswer = true
         return player
-      console.log players_
       @update (state) =>
         state.players= players_
         return state
