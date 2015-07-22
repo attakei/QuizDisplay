@@ -5,9 +5,13 @@ class @Player
     @id = id
     @name = name
     @isAnswer = false
+    @numOfRights = 0
 
   displayPositive: ->
-    '○ 1'
+    '○ ' + @numOfRights
 
   displayNegative: ->
     '✕ 1'
+
+  doRight: ->
+    @numOfRights++

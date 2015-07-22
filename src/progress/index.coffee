@@ -18,6 +18,14 @@ Player = require('../models/player').Player
     console.debug(elm.getAttribute('data-playerid') + ': try answer.')
     @dispatch 'try-answer', parseInt(elm.getAttribute('data-playerid'))
 
+  answerRight: ->
+    console.debug '正解'
+    @dispatch 'answer-right'
+
+  answerWrong: ->
+    console.debug '誤答'
+    @dispatch 'answer-wrong'
+
   resetAnswer: ->
     @dispatch 'reset-answer'
 
@@ -34,6 +42,12 @@ class @ProgressContext extends Arda.Context
     programName: props.programName
     players: state.players
     quizCount: state.quizCount
+
+  findAnswerPlayer: ->
+    answerPlayers_ = (player for player in @state.players when player.isAnswer)
+    if answerPlayers_.length != 1
+      return null
+    return answerPlayers_[0]
 
   delegate: (subscribe) ->
     super
@@ -52,6 +66,12 @@ class @ProgressContext extends Arda.Context
       @update (state) =>
         state.players= players_
         return state
+
+    subscribe 'answer-right', ->
+      answerPlayer = @findAnswerPlayer()
+      answerPlayer.isAnswer = false
+      answerPlayer.doRight()
+      @update (state) => state
 
     subscribe 'reset-answer', ->
       players_ = @state.players

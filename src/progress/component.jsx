@@ -26,9 +26,9 @@ JudgePanel = React.createClass({
         return (
         <div className="row">
             正誤操作
-            <button type="button" className="btn btn-default" onClick={this.props.resetAnswer}>リセット</button>
-            <button type="button" className="btn btn-primary">正解</button>
-            <button type="button" className="btn btn-danger">誤答</button>
+            <button type="button" className="btn btn-default" onClick={this.props.resetAnswer} >リセット</button>
+            <button type="button" className="btn btn-primary" onClick={this.props.answerRight} >正解</button>
+            <button type="button" className="btn btn-danger" onClick={this.props.answerWrong} >誤答</button>
         </div>
         );
     }
@@ -76,7 +76,7 @@ ProgressComponent = React.createClass({
       <div className="row">
       　{players}
       </div>
-      <JudgePanel resetAnswer={this.resetAnswer} />
+      <JudgePanel resetAnswer={this.resetAnswer} answerRight={this.answerRight} answerWrong={this.answerWrong} />
       {/*<ViewControlPanel />*/}
     </div>
 
