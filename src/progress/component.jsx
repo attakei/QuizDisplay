@@ -9,7 +9,7 @@ Player = React.createClass({
             var playerIdTag = <p className="text-center">{this.props.player.id}</p>;
         }
         return (
-        <div className="col-md-1" onClick={this.props.tryAnswer} data-playerid={this.props.player.id} data-answer={this.props.player.isAnswer}>
+        <div className="col-md-1 player-column" onClick={this.props.tryAnswer} data-playerid={this.props.player.id} data-answer={this.props.player.isAnswer}>
             {playerIdTag}
             <p className="text-center">{this.props.player.name}</p>
             {/* TODO: カラーリングは後でLESSに書く */}
