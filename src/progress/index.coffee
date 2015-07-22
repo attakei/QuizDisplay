@@ -73,6 +73,12 @@ class @ProgressContext extends Arda.Context
       answerPlayer.doRight()
       @update (state) => state
 
+    subscribe 'answer-wrong', ->
+      answerPlayer = @findAnswerPlayer()
+      answerPlayer.isAnswer = false
+      answerPlayer.doWrong()
+      @update (state) => state
+
     subscribe 'reset-answer', ->
       players_ = @state.players
       for player in players_

@@ -6,12 +6,16 @@ class @Player
     @name = name
     @isAnswer = false
     @numOfRights = 0
+    @numOfWrongs = 0
 
   displayPositive: ->
     '○ ' + @numOfRights
 
   displayNegative: ->
-    '✕ 1'
+    '✕ ' + @numOfWrongs
 
   doRight: ->
     @numOfRights++
+
+  doWrong: ->
+    @numOfWrongs++
