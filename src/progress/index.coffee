@@ -50,7 +50,6 @@ class @ProgressContext extends Arda.Context
       @update => players: players_
 
     subscribe 'reset-answer', ->
-      # 誰か一人でも解答権を持っている場合は、処理を進めない
       players_ = @state.players
       for player in players_
         player.isAnswer = false
