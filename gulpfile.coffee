@@ -1,4 +1,5 @@
 runSequence = require('run-sequence')
+del = require('del')
 gulp   = require('gulp')
 coffee = require('gulp-coffee')
 jade = require('gulp-jade')
@@ -10,6 +11,24 @@ config = require('./config')
 
 gulp.task 'default', ['build']
 
+
+gulp.task 'clean', (callback) ->
+  runSequence(
+    ['clean:dist', 'clean:compiled'],
+    callback
+    )
+
+gulp.task 'clean:dist', (callback) ->
+  del(
+    [config.dest.package],
+    callback
+    )
+
+gulp.task 'clean:compiled', (callback) ->
+  del(
+    [config.dest.compile],
+    callback
+    )
 
 gulp.task 'develop', (callback) ->
   config.webpack.entry = config.dest.compile + '/sub.js'
@@ -50,9 +69,6 @@ gulp.task 'compile:coffee', ->
     .pipe(gulp.dest(config.dest.compile))
 
 gulp.task 'compile:jade', ->
-  gulp.src('src/*.jade')
-    .pipe(jade())
-    .pipe(gulp.dest(config.dest.compile))
   gulp.src('src/**/*.jade')
     .pipe(gulp.dest(config.dest.compile))
 
