@@ -1,4 +1,4 @@
-div(class='col-md-1', onClick=this.props.tryAnswer, data-playerid=this.props.player.id)
+div(class='col-md-1 player-column', onClick=this.props.tryAnswer, data-playerid=this.props.player.id)
     if this.props.player.isAnswer
         p(class='text-center', style={backgroundColor: 'yellow'})= (this.props.player.id)
     else
