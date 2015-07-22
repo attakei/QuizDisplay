@@ -1,5 +1,6 @@
 runSequence = require('run-sequence')
 gulp   = require('gulp')
+less = require('gulp-less')
 coffee = require('gulp-coffee')
 react = require('gulp-react')
 webpack = require('webpack-stream')
@@ -25,16 +26,13 @@ gulp.task 'watch', ['develop'], (callback) ->
 gulp.task 'build', (callback) ->
   runSequence(
     'compile',
-    ['webpack', 'copy:index', 'copy:vendor'],
+    ['webpack', 'copy:index', 'copy:vendor', 'copy:css'],
     callback
   )
 
 gulp.task 'compile', (callback) ->
   runSequence(
-    [
-      'compile:jsx'
-      ,'compile:coffee'
-    ]
+    ['compile:jsx' ,'compile:coffee', 'compile:less'],
     callback
   )
 
@@ -48,6 +46,11 @@ gulp.task 'compile:coffee', ->
     .pipe(coffee())
     .pipe(gulp.dest(config.dest.compile))
 
+gulp.task 'compile:less', ->
+  gulp.src('src/**/*.less')
+    .pipe(less())
+    .pipe(gulp.dest(config.dest.compile))
+
 gulp.task 'copy:index', ->
   gulp.src('src/index.html')
     .pipe(gulp.dest(config.dest.package))
@@ -55,6 +58,10 @@ gulp.task 'copy:index', ->
 gulp.task 'copy:vendor', ->
   gulp.src('vendor/*', { base: 'vendor' })
     .pipe(gulp.dest(config.dest.package + '/lib'))
+
+gulp.task 'copy:css', ->
+  gulp.src(config.dest.compile+'/layout.css')
+    .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'webpack', ->
   gulp.src(config.webpack.entry)

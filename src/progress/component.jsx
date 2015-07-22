@@ -9,7 +9,7 @@ Player = React.createClass({
             var playerIdTag = <p className="text-center">{this.props.player.id}</p>;
         }
         return (
-        <div className="col-md-1" onClick={this.props.tryAnswer} data-playerid={this.props.player.id} data-answer={this.props.player.isAnswer}>
+        <div className="col-md-1 player-column" onClick={this.props.tryAnswer} data-playerid={this.props.player.id} data-answer={this.props.player.isAnswer}>
             {playerIdTag}
             <p className="text-center">{this.props.player.name}</p>
             {/* TODO: カラーリングは後でLESSに書く */}
@@ -26,9 +26,13 @@ JudgePanel = React.createClass({
         return (
         <div className="row">
             正誤操作
+            &nbsp;
             <button type="button" className="btn btn-primary" onClick={this.props.answerRight} >正解</button>
+            &nbsp;
             <button type="button" className="btn btn-danger" onClick={this.props.answerWrong} >誤答</button>
+            &nbsp;
             <button type="button" className="btn btn-warning" onClick={this.props.throughAnswer} >スルー</button>
+            &nbsp;
             <button type="button" className="btn btn-default" onClick={this.props.resetAnswer} >リセット</button>
         </div>
         );
@@ -41,8 +45,11 @@ ViewControlPanel = React.createClass({
         return (
         <div className="row">
             表示操作
+            &nbsp;
             <button type="button" className="btn btn-info">Info</button>
+            &nbsp;
             <button type="button" className="btn btn-info">Info</button>
+            &nbsp;
             <button type="button" className="btn btn-info">Info</button>
         </div>
         );
@@ -59,28 +66,27 @@ ProgressComponent = React.createClass({
         });
         return (
     <div>
-    <nav className="navbar navbar-default">
-      <div className="container-fluid">
-        <div className="navbar-header">
-          <p className="navbar-brand"><strong>{this.props.programName}</strong></p>
-        </div>
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <p className="navbar-brand"><strong>{this.props.programName}</strong></p>
+            </div>
 
-        <div className="collapse navbar-collapse">
-          <ul className="nav navbar-nav navbar-right">
-            <li><a>{this.props.quizCount} 問経過</a></li>
-            <li><a>menu</a></li>
-          </ul>
+            <div className="collapse navbar-collapse">
+              <ul className="nav navbar-nav navbar-right">
+                <li><a>{this.props.quizCount} 問経過</a></li>
+                <li><a>menu</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div className="container">
+          <div className="row">
+          　{players}
+          </div>
+          <JudgePanel resetAnswer={this.resetAnswer} answerRight={this.answerRight} answerWrong={this.answerWrong} throughAnswer={this.throughAnswer} />
+          {/*<ViewControlPanel />*/}
         </div>
-      </div>
-    </nav>
-    <div className="container">
-      <div className="row">
-      　{players}
-      </div>
-      <JudgePanel resetAnswer={this.resetAnswer} answerRight={this.answerRight} answerWrong={this.answerWrong} throughAnswer={this.throughAnswer} />
-      {/*<ViewControlPanel />*/}
-    </div>
-
     </div>
         );
     }
