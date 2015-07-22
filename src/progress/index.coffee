@@ -6,6 +6,12 @@
 Player2 = require('../models/player').Player
 
 
+Player_jade = require("jade-react!./Player.jade")
+Player = React.createClass
+    render: ->
+      require("jade-react!./Player.jade") @
+
+
 JudgePanel_jade = require("jade-react!./JudgePanel.jade")
 JudgePanel = React.createClass
    render: ->
@@ -51,6 +57,7 @@ ProgressComponent = React.createClass
    render: ->
       @JudgePanel = JudgePanel
       @ViewControlPanel = ViewControlPanel
+      @Player = Player
       ProgressComponent_jade @
       # ({self: this, props: this.props, state: this.state, JudgePanel: JudgePanel})
 

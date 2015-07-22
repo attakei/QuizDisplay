@@ -1,9 +1,9 @@
-div(class='col-md-1 player-column', onClick=this.props.tryAnswer, data-playerid=this.props.player.id)
-    if this.props.player.isAnswer
-        p(class='text-center', style={backgroundColor: 'yellow'})= (this.props.player.id)
+div(class='col-md-1 player-column', onClick=props.tryAnswer, data-playerid=props.player.id)
+    if props.player.isAnswer
+        p(class='text-center', style={backgroundColor: 'yellow'})= (props.player.id)
     else
-        p(class='text-center')= (this.props.player.id)
-    p(className='text-center')= (this.props.player.name)
+        p(class='text-center')= (props.player.id)
+    p(className='text-center')= (props.player.name)
     //- TODO: カラーリングは後でLESSに書く
-    p(className='text-center', style={fontWeight:'bold', color:'blue'})= (this.props.player.displayPositive())
-    p(className='text-center', style={fontWeight:'bold', color:'red'})= (this.props.player.displayNegative())
+    p(className='text-center', style={fontWeight:'bold', color:'blue'})= (props.player.displayPositive())
+    p(className='text-center', style={fontWeight:'bold', color:'red'})= (props.player.displayNegative())
