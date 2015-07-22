@@ -1,9 +1,9 @@
 runSequence = require('run-sequence')
 gulp   = require('gulp')
 coffee = require('gulp-coffee')
+jade = require('gulp-jade')
 react = require('gulp-react')
 webpack = require('webpack-stream')
-
 
 config = require('./config')
 
@@ -47,6 +47,12 @@ gulp.task 'compile:coffee', ->
   gulp.src('src/**/*.coffee')
     .pipe(coffee())
     .pipe(gulp.dest(config.dest.compile))
+
+gulp.task 'compile:jade', ->
+  gulp.src('src/**/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest(config.dest.compile))
+
 
 gulp.task 'copy:index', ->
   gulp.src('src/index.html')
