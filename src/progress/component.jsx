@@ -12,8 +12,9 @@ Player = React.createClass({
         <div className="col-md-1" onClick={this.props.tryAnswer} data-playerid={this.props.player.id} data-answer={this.props.player.isAnswer}>
             {playerIdTag}
             <p className="text-center">{this.props.player.name}</p>
-            <p className="text-center">{this.props.player.displayPositive()}</p>
-            <p className="text-center">{this.props.player.displayNegative()}</p>
+            {/* TODO: カラーリングは後でLESSに書く */}
+            <p className="text-center" style={{color: 'blue', fontWeight:'bold'}}>{this.props.player.displayPositive()}</p>
+            <p className="text-center" style={{color: 'red', fontWeight:'bold'}}>{this.props.player.displayNegative()}</p>
         </div>
         );
     }

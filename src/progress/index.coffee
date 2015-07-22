@@ -61,4 +61,3 @@ class @ProgressContext extends Arda.Context
       @update (state) =>
         state.players= players_
         return state
-
