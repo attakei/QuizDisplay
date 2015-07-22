@@ -6,24 +6,6 @@
 Player2 = require('../models/player').Player
 
 
-Player_jade = require("jade-react!./Player.jade")
-Player = React.createClass
-    render: ->
-      require("jade-react!./Player.jade") @
-
-
-JudgePanel_jade = require("jade-react!./JudgePanel.jade")
-JudgePanel = React.createClass
-   render: ->
-      require("jade-react!./JudgePanel.jade") @
-
-
-ViewControlPanel_jade = require("jade-react!./ViewControlPanel.jade")
-ViewControlPanel = React.createClass
-   render: ->
-      require("jade-react!./ViewControlPanel.jade") @
-
-
 ProgressController =
   _findColumnNode: (e) ->
     elm = e.target
@@ -51,16 +33,28 @@ ProgressController =
     @dispatch 'reset-answer'
 
 
-ProgressComponent_jade = require("jade-react!./ProgressComponent.jade")
+Player = React.createClass
+    render: ->
+      require("jade-react!./Player.jade") @
+
+
+JudgePanel = React.createClass
+   render: ->
+      require("jade-react!./JudgePanel.jade") @
+
+
+ViewControlPanel = React.createClass
+   render: ->
+      require("jade-react!./ViewControlPanel.jade") @
+
+
 ProgressComponent = React.createClass
    mixins: [Arda.mixin, ProgressController]
    render: ->
       @JudgePanel = JudgePanel
       @ViewControlPanel = ViewControlPanel
       @Player = Player
-      ProgressComponent_jade @
-      # ({self: this, props: this.props, state: this.state, JudgePanel: JudgePanel})
-
+      require("jade-react!./ProgressComponent.jade") @
 
 
 class @ProgressContext extends Arda.Context
