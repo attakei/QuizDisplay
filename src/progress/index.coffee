@@ -28,7 +28,7 @@ class @ProgressContext extends Arda.Context
 
   initState: (props) ->
     quizCount: 0
-    players: (new Player(name) for name in props.playerNames)
+    players: (new Player(idx, name) for name, idx in props.playerNames)
 
   expandComponentProps: (props, state) ->
     programName: props.programName
