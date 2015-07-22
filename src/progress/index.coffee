@@ -3,6 +3,7 @@
 # 進行表示Context系パッケージ
 #
 # --------------------------------------
+Player = require('../models/player').Player
 
 
 @ProgressController =
@@ -19,12 +20,6 @@
 
   resetAnswer: ->
     @dispatch 'reset-answer'
-
-
-class Player
-  constructor: (name) ->
-    @name = name
-    @isAnswer = false
 
 
 class @ProgressContext extends Arda.Context
