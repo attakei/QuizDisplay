@@ -26,18 +26,9 @@ JudgePanel = React.createClass({
     render: JudgePanelJade
 });
 
-
+ViewControlPanel_jade = require("jade-react!./ViewControlPanel.jade");
 ViewControlPanel = React.createClass({
-    render: function(){
-        return (
-        <div className="row">
-            表示操作
-            <button type="button" className="btn btn-info">Info</button>
-            <button type="button" className="btn btn-info">Info</button>
-            <button type="button" className="btn btn-info">Info</button>
-        </div>
-        );
-    }
+    render: ViewControlPanel_jade
 });
 
 ProgressComponent = React.createClass({
