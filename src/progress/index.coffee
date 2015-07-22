@@ -16,7 +16,7 @@ Player = require('../models/player').Player
   tryAnswer: (e) ->
     elm = @_findColumnNode(e)
     console.debug(elm.getAttribute('data-playerid') + ': try answer.')
-    @dispatch 'try-answer', elm.getAttribute('data-playerid')
+    @dispatch 'try-answer', parseInt(elm.getAttribute('data-playerid'))
 
   resetAnswer: ->
     @dispatch 'reset-answer'
@@ -45,8 +45,11 @@ class @ProgressContext extends Arda.Context
       if hasAnswer
         console.debug('already answers')
         return
-      players_ = @state.players
-      players_[playerId].isAnswer = true
+      players_ = @state.players.map (player) ->
+        if player.id == playerId
+          player.isAnswer = true
+        return player
+      console.log players_
       @update => players: players_
 
     subscribe 'reset-answer', ->
