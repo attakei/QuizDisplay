@@ -1,3 +1,6 @@
+@base_height: 20px;
+@base_font: 12px;
+
 .column-border {
     border-style: solid;
     border-color: black;
@@ -13,13 +16,17 @@
     p {
         .column-border;
     }
+    .player-id {
+        height: @base_height;
+        font-size: @base_font;
+    }
     .player-name {
-        height: 200px;
-        font-size: 24px;
+        height: @base_height * 10;
+        font-size: @base_font * 3;
     }
     .player-score {
-        height: 50px;
-        font-size: 24px;
+        height: @base_height * 2;
+        font-size: @base_font * 2;
     }
 }
 

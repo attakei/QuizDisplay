@@ -1,8 +1,8 @@
 div(class='col-md-1 player-column', onClick=props.tryAnswer, data-playerid=props.player.id)
     if props.player.isAnswer
-        p(class='text-center', style={backgroundColor: 'yellow'})= (props.player.id)
+        p(class='text-center player-id', style={backgroundColor: 'yellow'})= (props.player.id)
     else
-        p(class='text-center')= (props.player.id)
+        p(class='text-center player-id')= (props.player.id)
     p(className='text-center player-name')= (props.player.name)
     //- TODO: カラーリングは後でLESSに書く
     p(className='text-center player-score', style={fontWeight:'bold', color:'blue'})= (props.player.displayPositive())
