@@ -1,25 +1,31 @@
 var ProgressController = require('./index').ProgressController
 
 
+Player = React.createClass({
+    render: function(){
+        if (this.props.player.isAnswer) {
+            var playerIdTag = <p className="text-center" style={{backgroundColor: 'yellow'}}>{this.props.player.id}</p>;
+        } else {
+            var playerIdTag = <p className="text-center">{this.props.player.id}</p>;
+        }
+        return (
+        <div className="col-md-1" onClick={this.props.tryAnswer} data-playerid={this.props.player.id} data-answer={this.props.player.isAnswer}>
+            {playerIdTag}
+            <p className="text-center">{this.props.player.name}</p>
+            <p className="text-center">○1</p>
+            <p className="text-center">○1</p>
+        </div>
+        );
+    }
+});
+
 ProgressComponent = React.createClass({
     mixins: [Arda.mixin, ProgressController],
     render: function(){
         var players = [];
         var self = this;
         this.props.players.map(function(player){
-            if (player.isAnswer) {
-                var playerIdTag = <p className="text-center" style={{backgroundColor: 'yellow'}}>{player.id}</p>;
-            } else {
-                var playerIdTag = <p className="text-center">{player.id}</p>;
-            }
-            players.push(
-                <div className="col-md-1" onClick={self.tryAnswer} data-playerid={player.id} data-answer={player.isAnswer}>
-                    {playerIdTag}
-                    <p className="text-center">{player.name}</p>
-                    <p className="text-center">○1</p>
-                    <p className="text-center">○1</p>
-                </div>
-            );
+            players.push(<Player player={player} tryAnswer={self.tryAnswer} />);
         });
         return (
     <div>
