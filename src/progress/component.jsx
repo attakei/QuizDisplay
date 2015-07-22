@@ -1,25 +1,62 @@
 var ProgressController = require('./index').ProgressController
 
 
+Player = React.createClass({
+    render: function(){
+        if (this.props.player.isAnswer) {
+            var playerIdTag = <p className="text-center" style={{backgroundColor: 'yellow'}}>{this.props.player.id}</p>;
+        } else {
+            var playerIdTag = <p className="text-center">{this.props.player.id}</p>;
+        }
+        return (
+        <div className="col-md-1" onClick={this.props.tryAnswer} data-playerid={this.props.player.id} data-answer={this.props.player.isAnswer}>
+            {playerIdTag}
+            <p className="text-center">{this.props.player.name}</p>
+            {/* TODO: カラーリングは後でLESSに書く */}
+            <p className="text-center" style={{color: 'blue', fontWeight:'bold'}}>{this.props.player.displayPositive()}</p>
+            <p className="text-center" style={{color: 'red', fontWeight:'bold'}}>{this.props.player.displayNegative()}</p>
+        </div>
+        );
+    }
+});
+
+
+JudgePanel = React.createClass({
+    render: function(){
+        return (
+        <div className="row">
+            正誤操作
+            <button type="button" className="btn btn-primary" onClick={this.props.answerRight} >正解</button>
+            <button type="button" className="btn btn-danger" onClick={this.props.answerWrong} >誤答</button>
+            <button type="button" className="btn btn-warning" onClick={this.props.throughAnswer} >スルー</button>
+            <button type="button" className="btn btn-default" onClick={this.props.resetAnswer} >リセット</button>
+        </div>
+        );
+    }
+});
+
+
+ViewControlPanel = React.createClass({
+    render: function(){
+        return (
+        <div className="row">
+            表示操作
+            <button type="button" className="btn btn-info">Info</button>
+            <button type="button" className="btn btn-info">Info</button>
+            <button type="button" className="btn btn-info">Info</button>
+        </div>
+        );
+    }
+});
+
 ProgressComponent = React.createClass({
     mixins: [Arda.mixin, ProgressController],
     render: function(){
         var players = [];
-        for (var i = 0; i < this.props.players.length; i++) {
-            if (this.props.players[i].isAnswer) {
-                var playerIdTag = <p className="text-center" style={{backgroundColor: 'yellow'}}>{i}</p>;
-            } else {
-                var playerIdTag = <p className="text-center">{i}</p>;
-            }
-            players.push(
-                <div className="col-md-1" onClick={this.tryAnswer} data-playerid={i} data-answer={this.props.players[i].isAnswer}>
-                    {playerIdTag}
-                    <p className="text-center">{this.props.players[i].name}</p>
-                    <p className="text-center">○1</p>
-                    <p className="text-center">○1</p>
-                </div>
-            );
-        }
+        var self = this;
+        this.props.players.map(function(player){
+            players.push(<Player player={player} tryAnswer={self.tryAnswer} />);
+        });
         return (
     <div>
     <nav className="navbar navbar-default">
@@ -40,22 +77,8 @@ ProgressComponent = React.createClass({
       <div className="row">
       　{players}
       </div>
-    </div>
-    <div className="container">
-      <div className="row">
-        正誤操作
-        <button type="button" className="btn btn-default" onClick={this.resetAnswer}>リセット</button>
-        <button type="button" className="btn btn-primary">正解</button>
-        <button type="button" className="btn btn-danger">誤答</button>
-      </div>
-    </div>
-    <div className="container">
-      <div className="row">
-        表示操作
-        <button type="button" className="btn btn-info">Info</button>
-        <button type="button" className="btn btn-info">Info</button>
-        <button type="button" className="btn btn-info">Info</button>
-      </div>
+      <JudgePanel resetAnswer={this.resetAnswer} answerRight={this.answerRight} answerWrong={this.answerWrong} throughAnswer={this.throughAnswer} />
+      {/*<ViewControlPanel />*/}
     </div>
 
     </div>
