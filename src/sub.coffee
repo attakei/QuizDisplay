@@ -7,7 +7,7 @@ MaruBatsuRule = require('./models/rules').MaruBatsuRule
 form =
   programName: '7○3✕'
   playerNames: ['テスト太郎', 'クイズ花子']
-  rule: new MaruBatsuRule(7, 3)
+  rule: new MaruBatsuRule(3, 1)
 
 
 window.addEventListener 'DOMContentLoaded', ->

@@ -13,17 +13,17 @@ class @MaruBatsuRule
     @wrongsForLose = wrongsForLose
 
   judgeWin: (player) ->
-    player.numOfRights == @rightsForWin
+    player.numOfRights >= @rightsForWin
 
   judgeLose: (player) ->
-    player.numOfWrongs == @wrongsForLose
+    player.numOfWrongs >= @wrongsForLose
 
   judge: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
       return PlayerState.None
     if @judgeWin(player)
       nextState = PlayerState.Win
-    if @judgeLose(player)
+    else if @judgeLose(player)
       nextState = PlayerState.Lose
     else
       nextState = PlayerState.Neutral

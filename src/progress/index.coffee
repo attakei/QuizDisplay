@@ -86,8 +86,10 @@ class @ProgressContext extends Arda.Context
       if @findAnswerPlayer() != null
         console.debug('already answers')
         return
+      console.log @state.players
       players_ = @state.players.map (player) ->
-        if player.id == playerId
+        # 解答権を取りに行ける状態でないとステート更新しない
+        if player.id == playerId and player.state == PlayerState.Neutral
           player.state = PlayerState.Answer
         return player
       @update (state) =>

@@ -31,6 +31,8 @@ class @Player
 
   doRight: ->
     @numOfRights++
+    @state = PlayerState.Neutral
 
   doWrong: ->
     @numOfWrongs++
+    @state = PlayerState.Neutral
