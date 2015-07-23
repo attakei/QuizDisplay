@@ -2,8 +2,8 @@
 # ルール系モデルのテストケース
 # --------------------------------------
 assert = require("assert")
-rules = require('../src/models/rules')
-PlayerState = require('../src/models/player').PlayerState
+rules = require('../../src/models/rules')
+PlayerState = require('../../src/models/players').PlayerState
 
 
 describe 'MaruBatsuRule test', () ->

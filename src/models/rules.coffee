@@ -1,7 +1,7 @@
 # --------------------------------------
 # ルール系モデル
 # --------------------------------------
-PlayerState = require('./player').PlayerState
+PlayerState = require('./players').PlayerState
 
 
 ###

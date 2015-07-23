@@ -3,8 +3,8 @@
 # 進行表示Context系パッケージ
 #
 # --------------------------------------
-Player2 = require('../models/player').Player
-PlayerState = require('../models/player').PlayerState
+Player2 = require('../models/players').Player
+PlayerState = require('../models/players').PlayerState
 
 
 ProgressController =

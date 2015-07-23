@@ -1,5 +1,5 @@
 assert = require("assert")
-{Player, PlayerState} = require('../src/models/player')
+{Player, PlayerState} = require('../../src/models/players')
 
 
 describe 'Player test', () ->
