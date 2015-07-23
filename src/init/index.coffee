@@ -7,7 +7,7 @@ ProgressContext = require('../progress/index').ProgressContext
 
 
 # InitComponent用mixn
-@InitController =
+InitController =
   getInitialState: ->
     {}
 
@@ -23,10 +23,16 @@ ProgressContext = require('../progress/index').ProgressContext
     @dispatch('submit', formData)
 
 
+InitComponent = React.createClass
+  mixins: [Arda.mixin, React.addons.LinkedStateMixin, InitController],
+  render: ->
+    require("jade-react!./InitComponent.jade") @
+
+
 # 初期化画面用Context
 class @InitContext extends Arda.Context
   component:
-    require('./component')
+    InitComponent
   initState: (props) ->
     cnt: 0
     programName: 'None title'

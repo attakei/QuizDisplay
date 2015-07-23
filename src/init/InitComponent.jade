@@ -1,0 +1,17 @@
+div(class='container', id=container)
+  div(class='row')
+    hd 設定
+    form
+      div(class='form-group')
+        label(for='title') 企画名
+        input(type='text', class='form-control', id='title', )
+      div(class='form-group')
+        label(for='players') 参加者
+        - for (i = 0; i < props.maxPlayers; i++)
+          input(type='text', class='form-control')
+        //- for (var i=0; i < this.props.maxPlayers; i++) {
+        //-     playerNameForms.push(<input type="text" className="form-control" valueLink={this.linkState('player['+i+']')} />);
+        //- }
+        p(class='help-block') Example block-level help text here.
+      //- button(type='button', class='btn btn-primary', onClick=handleSubmit) 開始！
+      button(type='button', class='btn btn-primary') 開始！
