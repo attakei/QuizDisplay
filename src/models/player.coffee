@@ -4,7 +4,7 @@ Enum = require 'enum'
 
 # PlayerState = new Enum(['Neutral', 'Answer', 'Sleep', 'Win', 'Lose'])
 @PlayerState = PlayerState =
-  new Enum(['Neutral', 'Answer', 'Sleep', 'Win', 'Lose'])
+  new Enum(['None', 'Neutral', 'Answer', 'Sleep', 'Win', 'Lose'])
 
 
 class @Player
