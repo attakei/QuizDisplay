@@ -31,6 +31,7 @@
   "dependencies": {
     "arda": "^0.13.1",
     "bluebird": "^2.9.34",
+    "enum": "^2.1.0",
     "react": "^0.13.3"
   }
 }
