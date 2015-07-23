@@ -96,15 +96,15 @@ class @ProgressContext extends Arda.Context
 
     subscribe 'answer-right', ->
       answerPlayer = @findAnswerPlayer()
-      answerPlayer.state = PlayerState.Neutral
       answerPlayer.doRight()
+      @props.rule.judge(answerPlayer)
       @state.quizCount++;
       @update (state) => state
 
     subscribe 'answer-wrong', ->
       answerPlayer = @findAnswerPlayer()
-      answerPlayer.state = PlayerState.Neutral
       answerPlayer.doWrong()
+      @props.rule.judge(answerPlayer)
       @state.quizCount++;
       @update (state) => state
 

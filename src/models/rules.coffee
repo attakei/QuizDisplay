@@ -22,9 +22,10 @@ class @MaruBatsuRule
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
       return PlayerState.None
     if @judgeWin(player)
-      player.state = PlayerState.Win
-      return PlayerState.Win
+      nextState = PlayerState.Win
     if @judgeLose(player)
-      player.state = PlayerState.Lose
-      return PlayerState.Lose
-    return PlayerState.Neutral
+      nextState = PlayerState.Lose
+    else
+      nextState = PlayerState.Neutral
+    player.state = nextState
+    return nextState
