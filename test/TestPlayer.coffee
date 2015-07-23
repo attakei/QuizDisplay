@@ -7,7 +7,6 @@ describe 'Player test', () ->
     player = new Player(1, 'test')
 
     it 'state is Neutral', () ->
-      console.log PlayerState
       assert.equal PlayerState.Neutral, player.state
 
   describe '#displayPositive', () ->

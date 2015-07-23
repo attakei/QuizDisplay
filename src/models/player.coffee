@@ -2,8 +2,9 @@
 Enum = require 'enum'
 
 
-PlayerState = new Enum(['Neutral', 'Answer', 'Sleep', 'Win', 'Lose'])
-module.exports.PlayerState = PlayerState
+# PlayerState = new Enum(['Neutral', 'Answer', 'Sleep', 'Win', 'Lose'])
+@PlayerState = PlayerState =
+  new Enum(['Neutral', 'Answer', 'Sleep', 'Win', 'Lose'])
 
 
 class @Player
