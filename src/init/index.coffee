@@ -14,11 +14,11 @@ InitController =
   handleSubmit: ->
     formData = {}
     formData.programName = @linkState('programName').value
-    formData.players = []
+    formData.playerNames = []
     for i in [0..@props.maxPlayers]
       val_ = @linkState('player[' + i + ']').value
       val_ = '' if typeof val_ == "undefined"
-      formData.players.push(val_)
+      formData.playerNames.push(val_)
 
     @dispatch('submit', formData)
 
