@@ -6,7 +6,6 @@ coffee = require('gulp-coffee')
 jade = require('gulp-jade')
 react = require('gulp-react')
 mocha = require('gulp-mocha')
-gutil = require('gulp-util')
 webpack = require('webpack-stream')
 
 config = require('./config')
