@@ -4,6 +4,9 @@
 PlayerState = require('./player').PlayerState
 
 
+###
+n○m✕形式ルール
+###
 class @MaruBatsuRule
   constructor: (rightsForWin, wrongsForLose) ->
     @rightsForWin = rightsForWin
@@ -11,6 +14,9 @@ class @MaruBatsuRule
 
   judgeWin: (player) ->
     player.numOfRights == @rightsForWin
+
+  judgeLose: (player) ->
+    player.numOfWrongs == @wrongsForLose
 
   judge: (player)->
     if @judgeWin(player)
