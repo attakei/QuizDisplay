@@ -5,12 +5,19 @@ less = require('gulp-less')
 coffee = require('gulp-coffee')
 jade = require('gulp-jade')
 react = require('gulp-react')
+mocha = require('gulp-mocha')
 webpack = require('webpack-stream')
 
 config = require('./config')
 
 
 gulp.task 'default', ['build']
+
+
+gulp.task 'mocha', (callback) ->
+  gulp.src(['test/**/.js', 'test/**/*coffee'], { read: false })
+    .pipe(mocha({ reporter: 'list'}))
+    # .on('error', gutil.log)
 
 
 gulp.task 'clean', (callback) ->

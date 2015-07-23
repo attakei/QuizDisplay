@@ -1,5 +1,5 @@
 div(class='col-md-1 player-column', onClick=props.tryAnswer, data-playerid=props.player.id)
-    if props.player.isAnswer
+    if props.player.state == PlayerState.Answer
         p(class='text-center player-id', style={backgroundColor: 'yellow'})= (props.player.id)
     else
         p(class='text-center player-id')= (props.player.id)
