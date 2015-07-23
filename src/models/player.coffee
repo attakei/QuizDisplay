@@ -19,7 +19,6 @@ class @Player
   constructor: (id, name) ->
     @id = id
     @name = name
-    @isAnswer = false
     @numOfRights = 0
     @numOfWrongs = 0
     @state = PlayerState.Neutral

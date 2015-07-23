@@ -4,6 +4,7 @@
 #
 # --------------------------------------
 Player2 = require('../models/player').Player
+PlayerState = require('../models/player').PlayerState
 
 
 ProgressController =
@@ -35,6 +36,7 @@ ProgressController =
 
 Player = React.createClass
     render: ->
+      @PlayerState = PlayerState
       require("jade-react!./Player.jade") @
 
 
@@ -71,7 +73,7 @@ class @ProgressContext extends Arda.Context
     quizCount: state.quizCount
 
   findAnswerPlayer: ->
-    answerPlayers_ = (player for player in @state.players when player.isAnswer)
+    answerPlayers_ = (player for player in @state.players when player.state == PlayerState.Answer)
     if answerPlayers_.length != 1
       return null
     return answerPlayers_[0]
@@ -86,7 +88,7 @@ class @ProgressContext extends Arda.Context
         return
       players_ = @state.players.map (player) ->
         if player.id == playerId
-          player.isAnswer = true
+          player.state = PlayerState.Answer
         return player
       @update (state) =>
         state.players= players_
@@ -94,14 +96,14 @@ class @ProgressContext extends Arda.Context
 
     subscribe 'answer-right', ->
       answerPlayer = @findAnswerPlayer()
-      answerPlayer.isAnswer = false
+      answerPlayer.state = PlayerState.Neutral
       answerPlayer.doRight()
       @state.quizCount++;
       @update (state) => state
 
     subscribe 'answer-wrong', ->
       answerPlayer = @findAnswerPlayer()
-      answerPlayer.isAnswer = false
+      answerPlayer.state = PlayerState.Neutral
       answerPlayer.doWrong()
       @state.quizCount++;
       @update (state) => state
@@ -113,7 +115,7 @@ class @ProgressContext extends Arda.Context
     subscribe 'reset-answer', ->
       players_ = @state.players
       for player in players_
-        player.isAnswer = false
+        player.state = PlayerState.Neutral
       @update (state) =>
         state.players= players_
         return state
