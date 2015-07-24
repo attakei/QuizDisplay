@@ -37,17 +37,17 @@ ProgressController =
 Player = React.createClass
     render: ->
       @PlayerState = PlayerState
-      require("jade-react!./Player.jade") @
+      require("jade-react!../components/Player.jade") @
 
 
 JudgePanel = React.createClass
    render: ->
-      require("jade-react!./JudgePanel.jade") @
+      require("jade-react!../components/JudgePanel.jade") @
 
 
 ViewControlPanel = React.createClass
    render: ->
-      require("jade-react!./ViewControlPanel.jade") @
+      require("jade-react!../components/ViewControlPanel.jade") @
 
 
 ProgressComponent = React.createClass
@@ -56,7 +56,7 @@ ProgressComponent = React.createClass
       @JudgePanel = JudgePanel
       @ViewControlPanel = ViewControlPanel
       @Player = Player
-      require("jade-react!./ProgressComponent.jade") @
+      require("jade-react!../components/ProgressComponent.jade") @
 
 
 class @ProgressContext extends Arda.Context

@@ -3,7 +3,7 @@
 # 初期設定Context系パッケージ
 #
 # --------------------------------------
-ProgressContext = require('../progress/index').ProgressContext
+ProgressContext = require('./progress').ProgressContext
 
 
 # InitComponent用mixn
@@ -28,7 +28,7 @@ InitController =
 InitComponent = React.createClass
   mixins: [Arda.mixin, React.addons.LinkedStateMixin, InitController],
   render: ->
-    require("jade-react!./InitComponent.jade") @
+    require("jade-react!../components/InitComponent.jade") @
 
 
 # 初期化画面用Context
