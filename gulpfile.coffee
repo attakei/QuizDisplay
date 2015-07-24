@@ -1,6 +1,7 @@
 runSequence = require('run-sequence')
 del = require('del')
 gulp   = require('gulp')
+stripDebug = require('gulp-strip-debug')
 less = require('gulp-less')
 coffee = require('gulp-coffee')
 jade = require('gulp-jade')
@@ -13,6 +14,12 @@ config = require('./config')
 
 gulp.task 'default', ['build']
 
+
+gulp.task 'prod', (callback) ->
+  config.production = true
+  runSequence(
+    'build'
+  )
 
 gulp.task 'mocha', (callback) ->
   gulp.src(['test/**/.js', 'test/**/*coffee'], { read: false })
@@ -68,9 +75,10 @@ gulp.task 'compile:jsx', ->
     .pipe(gulp.dest(config.dest.compile))
 
 gulp.task 'compile:coffee', ->
-  gulp.src('src/**/*.coffee')
-    .pipe(coffee())
-    .pipe(gulp.dest(config.dest.compile))
+  gPipe = gulp.src('src/**/*.coffee').pipe(coffee())
+  if config.production
+    gPipe = gPipe.pipe(stripDebug())
+  gPipe.pipe(gulp.dest(config.dest.compile))
 
 gulp.task 'compile:jade', ->
   gulp.src('src/**/*.jade')
