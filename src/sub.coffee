@@ -1,7 +1,7 @@
 Promise = require 'bluebird'
 Promise.resolve require './globals'
 
-ProgressContext = require('./progress/index').ProgressContext
+ProgressContext = require('./contexts/progress').ProgressContext
 MaruBatsuRule = require('./models/rules').MaruBatsuRule
 
 form =

@@ -3,7 +3,7 @@
 # 初期設定Context系パッケージ
 #
 # --------------------------------------
-ProgressContext = require('../progress/index').ProgressContext
+ProgressContext = require('./progress').ProgressContext
 
 
 # InitComponent用mixn
