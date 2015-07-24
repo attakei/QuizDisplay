@@ -1,4 +1,5 @@
 config =
+  production: false
   src: './src'
   dest:
     compile: './lib'
