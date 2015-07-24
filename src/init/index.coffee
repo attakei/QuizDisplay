@@ -19,7 +19,9 @@ InitController =
       val_ = @linkState('player[' + i + ']').value
       val_ = '' if typeof val_ == "undefined"
       formData.playerNames.push(val_)
-
+    # TODO: 仮に7◯3✕をセットする
+    MaruBatsuRule = require('../models/rules').MaruBatsuRule
+    formData.rule = new MaruBatsuRule(7, 3)
     @dispatch('submit', formData)
 
 
