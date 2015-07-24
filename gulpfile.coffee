@@ -7,6 +7,7 @@ coffee = require('gulp-coffee')
 jade = require('gulp-jade')
 react = require('gulp-react')
 mocha = require('gulp-mocha')
+uglify = require("gulp-uglify")
 webpack = require('webpack-stream')
 
 config = require('./config')
@@ -102,6 +103,7 @@ gulp.task 'copy:css', ->
     .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'webpack', ->
-  gulp.src(config.webpack.entry)
-    .pipe(webpack(config.webpack))
-    .pipe(gulp.dest(config.dest.package))
+  gPipe = gulp.src(config.webpack.entry).pipe(webpack(config.webpack))
+  if config.production
+    gPipe = gPipe.pipe(uglify())
+  gPipe.pipe(gulp.dest(config.dest.package))
