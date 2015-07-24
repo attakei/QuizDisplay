@@ -28,7 +28,7 @@ InitController =
 InitComponent = React.createClass
   mixins: [Arda.mixin, React.addons.LinkedStateMixin, InitController],
   render: ->
-    require("jade-react!./InitComponent.jade") @
+    require("jade-react!../components/InitComponent.jade") @
 
 
 # 初期化画面用Context

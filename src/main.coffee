@@ -1,7 +1,7 @@
 Promise = require 'bluebird'
 Promise.resolve require './globals'
 
-InitContext = require('./init/index').InitContext
+InitContext = require('./contexts/init').InitContext
 
 
 window.addEventListener 'DOMContentLoaded', ->
