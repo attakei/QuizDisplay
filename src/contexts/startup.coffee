@@ -6,7 +6,7 @@
 
 
 # StartupComponentのロジック(view->context)部分
-StartupController =
+@StartupController = StartupController =
   getInitialState: ->
     state_ = {}
     state_.programName = @props.programName
@@ -22,7 +22,7 @@ StartupController =
     # TODO: 仮に7◯3✕をセットする
     programParam.rule = 'NanaSan'
     programParam.ruleParam = {toWin: 7, toLose: 3}
-    console.debug programParam
+    console.log programParam
     @dispatch('start:program', programParam)
 
 
