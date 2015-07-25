@@ -53,6 +53,7 @@ ViewControlPanel = React.createClass
 ProgressComponent = React.createClass
    mixins: [Arda.mixin, ProgressController]
    render: ->
+      @BootstrapFooter = require('../components/common').BootstrapFooter
       @JudgePanel = JudgePanel
       @ViewControlPanel = ViewControlPanel
       @Player = Player
