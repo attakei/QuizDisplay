@@ -33,12 +33,6 @@ NanaSanController =
     @dispatch 'reset-answer'
 
 
-PlayerComponent = React.createClass
-  render: ->
-    @PlayerState = PlayerState
-    require("jade-react!../../components/Player.jade") @
-
-
 NanaSanComponent = React.createClass
   mixins: [
     Arda.mixin
@@ -46,10 +40,19 @@ NanaSanComponent = React.createClass
   ]
 
   render: ->
-    @BootstrapFooter = AppComponent.fromTemplate('common/BootstrapFooter')
-    @JudgePanel = AppComponent.fromTemplate('program/JudgePanel')
-    @ViewControlPanel = AppComponent.fromTemplate('program/ViewControlPanel')
-    @Player = PlayerComponent
+    @BootstrapFooter = React.createClass
+      render: ->
+        require('jade-react!../../components/common/BootstrapFooter.jade') @
+    @JudgePanel = React.createClass
+      render: ->
+        require('jade-react!../../components/program/JudgePanel.jade') @
+    @ViewControlPanel = React.createClass
+      render: ->
+        require('jade-react!../../components/program/ViewControlPanel.jade') @
+    @Player = React.createClass
+      render: ->
+        @PlayerState = PlayerState
+        require("jade-react!../../components/Player.jade") @
     require("jade-react!./nanasan.jade") @
 
 

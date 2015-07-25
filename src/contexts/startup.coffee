@@ -34,7 +34,9 @@ StartupComponent = React.createClass
   ]
 
   render: ->
-    @BootstrapFooter = AppComponent('common/BootstrapFooter')
+    @BootstrapFooter = React.createClass
+      render: ->
+        require('jade-react!../../components/common/BootstrapFooter.jade') @
     require("jade-react!./startup.jade") @
 
 
