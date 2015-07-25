@@ -19,6 +19,7 @@ gulp.task 'default', ['build']
 gulp.task 'prod', (callback) ->
   config.production = true
   runSequence(
+    'clean',
     'build'
   )
 
@@ -66,7 +67,7 @@ gulp.task 'build', (callback) ->
 
 gulp.task 'compile', (callback) ->
   runSequence(
-    ['compile:jsx' ,'compile:coffee', 'compile:less' ,'compile:jade'],
+    ['compile:jsx' ,'compile:coffee', 'compile:less' ,'compile:jade', 'compile:jade-raw'],
     callback
   )
 
@@ -81,17 +82,22 @@ gulp.task 'compile:coffee', ->
     gPipe = gPipe.pipe(stripDebug())
   gPipe.pipe(gulp.dest(config.dest.compile))
 
-gulp.task 'compile:jade', ->
+gulp.task 'compile:jade-raw', ->
   gulp.src('src/**/*.jade')
     .pipe(gulp.dest(config.dest.compile))
 
+gulp.task 'compile:jade', ->
+  gulp.src('src/html/**/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest(config.dest.compile + '/html'))
+
 gulp.task 'compile:less', ->
-  gulp.src('src/**/*.less')
+  gulp.src('src/css/**/*.less')
     .pipe(less())
-    .pipe(gulp.dest(config.dest.compile))
+    .pipe(gulp.dest(config.dest.compile + '/css'))
 
 gulp.task 'copy:index', ->
-  gulp.src('src/index.html')
+  gulp.src(config.dest.compile + '/html/index.html')
     .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'copy:resource', ->
@@ -99,7 +105,7 @@ gulp.task 'copy:resource', ->
     .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'copy:css', ->
-  gulp.src(config.dest.compile+'/layout.css')
+  gulp.src(config.dest.compile+'/css/layout.css')
     .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'webpack', ->
