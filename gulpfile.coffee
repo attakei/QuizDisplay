@@ -91,9 +91,9 @@ gulp.task 'compile:jade', ->
     .pipe(gulp.dest(config.dest.compile + '/html'))
 
 gulp.task 'compile:less', ->
-  gulp.src('src/**/*.less')
+  gulp.src('src/css/**/*.less')
     .pipe(less())
-    .pipe(gulp.dest(config.dest.compile))
+    .pipe(gulp.dest(config.dest.compile + '/css'))
 
 gulp.task 'copy:index', ->
   gulp.src(config.dest.compile + '/html/index.html')
@@ -104,7 +104,7 @@ gulp.task 'copy:resource', ->
     .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'copy:css', ->
-  gulp.src(config.dest.compile+'/layout.css')
+  gulp.src(config.dest.compile+'/css/layout.css')
     .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'webpack', ->
