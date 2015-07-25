@@ -35,19 +35,19 @@ ProgressController =
 
 
 Player = React.createClass
-    render: ->
-      @PlayerState = PlayerState
-      require("jade-react!../components/Player.jade") @
+  render: ->
+    @PlayerState = PlayerState
+    require("jade-react!../components/Player.jade") @
 
 
 JudgePanel = React.createClass
-   render: ->
-      require("jade-react!../components/JudgePanel.jade") @
+  render: ->
+    require("jade-react!../components/JudgePanel.jade") @
 
 
 ViewControlPanel = React.createClass
-   render: ->
-      require("jade-react!../components/ViewControlPanel.jade") @
+  render: ->
+    require("jade-react!../components/ViewControlPanel.jade") @
 
 
 ProgressComponent = React.createClass
