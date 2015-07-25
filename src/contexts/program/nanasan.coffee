@@ -52,7 +52,7 @@ NanaSanComponent = React.createClass
     @Player = React.createClass
       render: ->
         @PlayerState = PlayerState
-        require("jade-react!../../components/Player.jade") @
+        require("jade-react!../../components/program/Player.jade") @
     require("jade-react!./nanasan.jade") @
 
 
