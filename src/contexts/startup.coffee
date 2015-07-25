@@ -19,10 +19,9 @@ StartupController =
     programParam = {}
     programParam.name = @linkState('programName').value
     programParam.playerNames = (@linkState('playerName-' + i).value or '' for i in [0...@props.maxPlayers])
-    programParam.rule = null
     # TODO: 仮に7◯3✕をセットする
-    MaruBatsuRule = require('../models/rules').MaruBatsuRule
-    programParam.rule = new MaruBatsuRule(7, 3)
+    programParam.rule = 'NanaSan'
+    programParam.ruleParam = {toWin: 7, toLose: 3}
     console.debug programParam
     @dispatch('start:program', programParam)
 
@@ -54,3 +53,9 @@ class @StartupContext extends Arda.Context
 
   delegate: (subscribe) ->
     super
+
+    subscribe 'start:program', (params) ->
+      MaruBatsuRule = require('../models/rules').MaruBatsuRule
+      ProgressContext = require('./progress').ProgressContext
+      params.rule = new MaruBatsuRule(params.ruleParam.toWin, params.ruleParam.toLose)
+      App.router.pushContext(ProgressContext, params)
