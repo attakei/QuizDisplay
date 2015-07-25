@@ -40,7 +40,11 @@ PlayerComponent = React.createClass
 
 
 NanaSanComponent = React.createClass
-  mixins: [Arda.mixin, NanaSanController]
+  mixins: [
+    Arda.mixin
+    NanaSanController
+  ]
+
   render: ->
     @BootstrapFooter = AppComponent.fromTemplate('common/BootstrapFooter')
     @JudgePanel = AppComponent.fromTemplate('JudgePanel')
@@ -50,7 +54,8 @@ NanaSanComponent = React.createClass
 
 
 class @NanaSanContext extends Arda.Context
-  component: NanaSanComponent
+  component:
+    NanaSanComponent
 
   initState: (props) ->
     quizCount: 0
