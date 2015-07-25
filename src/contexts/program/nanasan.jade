@@ -14,7 +14,7 @@ div
   div(class='container')
     div(class='row')
       - each player in props.players
-        Player(player=player, tryAnswer=tryAnswer)
+        Player(player=player, key='player-'+player.id, tryAnswer=tryAnswer)
     div(class='row')
       hr
     JudgePanel(resetAnswer=resetAnswer, answerRight=answerRight, answerWrong=answerWrong, throughAnswer=throughAnswer)

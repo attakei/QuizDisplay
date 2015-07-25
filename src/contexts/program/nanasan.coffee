@@ -84,14 +84,12 @@ class @NanaSanContext extends Arda.Context
         console.log('already answers')
         return
       console.log @state.players
-      players_ = @state.players.map (player) ->
+      @state.players.map (player) ->
       # 解答権を取りに行ける状態でないとステート更新しない
         if player.id == playerId and player.state == PlayerState.Neutral
           player.state = PlayerState.Answer
         return player
-      @update (state) =>
-        state.players= players_
-        return state
+      @update (state) => state
 
     subscribe 'answer-right', ->
       answerPlayer = @findAnswerPlayer()
