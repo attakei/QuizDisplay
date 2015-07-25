@@ -50,7 +50,7 @@ NanaSanComponent = React.createClass
     @JudgePanel = AppComponent.fromTemplate('JudgePanel')
     @ViewControlPanel = AppComponent.fromTemplate('ViewControlPanel')
     @Player = PlayerComponent
-    require("jade-react!../../components/ProgressComponent.jade") @
+    require("jade-react!./nanasan.jade") @
 
 
 class @NanaSanContext extends Arda.Context

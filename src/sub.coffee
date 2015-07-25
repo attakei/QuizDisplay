@@ -8,8 +8,9 @@ MaruBatsuRule = require('./models/rules').MaruBatsuRule
 programParam =
   name: '7○3✕'
   playerNames: ['テスト太郎', 'クイズ花子']
-  rule: 'NanaSan'
+  ruleType: 'NanaSan'
   ruleParam: {toWin: 7, toLose: 3}
+  rule: new MaruBatsuRule(7, 3)
 
 
 window.addEventListener 'DOMContentLoaded', ->
