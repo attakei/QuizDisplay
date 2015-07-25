@@ -3,7 +3,7 @@ config =
   src: './src'
   dest:
     compile: './lib'
-    package: './app'
+    package: './public'
 
 config.webpack =
     entry: config.dest.compile + '/main.js'
