@@ -45,7 +45,8 @@ class @StartupContext extends Arda.Context
 
   initState: (props) ->
     programName: ''
-    maxPlayers: props.maxPlayers or 12
+#    maxPlayers: props.maxPlayers or 12
+    maxPlayers: props.maxPlayers or 8
 
   expandComponentProps: (props, state) ->
     programName: state.programName
