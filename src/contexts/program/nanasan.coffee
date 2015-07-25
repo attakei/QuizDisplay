@@ -95,6 +95,8 @@ class @NanaSanContext extends Arda.Context
 
     subscribe 'answer-right', ->
       answerPlayer = @findAnswerPlayer()
+      if answerPlayer == null
+        return
       answerPlayer.doRight()
       @props.rule.judge(answerPlayer)
       @state.quizCount++;
@@ -102,19 +104,21 @@ class @NanaSanContext extends Arda.Context
 
     subscribe 'answer-wrong', ->
       answerPlayer = @findAnswerPlayer()
+      if answerPlayer == null
+        return
       answerPlayer.doWrong()
       @props.rule.judge(answerPlayer)
       @state.quizCount++;
       @update (state) => state
 
     subscribe 'through-answer', ->
+      answerPlayer = @findAnswerPlayer()
+      if answerPlayer != null
+        return
       @state.quizCount++;
       @update (state) => state
 
     subscribe 'reset-answer', ->
-      players_ = @state.players
-      for player in players_
+      for player in @state.players
         player.state = PlayerState.Neutral
-      @update (state) =>
-        state.players= players_
-        return state
+      @update (state) => state
