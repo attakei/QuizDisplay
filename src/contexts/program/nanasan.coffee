@@ -47,8 +47,8 @@ NanaSanComponent = React.createClass
 
   render: ->
     @BootstrapFooter = AppComponent.fromTemplate('common/BootstrapFooter')
-    @JudgePanel = AppComponent.fromTemplate('JudgePanel')
-    @ViewControlPanel = AppComponent.fromTemplate('ViewControlPanel')
+    @JudgePanel = AppComponent.fromTemplate('program/JudgePanel')
+    @ViewControlPanel = AppComponent.fromTemplate('program/ViewControlPanel')
     @Player = PlayerComponent
     require("jade-react!./nanasan.jade") @
 
