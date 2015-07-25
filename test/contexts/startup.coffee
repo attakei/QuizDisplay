@@ -17,7 +17,7 @@ describe 'StartupContext tests', () ->
 
     it 'default value', () ->
       state = context.initState({})
-      assert.equal state.maxPlayers, 12
+      assert.equal state.maxPlayers, 8
 
     it 'use value of props', () ->
       state = context.initState({maxPlayers: 1})
