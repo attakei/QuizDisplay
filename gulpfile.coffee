@@ -19,6 +19,7 @@ gulp.task 'default', ['build']
 gulp.task 'prod', (callback) ->
   config.production = true
   runSequence(
+    'clean',
     'build'
   )
 
