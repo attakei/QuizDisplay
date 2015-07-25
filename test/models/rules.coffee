@@ -7,22 +7,24 @@ PlayerState = require('../../src/models/players').PlayerState
 
 
 describe 'MaruBatsuRule test', () ->
+  TestTargetRule = rules.MaruBatsuRule
+
   it '#judgeWin', () ->
-    rule = new rules.MaruBatsuRule(7, 3)
+    rule = new TestTargetRule(7, 3)
     player = {numOfRights: 6}
     assert.equal false, rule.judgeWin(player)
     player.numOfRights++
     assert.equal true, rule.judgeWin(player)
 
   it '#judgeLose', () ->
-    rule = new rules.MaruBatsuRule(7, 3)
+    rule = new TestTargetRule(7, 3)
     player = {numOfWrongs: 2}
     assert.equal false, rule.judgeLose(player)
     player.numOfWrongs++
     assert.equal true, rule.judgeLose(player)
 
   describe '#judge', () ->
-    rule = new rules.MaruBatsuRule(7, 3)
+    rule = new TestTargetRule(7, 3)
 
     it 'If num of rights is more then rules, it change state', () ->
       player = {numOfRights: 6, state: PlayerState.Neutral}
