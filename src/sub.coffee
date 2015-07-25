@@ -1,15 +1,17 @@
 Promise = require 'bluebird'
 Promise.resolve require './globals'
 
-ProgressContext = require('./contexts/progress').ProgressContext
+NanaSanContext = require('./contexts/program/nanasan').NanaSanContext
 MaruBatsuRule = require('./models/rules').MaruBatsuRule
 
-form =
-  programName: '7○3✕'
+
+programParam =
+  name: '7○3✕'
   playerNames: ['テスト太郎', 'クイズ花子']
-  rule: new MaruBatsuRule(7, 3)
+  rule: 'NanaSan'
+  ruleParam: {toWin: 7, toLose: 3}
 
 
 window.addEventListener 'DOMContentLoaded', ->
   App.router = new Arda.Router Arda.DefaultLayout, document.body
-  App.router.pushContext(ProgressContext, form)
+  App.router.pushContext(NanaSanContext, programParam)

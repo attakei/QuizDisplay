@@ -56,7 +56,5 @@ class @StartupContext extends Arda.Context
     super
 
     subscribe 'start:program', (params) ->
-      MaruBatsuRule = require('../models/rules').MaruBatsuRule
-      ProgressContext = require('./progress').ProgressContext
-      params.rule = new MaruBatsuRule(params.ruleParam.toWin, params.ruleParam.toLose)
-      App.router.pushContext(ProgressContext, params)
+      NanaSanContext = require('./program/nanasan').NanaSanContext
+      App.router.pushContext(NanaSanContext, params)
