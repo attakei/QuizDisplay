@@ -7,7 +7,7 @@ TargetContext = require('../../src/contexts/startup').StartupContext
 
 
 describe 'StartupContext tests', () ->
-  describe '#programName', () ->
+  it '#programName', () ->
     context = new TargetContext()
     state = context.initState({})
     assert.equal state.programName, ''
@@ -29,3 +29,8 @@ describe 'StartupContext tests', () ->
     it 'maxPlayers', () ->
       props = context.expandComponentProps({}, {maxPlayers: 10})
       assert.equal props.maxPlayers, 10
+
+
+describe 'StartupComponent tests', () ->
+  it 'none test(stub)', () ->
+    assert.ok true
