@@ -8,4 +8,4 @@ global.Arda      = require 'arda'
 
 # Application
 global.App ?= {}
-global.AppComponent = require('./components/index').findFromTemplate
+global.AppComponent = require('./components/index')

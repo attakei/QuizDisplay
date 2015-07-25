@@ -1,4 +1,4 @@
-@findFromTemplate = (name) ->
+@fromTemplate = (name) ->
   classType = React.createClass
     render: ->
       require('jade-react!./' + name + '.jade') @

@@ -38,12 +38,13 @@ PlayerComponent = React.createClass
     @PlayerState = PlayerState
     require("jade-react!../../components/Player.jade") @
 
+
 NanaSanComponent = React.createClass
   mixins: [Arda.mixin, NanaSanController]
   render: ->
-    @BootstrapFooter = AppComponent('common/BootstrapFooter')
-    @JudgePanel = AppComponent('JudgePanel')
-    @ViewControlPanel = AppComponent('ViewControlPanel')
+    @BootstrapFooter = AppComponent.fromTemplate('common/BootstrapFooter')
+    @JudgePanel = AppComponent.fromTemplate('JudgePanel')
+    @ViewControlPanel = AppComponent.fromTemplate('ViewControlPanel')
     @Player = PlayerComponent
     require("jade-react!../../components/ProgressComponent.jade") @
 
