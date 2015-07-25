@@ -60,7 +60,7 @@ gulp.task 'watch', (callback) ->
 gulp.task 'build', (callback) ->
   runSequence(
     'compile',
-    ['webpack', 'copy:index', 'copy:vendor', 'copy:css'],
+    ['webpack', 'copy:index', 'copy:resource', 'copy:css'],
     callback
   )
 
@@ -94,9 +94,9 @@ gulp.task 'copy:index', ->
   gulp.src('src/index.html')
     .pipe(gulp.dest(config.dest.package))
 
-gulp.task 'copy:vendor', ->
-  gulp.src('vendor/*', { base: 'vendor' })
-    .pipe(gulp.dest(config.dest.package + '/lib'))
+gulp.task 'copy:resource', ->
+  gulp.src('resource/*') #, { base: 'resource' })
+    .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'copy:css', ->
   gulp.src(config.dest.compile+'/layout.css')

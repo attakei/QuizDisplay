@@ -27,5 +27,5 @@ build/Release
 node_modules
 
 # gulp destination path
-lib
-app
+/lib
+/public
