@@ -56,9 +56,16 @@ describe 'MaruBatsuRule test', () ->
 describe 'PointsRule', () ->
   TestTargetRule = rules.PointsRule
 
-  it '#constructor', () ->
-    rule = new TestTargetRule()
-    assert.equal 10, rule.scoreToWin
-    assert.equal 1, rule.scoreForRight
-    assert.equal null, rule.scoreToLose
-    assert.equal -1, rule.scoreForWrong
+  describe '#constructor', () ->
+    it 'default', () ->
+      rule = new TestTargetRule()
+      assert.equal 10, rule.scoreToWin
+      assert.equal 1, rule.scoreForRight
+      assert.equal null, rule.scoreToLose
+      assert.equal -1, rule.scoreForWrong
+
+    it 'specify arg', () ->
+      rule = new TestTargetRule(scoreForRight=2)
+      assert.equal 2, rule.scoreToWin
+      assert.equal null, rule.scoreToLose
+      assert.equal -1, rule.scoreForWrong
