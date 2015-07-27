@@ -1,1 +1,2 @@
-require './gulp/index'
+requireDir = require 'require-dir'
+requireDir "./gulp/tasks", { recurse: true }
