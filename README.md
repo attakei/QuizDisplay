@@ -1,9 +1,9 @@
-# QuizDisplay
+# QuizDisplay [![Build Status](https://travis-ci.org/attakei/QuizDisplay.svg)](https://travis-ci.org/attakei/QuizDisplay)
+
 早押しクイズの状態表示(React)
 
 
-[![Build Status](https://travis-ci.org/attakei/QuizDisplay.svg)](https://travis-ci.org/attakei/QuizDisplay)
-
+[![wercker status](https://app.wercker.com/status/107d0dbcd3cd83c8105a7328c5f8dac3/m "wercker status")](https://app.wercker.com/project/bykey/107d0dbcd3cd83c8105a7328c5f8dac3)
 
 
 ## 何をするものか
