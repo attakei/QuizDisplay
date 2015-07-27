@@ -42,3 +42,16 @@ class @Player
   doWrong: ->
     @numOfWrongs++
     @state = PlayerState.Neutral
+
+
+class @ScorePlayer extends @Player
+  displayPositive: ->
+    if @state == PlayerState.Win
+      return '勝抜'
+    @calcScore() + ' pts'
+
+  displayNegative: ->
+    ''
+
+  calcScore: ->
+    @numOfRights - @numOfWrongs

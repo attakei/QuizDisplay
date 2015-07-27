@@ -1,4 +1,5 @@
 assert = require("assert")
+players = require('../../src/models/players')
 {Player, PlayerState} = require('../../src/models/players')
 
 
@@ -26,3 +27,16 @@ describe 'Player test', () ->
       assert.equal '✕ 1', p.displayNegative()
       p.numOfRights++
       assert.equal '✕ 1', p.displayNegative()
+
+
+describe 'ScorePlayer test', () ->
+  player = new players.ScorePlayer(1, 'test')
+
+  it '#calcScore', () ->
+    assert.equal 0, player.calcScore()
+
+  it '#displayPositive', () ->
+    assert.equal '0 pts', player.displayPositive()
+
+  it '#displayNegative', () ->
+    assert.equal '', player.displayNegative()
