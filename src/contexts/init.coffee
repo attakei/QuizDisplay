@@ -28,7 +28,7 @@ InitController =
 InitComponent = React.createClass
   mixins: [Arda.mixin, React.addons.LinkedStateMixin, InitController],
   render: ->
-    @BootstrapFooter = require('../components/common').BoostrapFooter
+    @BootstrapFooter = require('../components/common').BootstrapFooter
     require("jade-react!../components/InitComponent.jade") @
 
 
