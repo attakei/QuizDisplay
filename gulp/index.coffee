@@ -23,11 +23,6 @@ gulp.task 'prod', (callback) ->
     'build'
   )
 
-gulp.task 'mocha', (callback) ->
-  gulp.src(['test/**/.js', 'test/**/*coffee'], { read: false })
-  .pipe(mocha({ reporter: 'list'}))
-# .on('error', gutil.log)
-
 
 gulp.task 'clean', (callback) ->
   runSequence(
