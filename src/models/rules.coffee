@@ -31,12 +31,12 @@ class @MaruBatsuRule
     return nextState
 
   displayPositive: (player) ->
-    if player.state == PlayerState.Win
+    if player.state == PlayerState.Win or player.numOfRights >= @rightsForWin
       return '勝抜'
     '◯ ' + player.numOfRights
 
   displayNegative: (player) ->
-    if player.state == PlayerState.Lose
+    if player.state == PlayerState.Lose or player.numOfWrongs >= @wrongsForLose
       return '失格'
     '✕ ' + player.numOfWrongs
 
