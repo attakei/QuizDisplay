@@ -29,3 +29,11 @@ class @MaruBatsuRule
       nextState = PlayerState.Neutral
     player.state = nextState
     return nextState
+
+
+class @PointsRule
+  constructor: (scoreToWin=10, scoreForRight=1, scoreForWrong=-1) ->
+    @scoreToWin = scoreToWin
+    @scoreForRight = scoreForRight
+    @scoreForWrong = scoreForWrong
+

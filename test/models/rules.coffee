@@ -51,3 +51,14 @@ describe 'MaruBatsuRule test', () ->
       assert.equal PlayerState.None, rule.judge(player)
       player.numOfRights++
       assert.equal PlayerState.None, rule.judge(player)
+
+
+describe 'PointsRule', () ->
+  TestTargetRule = rules.PointsRule
+
+  it '#constructor', () ->
+    rule = new TestTargetRule()
+    assert.equal 10, rule.scoreToWin
+    assert.equal 1, rule.scoreForRight
+    assert.equal null, rule.scoreToLose
+    assert.equal -1, rule.scoreForWrong
