@@ -30,6 +30,16 @@ class @MaruBatsuRule
     player.state = nextState
     return nextState
 
+  displayPositive: (player) ->
+    if player.state == PlayerState.Win
+      return '勝抜'
+    '◯ ' + player.numOfRights
+
+  displayNegative: (player) ->
+    if player.state == PlayerState.Lose
+      return '失格'
+    '✕ ' + player.numOfWrongs
+
 
 class @PointsRule
   constructor: (scoreToWin=10, scoreForRight=1, scoreForWrong=-1) ->
