@@ -94,14 +94,6 @@ describe 'MaruBatsuRule test', () ->
       player.state = PlayerState.Lose
       assert.equal '失格', rule.displayNegative(player)
 
-  # describe '#displayNegative', () ->
-  #   it 'ref it.numOfWrongs', () ->
-  #     p = new Player(1, 'test')
-  #     assert.equal '✕ 0', p.displayNegative()
-  #     p.numOfWrongs++
-  #     assert.equal '✕ 1', p.displayNegative()
-  #     p.numOfRights++
-  #     assert.equal '✕ 1', p.displayNegative()
 
 describe 'PointsRule', () ->
   TestTargetRule = rules.PointsRule
