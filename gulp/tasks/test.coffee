@@ -6,6 +6,11 @@ config = require('../config')
 
 
 gulp.task 'mocha', (callback) ->
-  gulp.src(['test/**/.js', 'test/**/*coffee'], { read: false })
+  gulp.src([
+    'test/**/*.js'
+    'test/**/*.coffee'
+    '!test/functest/*.js'
+    '!test/functest/*.coffee'
+    ], { read: false })
   .pipe(mocha({ reporter: 'list'}))
 # .on('error', gutil.log)
