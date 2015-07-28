@@ -47,3 +47,17 @@ class @PointsRule
     @scoreForRight = scoreForRight
     @scoreForWrong = scoreForWrong
 
+  calcScore: (player) ->
+    return player.numOfRights - player.numOfWrongs
+
+  displayPositive: (player) ->
+    score = @calcScore(player)
+    if score >= 0
+      return score + ' pts'
+    return ''
+
+  displayNegative: (player) ->
+    score = @calcScore(player)
+    if score < 0
+      return score + ' pts'
+    return ''

@@ -111,3 +111,25 @@ describe 'PointsRule', () ->
       assert.equal 2, rule.scoreToWin
       assert.equal null, rule.scoreToLose
       assert.equal -1, rule.scoreForWrong
+
+  it '#displayPositive', () ->
+    rule = new TestTargetRule()
+    player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+    assert.equal '0 pts', rule.displayPositive(player)
+    player.numOfWrongs++
+    assert.equal '', rule.displayPositive(player)
+    player.numOfRights++
+    assert.equal '0 pts', rule.displayPositive(player)
+    player.numOfRights++
+    assert.equal '1 pts', rule.displayPositive(player)
+
+  it '#displayNegative', () ->
+    rule = new TestTargetRule()
+    player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+    assert.equal '', rule.displayNegative(player)
+    player.numOfRights++
+    assert.equal '', rule.displayNegative(player)
+    player.numOfWrongs++
+    assert.equal '', rule.displayNegative(player)
+    player.numOfWrongs++
+    assert.equal '-1 pts', rule.displayNegative(player)
