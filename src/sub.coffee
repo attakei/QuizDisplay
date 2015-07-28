@@ -2,12 +2,13 @@ Promise = require 'bluebird'
 Promise.resolve require './globals'
 
 ProgressContext = require('./contexts/progress').ProgressContext
-MaruBatsuRule = require('./models/rules').MaruBatsuRule
+TargetRule = require('./models/rules').PointsRule
+
 
 form =
-  programName: '7○3✕'
+  programName: '10 points'
   playerNames: ['テスト太郎', 'クイズ花子']
-  rule: new MaruBatsuRule(7, 3)
+  rule: new TargetRule()
 
 
 window.addEventListener 'DOMContentLoaded', ->

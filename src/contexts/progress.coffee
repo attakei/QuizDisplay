@@ -51,13 +51,16 @@ ViewControlPanel = React.createClass
 
 
 ProgressComponent = React.createClass
-   mixins: [Arda.mixin, ProgressController]
-   render: ->
-      @BootstrapFooter = require('../components/common').BootstrapFooter
-      @JudgePanel = JudgePanel
-      @ViewControlPanel = ViewControlPanel
-      @Player = Player
-      require("jade-react!../components/ProgressComponent.jade") @
+  mixins: [
+    Arda.mixin, ProgressController
+  ]
+
+  render: ->
+    @BootstrapFooter = require('../components/common').BootstrapFooter
+    @JudgePanel = JudgePanel
+    @ViewControlPanel = ViewControlPanel
+    @Player = Player
+    require("jade-react!../components/ProgressComponent.jade") @
 
 
 class @ProgressContext extends Arda.Context
@@ -72,6 +75,7 @@ class @ProgressContext extends Arda.Context
     programName: props.programName
     players: state.players
     quizCount: state.quizCount
+    rule: props.rule
 
   findAnswerPlayer: ->
     answerPlayers_ = (player for player in @state.players when player.state == PlayerState.Answer)
