@@ -14,3 +14,12 @@ gulp.task 'mocha', (callback) ->
     ], { read: false })
   .pipe(mocha({ reporter: 'list'}))
 # .on('error', gutil.log)
+
+
+gulp.task 'mocha:functest', (callback) ->
+  gulp.src([
+    'test/functest/*.js'
+    'test/functest/*.coffee'
+    ], { read: false })
+  .pipe(mocha({ reporter: 'list'}))
+# .on('error', gutil.log)
