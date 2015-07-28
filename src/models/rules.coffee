@@ -42,8 +42,9 @@ class @MaruBatsuRule
 
 
 class @PointsRule
-  constructor: (scoreToWin=10, scoreForRight=1, scoreForWrong=-1) ->
+  constructor: (scoreToWin=10, scoreToLose=null, scoreForRight=1, scoreForWrong=-1) ->
     @scoreToWin = scoreToWin
+    @scoreToLose = scoreToLose
     @scoreForRight = scoreForRight
     @scoreForWrong = scoreForWrong
 
@@ -52,12 +53,16 @@ class @PointsRule
 
   displayPositive: (player) ->
     score = @calcScore(player)
-    if score >= 0
+    if score >= @scoreToWin
+      return '勝抜'
+    else if score >= 0
       return score + ' pts'
     return ''
 
   displayNegative: (player) ->
     score = @calcScore(player)
+    if @scoreToLose != null and score <= @scoreToLose
+      return '失格'
     if score < 0
       return score + ' pts'
     return ''

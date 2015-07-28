@@ -107,29 +107,40 @@ describe 'PointsRule', () ->
       assert.equal -1, rule.scoreForWrong
 
     it 'specify arg', () ->
-      rule = new TestTargetRule(scoreForRight=2)
+      rule = new TestTargetRule(2)
       assert.equal 2, rule.scoreToWin
       assert.equal null, rule.scoreToLose
       assert.equal -1, rule.scoreForWrong
+      rule = new TestTargetRule(10,-2)
+      assert.equal -2, rule.scoreToLose
 
-  it '#displayPositive', () ->
+  describe '#displayPositive', () ->
     rule = new TestTargetRule()
-    player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
-    assert.equal '0 pts', rule.displayPositive(player)
-    player.numOfWrongs++
-    assert.equal '', rule.displayPositive(player)
-    player.numOfRights++
-    assert.equal '0 pts', rule.displayPositive(player)
-    player.numOfRights++
-    assert.equal '1 pts', rule.displayPositive(player)
+    it 'count up and down', () ->
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      assert.equal '0 pts', rule.displayPositive(player)
+      player.numOfWrongs++
+      assert.equal '', rule.displayPositive(player)
+      player.numOfRights++
+      assert.equal '0 pts', rule.displayPositive(player)
+      player.numOfRights++
+      assert.equal '1 pts', rule.displayPositive(player)
+    it 'count up and down', () ->
+      player = {numOfRights: 10, numOfWrongs: 0, state: PlayerState.Neutral}
+      assert.equal '勝抜', rule.displayPositive(player)
 
-  it '#displayNegative', () ->
+  describe '#displayNegative', () ->
     rule = new TestTargetRule()
-    player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
-    assert.equal '', rule.displayNegative(player)
-    player.numOfRights++
-    assert.equal '', rule.displayNegative(player)
-    player.numOfWrongs++
-    assert.equal '', rule.displayNegative(player)
-    player.numOfWrongs++
-    assert.equal '-1 pts', rule.displayNegative(player)
+    it 'count up and down', () ->
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      assert.equal '', rule.displayNegative(player)
+      player.numOfRights++
+      assert.equal '', rule.displayNegative(player)
+      player.numOfWrongs++
+      assert.equal '', rule.displayNegative(player)
+      player.numOfWrongs++
+      assert.equal '-1 pts', rule.displayNegative(player)
+    it 'case to set lose score', () ->
+      rule = new TestTargetRule(10, -2)
+      player = {numOfRights: 0, numOfWrongs: 2, state: PlayerState.Neutral}
+      assert.equal '失格', rule.displayNegative(player)
