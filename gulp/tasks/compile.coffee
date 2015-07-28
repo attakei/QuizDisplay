@@ -45,7 +45,7 @@ gulp.task 'copy:index', ->
   .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'copy:resource', ->
-  gulp.src('resource/*') #, { base: 'resource' })
+  gulp.src('resource/**/*') #, { base: 'resource' })
   .pipe(gulp.dest(config.dest.package))
 
 gulp.task 'copy:css', ->
