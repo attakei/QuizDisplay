@@ -163,3 +163,37 @@ describe 'PointsRule', () ->
       rule = new TestTargetRule(10, -2)
       player = {numOfRights: 0, numOfWrongs: 2, state: PlayerState.Neutral}
       assert.equal '失格', rule.displayNegative(player)
+
+  it '#judgeWin', () ->
+    rule = new TestTargetRule()
+    player = {numOfRights: 9, numOfWrongs: 0}
+    assert.equal false, rule.judgeWin(player)
+    player.numOfRights++
+    assert.equal true, rule.judgeWin(player)
+    player.numOfWrongs++
+    assert.equal false, rule.judgeWin(player)
+    player.numOfRights++
+    assert.equal true, rule.judgeWin(player)
+
+  describe '#judgeLose', () ->
+    it 'has scoreToLose', () ->
+      rule = new TestTargetRule(10, -3)
+      player = {numOfRights: 0, numOfWrongs: 2}
+      assert.equal false, rule.judgeLose(player)
+      player.numOfWrongs++
+      assert.equal true, rule.judgeLose(player)
+      player.numOfRights++
+      assert.equal false, rule.judgeLose(player)
+      player.numOfWrongs++
+      assert.equal true, rule.judgeLose(player)
+
+    it 'does not have scoreToLose', () ->
+      rule = new TestTargetRule(10)
+      player = {numOfRights: 0, numOfWrongs: 2}
+      assert.equal false, rule.judgeLose(player)
+      player.numOfWrongs++
+      assert.equal false, rule.judgeLose(player)
+      player.numOfRights++
+      assert.equal false, rule.judgeLose(player)
+      player.numOfWrongs++
+      assert.equal false, rule.judgeLose(player)

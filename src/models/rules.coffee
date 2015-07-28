@@ -3,21 +3,7 @@
 # --------------------------------------
 PlayerState = require('./players').PlayerState
 
-
-###
-n○m✕形式ルール
-###
-class @MaruBatsuRule
-  constructor: (rightsForWin, wrongsForLose) ->
-    @rightsForWin = rightsForWin
-    @wrongsForLose = wrongsForLose
-
-  judgeWin: (player) ->
-    player.numOfRights >= @rightsForWin
-
-  judgeLose: (player) ->
-    player.numOfWrongs >= @wrongsForLose
-
+class RuleBase
   judge: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
       return PlayerState.None
@@ -30,6 +16,21 @@ class @MaruBatsuRule
     player.state = nextState
     return nextState
 
+
+###
+n○m✕形式ルール
+###
+class @MaruBatsuRule extends RuleBase
+  constructor: (rightsForWin, wrongsForLose) ->
+    @rightsForWin = rightsForWin
+    @wrongsForLose = wrongsForLose
+
+  judgeWin: (player) ->
+    player.numOfRights >= @rightsForWin
+
+  judgeLose: (player) ->
+    player.numOfWrongs >= @wrongsForLose
+
   displayPositive: (player) ->
     if player.state == PlayerState.Win or player.numOfRights >= @rightsForWin
       return '勝抜'
@@ -41,12 +42,18 @@ class @MaruBatsuRule
     '✕ ' + player.numOfWrongs
 
 
-class @PointsRule
+class @PointsRule extends RuleBase
   constructor: (scoreToWin=10, scoreToLose=null, scoreForRight=1, scoreForWrong=-1) ->
     @scoreToWin = scoreToWin
     @scoreToLose = scoreToLose
     @scoreForRight = scoreForRight
     @scoreForWrong = scoreForWrong
+
+  judgeWin: (player) ->
+    @calcScore(player) >= @scoreToWin
+
+  judgeLose: (player) ->
+    @scoreToLose != null and @calcScore(player) <= @scoreToLose
 
   calcScore: (player) ->
     return player.numOfRights * @scoreForRight + player.numOfWrongs * @scoreForWrong
