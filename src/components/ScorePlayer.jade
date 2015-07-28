@@ -5,5 +5,6 @@ div(class='col-md-1 player-column', onClick=props.tryAnswer, data-playerid=props
         p(class='text-center player-id')= (props.player.id)
     p(className='text-center player-name')= (props.player.name)
     //- TODO: カラーリングは後でLESSに書く
-    p(className='text-center player-score', style={fontWeight:'bold', color:'blue'})= (props.rule.displayPositive(props.player))
-    p(className='text-center player-score', style={fontWeight:'bold', color:'red'})= (props.rule.displayNegative(props.player))
+    p(className='text-center player-score', style={fontWeight:'bold'})
+      span(style={color:'blue'})= (props.rule.displayPositive(props.player))
+      span(style={color:'red'})= (props.rule.displayNegative(props.player))
