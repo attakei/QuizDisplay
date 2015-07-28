@@ -114,6 +114,25 @@ describe 'PointsRule', () ->
       rule = new TestTargetRule(10,-2)
       assert.equal -2, rule.scoreToLose
 
+  describe '#calcScore', () ->
+    it 'default', () ->
+      rule = new TestTargetRule(10, -10)
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      player.numOfRights++
+      assert.equal 1, rule.calcScore(player)
+
+    it 'right points', () ->
+      rule = new TestTargetRule(10, -10, 2, -1)
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      player.numOfRights++
+      assert.equal 2, rule.calcScore(player)
+
+    it 'wrong points', () ->
+      rule = new TestTargetRule(10, -10, 1, -2)
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      player.numOfWrongs++
+      assert.equal -2, rule.calcScore(player)
+
   describe '#displayPositive', () ->
     rule = new TestTargetRule()
     it 'count up and down', () ->

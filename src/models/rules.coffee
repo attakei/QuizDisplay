@@ -49,7 +49,7 @@ class @PointsRule
     @scoreForWrong = scoreForWrong
 
   calcScore: (player) ->
-    return player.numOfRights - player.numOfWrongs
+    return player.numOfRights * @scoreForRight + player.numOfWrongs * @scoreForWrong
 
   displayPositive: (player) ->
     score = @calcScore(player)
