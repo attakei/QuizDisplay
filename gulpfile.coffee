@@ -58,6 +58,10 @@ gulp.task 'watch', (callback) ->
   gulp.watch('./src/**', ['develop'])
 
 
+gulp.task 'watch:test', (callback) ->
+  gulp.watch(['./src/**', './test/**'], ['mocha'])
+
+
 gulp.task 'build', (callback) ->
   runSequence(
     'compile',

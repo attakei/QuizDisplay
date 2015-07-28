@@ -23,18 +23,6 @@ class @Player
     @numOfWrongs = 0
     @state = PlayerState.Neutral
 
-  # TODO: 後で見直し
-  displayPositive: ->
-    if @state == PlayerState.Win
-      return '勝抜'
-    '◯ ' + @numOfRights
-
-  # TODO: 後で見直し
-  displayNegative: ->
-    if @state == PlayerState.Lose
-      return '失格'
-    '✕ ' + @numOfWrongs
-
   doRight: ->
     @numOfRights++
     @state = PlayerState.Neutral

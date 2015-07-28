@@ -52,6 +52,56 @@ describe 'MaruBatsuRule test', () ->
       player.numOfRights++
       assert.equal PlayerState.None, rule.judge(player)
 
+  describe '#displayPositive', () ->
+    rule = new TestTargetRule(7, 3)
+
+    it 'ref player.numOfRights', () ->
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      assert.equal '◯ 0', rule.displayPositive(player)
+      player.numOfRights++
+      assert.equal '◯ 1', rule.displayPositive(player)
+      player.numOfRights = 7
+      assert.equal '勝抜', rule.displayPositive(player)
+
+    it 'not ref player.numOfWrongs', () ->
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      player.numOfWrongs++
+      assert.equal '◯ 0', rule.displayPositive(player)
+
+    it 'not ref player.state', () ->
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      player.state = PlayerState.Win
+      assert.equal '勝抜', rule.displayPositive(player)
+
+  describe '#displayNegative', () ->
+    rule = new TestTargetRule(7, 3)
+
+    it 'ref player.numOfWrongs', () ->
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      assert.equal '✕ 0', rule.displayNegative(player)
+      player.numOfWrongs++
+      assert.equal '✕ 1', rule.displayNegative(player)
+      player.numOfWrongs = 3
+      assert.equal '失格', rule.displayNegative(player)
+
+    it 'not ref player.numOfRights', () ->
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      player.numOfRights++
+      assert.equal '✕ 0', rule.displayNegative(player)
+
+    it 'not ref player.state', () ->
+      player = {numOfRights: 0, numOfWrongs: 0, state: PlayerState.Neutral}
+      player.state = PlayerState.Lose
+      assert.equal '失格', rule.displayNegative(player)
+
+  # describe '#displayNegative', () ->
+  #   it 'ref it.numOfWrongs', () ->
+  #     p = new Player(1, 'test')
+  #     assert.equal '✕ 0', p.displayNegative()
+  #     p.numOfWrongs++
+  #     assert.equal '✕ 1', p.displayNegative()
+  #     p.numOfRights++
+  #     assert.equal '✕ 1', p.displayNegative()
 
 describe 'PointsRule', () ->
   TestTargetRule = rules.PointsRule

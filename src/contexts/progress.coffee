@@ -75,6 +75,7 @@ class @ProgressContext extends Arda.Context
     programName: props.programName
     players: state.players
     quizCount: state.quizCount
+    rule: props.rule
 
   findAnswerPlayer: ->
     answerPlayers_ = (player for player in @state.players when player.state == PlayerState.Answer)
