@@ -1,6 +1,24 @@
 @base_height: 20px;
 @base_font: 12px;
 
+.vertigal-text{
+    @writing_mode: vertical-rl;
+    @text_orientation: mixed;
+
+    writing-mode: @writing_mode;
+    -ms-writing-mode: @writing_mode;
+    -moz-writing-mode: @writing_mode;
+    -o-writing-mode: @writing_mode;
+    -webkit-writing-mode: @writing_mode;
+
+    text-orientation: @text_orientation;
+    -ms-text-orientation: @text_orientation;
+    -moz-text-orientation: @text_orientation;
+    -o-text-orientation: @text_orientation;
+    -webkit-text-orientation: @text_orientation;
+
+    text-align: left;
+}
 
 body {
   margin-bottom: 40px;
@@ -37,8 +55,11 @@ body {
         font-size: @base_font;
     }
     .player-name {
-        height: @base_height * 10;
+        .vertigal-text;
+        width: 100%;
+        height: @base_height * 15;
         font-size: @base_font * 3;
+
     }
     .player-score {
         height: @base_height * 2;
