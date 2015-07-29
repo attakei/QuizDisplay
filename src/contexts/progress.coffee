@@ -33,6 +33,9 @@ ProgressController =
   resetAnswer: ->
     @dispatch 'reset-answer'
 
+  endProgress: ->
+    @dispatch 'end-progress'
+
 
 Player = React.createClass
   render: ->
@@ -126,3 +129,6 @@ class @ProgressContext extends Arda.Context
       @update (state) =>
         state.players= players_
         return state
+
+    subscribe 'end-progress', ->
+      App.router.popContext()

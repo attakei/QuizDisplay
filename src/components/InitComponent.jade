@@ -4,6 +4,14 @@ div
       div(class='navbar-header')
         div(class='navbar-brand')
           strong 7○3✕
+      div(class='collapse navbar-collapse')
+        ul(class='nav navbar-nav navbar-right')
+          li(class='dropdown')
+            a(class='dropdown-toggle', data-toggle='dropdown', role='button' aria-haspopup='true' aria-expanded='false')
+              | menu
+              span(class='caret')/
+            ul(class='dropdown-menu')
+              //- li: a(onClick=resetForm) リセット
 
   div(class='container')
     div(class='row')
@@ -14,7 +22,7 @@ div
         div(class='form-group')
           label(for='players') 参加者
           - for (i = 0; i < props.maxPlayers; i++)
-          input(type='text', class='form-control', valueLink=linkState('player[' + i + ']'))
+          input(type='text', class='form-control', style={margin:'5px'}, valueLink=linkState('player[' + i + ']'))
           //- p(class='help-block') Example block-level help text here.
         button(type='button', class='btn btn-primary', onClick=handleSubmit) 開始！
 

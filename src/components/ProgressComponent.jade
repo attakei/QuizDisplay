@@ -8,13 +8,20 @@ div
         ul(class='nav navbar-nav navbar-right')
           li
             a= props.quizCount + '問経過'
-          li
-            a menu
+          li(class='dropdown')
+            a(class='dropdown-toggle', data-toggle='dropdown', role='button' aria-haspopup='true' aria-expanded='false')
+              | menu
+              span(class='caret')/
+            ul(class='dropdown-menu')
+              //- li: a 全リセット
+              li: a(onClick=endProgress) 終了
+
 
   div(class='container')
     div(class='row')
-      - each player in props.players
-        Player(player=player, rule=props.rule, tryAnswer=tryAnswer)
+      each player in props.players
+        if player.name != ''
+          Player(player=player, rule=props.rule, tryAnswer=tryAnswer)
     div(class='row')
       hr
     JudgePanel(resetAnswer=resetAnswer, answerRight=answerRight, answerWrong=answerWrong, throughAnswer=throughAnswer)
