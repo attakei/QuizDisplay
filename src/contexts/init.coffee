@@ -13,7 +13,9 @@ InitController =
 
   handleSubmit: ->
     formData = {}
-    formData.programName = @linkState('programName').value
+    # TODO: beta2以降で随時戻すことを検討する
+    # formData.programName = @linkState('programName').value
+    formData.programName = '7○3✕'
     formData.playerNames = []
     for i in [0..@props.maxPlayers]
       val_ = @linkState('player[' + i + ']').value

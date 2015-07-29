@@ -3,19 +3,19 @@ div
     div(class='container-fluid')
       div(class='navbar-header')
         div(class='navbar-brand')
-          strong 初期設定
+          strong 7○3✕
 
   div(class='container')
     div(class='row')
       form
-        div(class='form-group')
-          label(for='title') 企画名
-          input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
+        //- div(class='form-group')
+        //-   label(for='title') 企画名
+        //-   input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
         div(class='form-group')
           label(for='players') 参加者
           - for (i = 0; i < props.maxPlayers; i++)
           input(type='text', class='form-control', valueLink=linkState('player[' + i + ']'))
-          p(class='help-block') Example block-level help text here.
+          //- p(class='help-block') Example block-level help text here.
         button(type='button', class='btn btn-primary', onClick=handleSubmit) 開始！
 
   BootstrapFooter
