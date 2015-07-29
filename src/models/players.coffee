@@ -31,6 +31,14 @@ class @Player
     @numOfWrongs++
     @state = PlayerState.Neutral
 
+  vname: ->
+    vname = ''
+    for idx in [0...@name.length]
+      if idx != 0
+        vname += '\n'
+      vname += @name[idx]
+    vname
+
 
 class @ScorePlayer extends @Player
   displayPositive: ->
