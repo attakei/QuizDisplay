@@ -10,7 +10,7 @@
 
 ブラウザ上で早押しクイズの得点状況表示をするアプリです。
 
-[手っ取り早く試してみる](http://attakei.github.io/QuizDisplay/){:target="_blank"}
+[手っ取り早く試してみる](http://attakei.github.io/QuizDisplay/)
 
 ![](./docs/playing.gif)
 
