@@ -31,17 +31,17 @@ ProgressActions =
 Player = React.createClass
   render: ->
     @PlayerState = PlayerState
-    require("jade-react!../components/Player.jade") @
+    require("../Player") @
 
 
 JudgePanel = React.createClass
   render: ->
-    require("jade-react!../components/JudgePanel.jade") @
+    require("../JudgePanel") @
 
 
 ViewControlPanel = React.createClass
   render: ->
-    require("jade-react!../components/ViewControlPanel.jade") @
+    require("../ViewControlPanel") @
 
 
 ProgressComponent = React.createClass
