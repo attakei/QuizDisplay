@@ -3,11 +3,12 @@
 # 進行表示Context系パッケージ
 #
 # --------------------------------------
-{Player, PlayerState} = require('../models/players').PlayerState
+{Player, PlayerState} = require('../../models/players')
 
 
 class @ProgressContext extends Arda.Context
-  component: require('../components/progress').ProgressComponent
+  component:
+    require('../../components/progress').ProgressComponent
 
   initState: (props) ->
     quizCount: 0

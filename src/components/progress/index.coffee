@@ -1,3 +1,6 @@
+PlayerState = require('../../models/players').PlayerState
+
+
 ProgressActions =
   _findColumnNode: (e) ->
     elm = e.target
@@ -44,7 +47,7 @@ ViewControlPanel = React.createClass
     require("./ViewControlPanel") @
 
 
-ProgressComponent = React.createClass
+@ProgressComponent = React.createClass
   mixins: [
     Arda.mixin, ProgressActions
   ]
