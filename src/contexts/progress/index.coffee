@@ -3,8 +3,7 @@
 # 進行表示Context系パッケージ
 #
 # --------------------------------------
-Player2 = require('../models/players').Player
-PlayerState = require('../models/players').PlayerState
+{Player, PlayerState} = require('../models/players').PlayerState
 
 
 class @ProgressContext extends Arda.Context
@@ -12,7 +11,7 @@ class @ProgressContext extends Arda.Context
 
   initState: (props) ->
     quizCount: 0
-    players: (new Player2(idx, name) for name, idx in props.playerNames)
+    players: (new Player(idx, name) for name, idx in props.playerNames)
 
   expandComponentProps: (props, state) ->
     programName: props.programName
