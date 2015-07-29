@@ -3,7 +3,7 @@
 # 初期設定Context系パッケージ
 #
 # --------------------------------------
-ProgressContext = require('./progress').ProgressContext
+ProgressContext = require('../progress').ProgressContext
 
 
 # InitComponent用mixn
@@ -22,7 +22,7 @@ InitController =
       val_ = '' if typeof val_ == "undefined"
       formData.playerNames.push(val_)
     # TODO: 仮に7◯3✕をセットする
-    MaruBatsuRule = require('../models/rules').MaruBatsuRule
+    MaruBatsuRule = require('../../models/rules').MaruBatsuRule
     formData.rule = new MaruBatsuRule(7, 3)
     @dispatch('submit', formData)
 
@@ -30,12 +30,12 @@ InitController =
 InitComponent = React.createClass
   mixins: [Arda.mixin, React.addons.LinkedStateMixin, InitController],
   render: ->
-    @BootstrapFooter = require('../components/common').BootstrapFooter
-    require("jade-react!../components/InitComponent.jade") @
+    @BootstrapFooter = require('../../components/common').BootstrapFooter
+    require("jade-react!../../components/startup/template.jade") @
 
 
 # 初期化画面用Context
-class @InitContext extends Arda.Context
+class @StartupContext extends Arda.Context
   component:
     InitComponent
   initState: (props) ->
