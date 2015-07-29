@@ -23,4 +23,4 @@ StartupComponentActions =
   mixins: [Arda.mixin, React.addons.LinkedStateMixin, StartupComponentActions],
   render: ->
     @BootstrapFooter = require('../../components/common').BootstrapFooter
-    require("jade-react!./template.jade") @
+    require("./template") @

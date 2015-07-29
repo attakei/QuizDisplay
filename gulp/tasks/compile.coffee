@@ -3,7 +3,7 @@ stripDebug = require('gulp-strip-debug')
 less = require('gulp-less')
 coffee = require('gulp-coffee')
 jade = require('gulp-jade')
-react = require('gulp-react')
+react = require('gulp-react-jade')
 
 config = require('../config')
 
@@ -11,12 +11,12 @@ config = require('../config')
 gulp.task 'compile', (callback) ->
   runSequence = require('run-sequence')
   runSequence(
-    ['compile:jsx' ,'compile:coffee', 'compile:less' ,'compile:jade', 'compile:jade-raw'],
+    ['compile:react' ,'compile:coffee', 'compile:less' ,'compile:jade', 'compile:jade-raw'],
     callback
   )
 
-gulp.task 'compile:jsx', ->
-  gulp.src('src/**/*.jsx')
+gulp.task 'compile:react', ->
+  gulp.src(['src/**/*.jade', '!src/html/**/*.jade'])
   .pipe(react())
   .pipe(gulp.dest(config.dest.compile))
 
