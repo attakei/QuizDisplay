@@ -31,17 +31,17 @@ ProgressActions =
 Player = React.createClass
   render: ->
     @PlayerState = PlayerState
-    require("../Player") @
+    require("./Player") @
 
 
 JudgePanel = React.createClass
   render: ->
-    require("../JudgePanel") @
+    require("./JudgePanel") @
 
 
 ViewControlPanel = React.createClass
   render: ->
-    require("../ViewControlPanel") @
+    require("./ViewControlPanel") @
 
 
 ProgressComponent = React.createClass
@@ -50,7 +50,7 @@ ProgressComponent = React.createClass
   ]
 
   render: ->
-    @BootstrapFooter = require('../components/common').BootstrapFooter
+    @BootstrapFooter = require('../common').BootstrapFooter
     @JudgePanel = JudgePanel
     @ViewControlPanel = ViewControlPanel
     @Player = Player
