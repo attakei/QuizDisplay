@@ -5,7 +5,7 @@
   "bugs": {
     "url": "https://github.com/attakei/QuizDisplay/issues"
   },
-  "main": "",
+  "main": "runner.js",
   "scripts": {
     "test": "gulp mocha"
   },
