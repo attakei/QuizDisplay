@@ -19,7 +19,9 @@ div
         //- div(class='form-group')
         //-   label(for='title') 企画名
         //-   input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
-        = props.rule.render()
+        //- = React.createFactory(props.rule.component)({props.rule})
+        //- = props.rule.render({})
+        = ruleForm.render()
         div(class='form-group')
           label(for='players') 参加者
           - for (i = 0; i < props.maxPlayers; i++)

@@ -13,10 +13,12 @@ class @StartupContext extends Arda.Context
     require('../../components/startup').StartupComponent
 
   initState: (props) ->
+    rule_ = new MaruBatsuRule
+    rule_.props = {toWin: 7, toLose: 3}
     cnt: 0
     programName: 'None title'
     maxPlayers: props.maxPlayers or 12
-    rule: new MaruBatsuRule()
+    rule:  rule_
 
   expandComponentProps: (props, state) ->
     cnt: state.cnt

@@ -20,7 +20,12 @@ StartupComponentActions =
 
 
 @StartupComponent = React.createClass
-  mixins: [Arda.mixin, React.addons.LinkedStateMixin, StartupComponentActions],
+  mixins: [
+    Arda.mixin,
+    React.addons.LinkedStateMixin,
+    StartupComponentActions
+  ]
+
   render: ->
     @BootstrapFooter = require('../common').BootstrapFooter
     require("./template") @

@@ -1,3 +1,8 @@
-@MartuBatsuForm = React.createClass
+@MaruBatsuForm = React.createClass
+  mixins: [
+    Arda.mixin,
+    React.addons.LinkedStateMixin
+  ]
+
   render: ->
-    require('./MartuBatsuForm') @
+    require('./MaruBatsuForm') @
