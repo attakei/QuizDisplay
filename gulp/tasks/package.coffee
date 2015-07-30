@@ -6,6 +6,14 @@ electron    = require('gulp-electron')
 config      = require('../config')
 
 
+gulp.task 'electron', (callback) ->
+  runSequence(
+    'prod',
+    'atom:json',
+    'atom:app',
+    callback
+  )
+
 gulp.task 'develop', (callback) ->
   config.webpack.entry = config.dest.compile + '/sub.js'
   runSequence(
@@ -18,6 +26,7 @@ gulp.task 'prod', (callback) ->
   runSequence(
     'clean',
     'build',
+    callback
   )
 
 gulp.task 'build', (callback) ->
@@ -33,13 +42,13 @@ gulp.task 'webpack', ->
     gPipe = gPipe.pipe(uglify())
   gPipe.pipe(gulp.dest(config.dest.package))
 
-gulp.task 'electron', (callback) ->
-  runSequence(
-    'prod'
-    'atom'
-    )
 
-gulp.task 'atom', (callback) ->
+gulp.task 'atom:json', (callback) ->
+  gulp.src(['package.json', config.dest.compile + '/' + config.electron.packageJson.main])
+    .pipe(gulp.dest(config.dest.package))
+
+
+gulp.task 'atom:app', (callback) ->
   gulp.src('')
     .pipe(electron(config.electron))
     .pipe(gulp.dest(''))

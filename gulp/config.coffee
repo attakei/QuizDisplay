@@ -14,11 +14,11 @@ config.webpack =
 
 config.electron =
   src: './public'
-  packageJson: '../package.json'
-  release: './release'
+  packageJson: require('../package.json')
+  release: './dist'
   cache: './cache'
   version: 'v0.30.2'
-  packaging: true
+  # packaging: true
   platforms: ['darwin-x64']  # ['win32-ia32', 'darwin-x64'],
   platformResources:
     darwin:
