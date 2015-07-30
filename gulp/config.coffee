@@ -18,8 +18,8 @@ config.electron =
   release: './release'
   cache: './cache'
   version: 'v0.30.2'
-  # packaging: true
-  # platforms: ['darwin']  # ['win32-ia32', 'darwin-x64'],
+  packaging: true
+  platforms: ['darwin-x64']  # ['win32-ia32', 'darwin-x64'],
   platformResources:
     darwin:
       CFBundleDisplayName: 'QuizDisplay'
