@@ -2,6 +2,7 @@ runSequence = require('run-sequence')
 gulp        = require('gulp')
 uglify      = require("gulp-uglify")
 webpack     = require('webpack-stream')
+electron    = require('gulp-electron')
 config      = require('../config')
 
 
@@ -31,3 +32,14 @@ gulp.task 'webpack', ->
   if config.production
     gPipe = gPipe.pipe(uglify())
   gPipe.pipe(gulp.dest(config.dest.package))
+
+gulp.task 'electron', (callback) ->
+  runSequence(
+    'prod'
+    'atom'
+    )
+
+gulp.task 'atom', (callback) ->
+  gulp.src('')
+    .pipe(electron(config.electron))
+    .pipe(gulp.dest(''))
