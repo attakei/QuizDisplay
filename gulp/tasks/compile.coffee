@@ -3,7 +3,7 @@ stripDebug = require('gulp-strip-debug')
 less = require('gulp-less')
 coffee = require('gulp-coffee')
 jade = require('gulp-jade')
-react = require('gulp-react')
+reactJade = require('gulp-react-jade')
 
 config = require('../config')
 
@@ -11,14 +11,9 @@ config = require('../config')
 gulp.task 'compile', (callback) ->
   runSequence = require('run-sequence')
   runSequence(
-    ['compile:jsx' ,'compile:coffee', 'compile:less' ,'compile:jade', 'compile:jade-raw'],
+    ['compile:jade:js' ,'compile:coffee', 'compile:less' ,'compile:jade:html'],
     callback
   )
-
-gulp.task 'compile:jsx', ->
-  gulp.src('src/**/*.jsx')
-  .pipe(react())
-  .pipe(gulp.dest(config.dest.compile))
 
 gulp.task 'compile:coffee', ->
   gPipe = gulp.src('src/**/*.coffee').pipe(coffee())
@@ -26,11 +21,12 @@ gulp.task 'compile:coffee', ->
     gPipe = gPipe.pipe(stripDebug())
   gPipe.pipe(gulp.dest(config.dest.compile))
 
-gulp.task 'compile:jade-raw', ->
-  gulp.src('src/**/*.jade')
+gulp.task 'compile:jade:js', ->
+  gulp.src(['src/**/*.jade', '!src/html/**/*.jade'])
+  .pipe(reactJade())
   .pipe(gulp.dest(config.dest.compile))
 
-gulp.task 'compile:jade', ->
+gulp.task 'compile:jade:html', ->
   gulp.src('src/html/**/*.jade')
   .pipe(jade())
   .pipe(gulp.dest(config.dest.compile + '/html'))
