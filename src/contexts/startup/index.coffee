@@ -4,20 +4,26 @@
 #
 # --------------------------------------
 ProgressContext = require('../progress').ProgressContext
+MaruBatsuRule = require('../_rules').MaruBatsuRule
 
 
 # 初期化画面用Context
 class @StartupContext extends Arda.Context
   component:
     require('../../components/startup').StartupComponent
+
   initState: (props) ->
     cnt: 0
     programName: 'None title'
     maxPlayers: props.maxPlayers or 12
+    rule: new MaruBatsuRule()
+
   expandComponentProps: (props, state) ->
     cnt: state.cnt
     programName: state.programName
     maxPlayers: state.maxPlayers
+    rule: state.rule
+
   delegate: (subscribe) ->
     super
 
