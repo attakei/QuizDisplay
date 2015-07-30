@@ -12,5 +12,20 @@ config.webpack =
     resolve:
       extensions: ['', '.js']
 
+config.electron =
+  src: './public'
+  packageJson: '../package.json'
+  release: './release'
+  cache: './cache'
+  version: 'v0.30.2'
+  # packaging: true
+  # platforms: ['darwin']  # ['win32-ia32', 'darwin-x64'],
+  platformResources:
+    darwin:
+      CFBundleDisplayName: 'QuizDisplay'
+      CFBundleIdentifier: 'QuizDisplay'
+      CFBundleName: 'QuizDisplay'
+      CFBundleVersion: '0.0.1'
+      # icon: 'gulp-electron.icns'
 
 module.exports = config

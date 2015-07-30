@@ -17,7 +17,6 @@ gulp.task 'prod', (callback) ->
   runSequence(
     'clean',
     'build',
-    'electron',
   )
 
 gulp.task 'build', (callback) ->
@@ -32,9 +31,3 @@ gulp.task 'webpack', ->
   if config.production
     gPipe = gPipe.pipe(uglify())
   gPipe.pipe(gulp.dest(config.dest.package))
-
-gulp.task 'electron', (callback) ->
-  gulp.src(config.dest.compile + '/runner.js')
-    .pipe(gulp.dest(config.dest.package))
-  gulp.src('./package.json')
-    .pipe(gulp.dest(config.dest.package))
