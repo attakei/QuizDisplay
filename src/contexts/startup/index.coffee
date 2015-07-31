@@ -18,7 +18,7 @@ class @StartupContext extends Arda.Context
     cnt: 0
     programName: 'None title'
     maxPlayers: props.maxPlayers or 12
-    rule:  rule_
+    rule: rule_
 
   expandComponentProps: (props, state) ->
     cnt: state.cnt
@@ -31,3 +31,7 @@ class @StartupContext extends Arda.Context
 
     subscribe 'submit', (form) ->
       App.router.pushContext(ProgressContext, form)
+
+    subscribe 'change::rule:param', (param) ->
+      @state.rule.props = param
+      @update (state) => state

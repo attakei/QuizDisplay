@@ -1,3 +1,6 @@
+MaruBatsuForm = require('../_rules').MaruBatsuForm
+
+
 # InitComponent用mixn
 StartupComponentActions =
   getInitialState: ->
@@ -28,4 +31,5 @@ StartupComponentActions =
 
   render: ->
     @BootstrapFooter = require('../common').BootstrapFooter
+    @MaruBatsuForm = MaruBatsuForm
     require("./template") @

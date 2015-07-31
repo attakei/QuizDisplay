@@ -1,8 +1,19 @@
+clone = require('clone')
+
 @MaruBatsuForm = React.createClass
   mixins: [
-    Arda.mixin,
-    React.addons.LinkedStateMixin
+    Arda.mixin
   ]
 
   render: ->
     require('./MaruBatsuForm') @
+
+  changeToWin: (e) ->
+    param = clone @props
+    param.toWin = +e.target.value
+    @dispatch 'change::rule:param', param
+
+  changeToLose: (e) ->
+    param = clone @props
+    param.toLose = +e.target.value
+    @dispatch 'change::rule:param', param

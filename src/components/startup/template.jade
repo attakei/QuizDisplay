@@ -19,9 +19,7 @@ div
         //- div(class='form-group')
         //-   label(for='title') 企画名
         //-   input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
-        //- = React.createFactory(props.rule.component)({props.rule})
-        //- = props.rule.render({})
-        = ruleForm.render()
+        MaruBatsuForm(toWin=props.rule.props.toWin, toLose=props.rule.props.toLose)
         div(class='form-group')
           label(for='players') 参加者
           - for (i = 0; i < props.maxPlayers; i++)
