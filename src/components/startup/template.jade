@@ -3,7 +3,7 @@ div
     div(class='container-fluid')
       div(class='navbar-header')
         div(class='navbar-brand')
-          strong 7○3✕
+          strong n○m✕
       div(class='collapse navbar-collapse')
         ul(class='nav navbar-nav navbar-right')
           li(class='dropdown')
@@ -19,6 +19,7 @@ div
         //- div(class='form-group')
         //-   label(for='title') 企画名
         //-   input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
+        MaruBatsuForm(toWin=props.rule.props.toWin, toLose=props.rule.props.toLose)
         div(class='form-group')
           label(for='players') 参加者
           - for (i = 0; i < props.maxPlayers; i++)
