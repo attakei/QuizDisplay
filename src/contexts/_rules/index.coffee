@@ -11,7 +11,7 @@ class @MaruBatsuRule extends Arda.Context
     toLose: state.toLose
 
   title: ->
-    @props.toWin + '○' + @props.toLose + '✕'
+    @props.toWin + '◯' + @props.toLose + '✕'
 
   getModel: ->
     MaruBatsuRule = require('../../models/rules').MaruBatsuRule

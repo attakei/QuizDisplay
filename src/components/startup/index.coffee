@@ -10,7 +10,7 @@ StartupComponentActions =
     formData = {}
     # TODO: beta2以降で随時戻すことを検討する
     # formData.programName = @linkState('programName').value
-    formData.programName = @props.rule.title()
+    formData.programName = @linkState('programName').value or @props.rule.title()
     formData.playerNames = []
     for i in [0..@props.maxPlayers]
       val_ = @linkState('player[' + i + ']').value
