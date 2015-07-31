@@ -4,6 +4,7 @@
 #
 # --------------------------------------
 ProgressContext = require('../progress').ProgressContext
+CreditContext = require('../credit').CreditContext
 MaruBatsuRule = require('../_rules').MaruBatsuRule
 
 
@@ -31,6 +32,9 @@ class @StartupContext extends Arda.Context
 
     subscribe 'submit', (form) ->
       App.router.pushContext(ProgressContext, form)
+
+    subscribe 'start::context:credit', (from) ->
+      App.router.pushContext(CreditContext, {})
 
     subscribe 'change::rule:param', (param) ->
       @state.rule.props = param

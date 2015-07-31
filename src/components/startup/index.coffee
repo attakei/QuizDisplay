@@ -22,6 +22,9 @@ StartupComponentActions =
     formData.rule = new MaruBatsuRule(rule.props.toWin, rule.props.toLose)
     @dispatch('submit', formData)
 
+  goToCredit: ->
+    @dispatch 'start::context:credit'
+
 
 @StartupComponent = React.createClass
   mixins: [

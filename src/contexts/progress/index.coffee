@@ -3,6 +3,7 @@
 # 進行表示Context系パッケージ
 #
 # --------------------------------------
+CreditContext = require('../credit').CreditContext
 {Player, PlayerState} = require('../../models/players')
 
 
@@ -28,6 +29,9 @@ class @ProgressContext extends Arda.Context
 
   delegate: (subscribe) ->
     super
+
+    subscribe 'start::context:credit', (from) ->
+      App.router.pushContext(CreditContext, {})
 
     subscribe 'try-answer', (playerId) ->
       # 誰か一人でも解答権を持っている場合は、処理を進めない

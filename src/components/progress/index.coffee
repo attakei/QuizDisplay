@@ -30,6 +30,9 @@ ProgressActions =
   endProgress: ->
     @dispatch 'end-progress'
 
+  goToCredit: ->
+    @dispatch 'start::context:credit'
+
 
 Player = React.createClass
   render: ->
