@@ -9,3 +9,10 @@ class @MaruBatsuRule extends Arda.Context
   expandComponentProps: (props, state) ->
     toWin: state.toWin
     toLose: state.toLose
+
+  title: ->
+    @props.toWin + '○' + @props.toLose + '✕'
+
+  getModel: ->
+    MaruBatsuRule = require('../../models/rules').MaruBatsuRule
+    new MaruBatsuRule(@props.toWin, @props.toLose)
