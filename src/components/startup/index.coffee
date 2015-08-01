@@ -1,3 +1,4 @@
+clone = require('clone')
 MaruBatsuForm = require('../_rules').MaruBatsuForm
 
 
@@ -11,11 +12,6 @@ StartupComponentActions =
     # TODO: beta2以降で随時戻すことを検討する
     # formData.programName = @linkState('programName').value
     formData.programName = @linkState('programName').value or @props.rule.title()
-    formData.playerNames = []
-    for i in [0..@props.maxPlayers]
-      val_ = @linkState('player[' + i + ']').value
-      val_ = '' if typeof val_ == "undefined"
-      formData.playerNames.push(val_)
     # TODO: 仮に7◯3✕をセットする
     @dispatch('submit', formData)
 
@@ -29,5 +25,22 @@ StartupComponentActions =
 
   render: ->
     @BootstrapFooter = require('../common').BootstrapFooter
+    @PlayerEntryList = PlayerEntryList
     @MaruBatsuForm = MaruBatsuForm
+
     require("./template") @
+
+
+PlayerEntryList = React.createClass
+  mixins: [
+    Arda.mixin,
+    React.addons.LinkedStateMixin,
+  ]
+
+  renameEntry: (e) ->
+    playerNames = clone @props.playerNames
+    playerNames[e.target.getAttribute('data-index')] = e.target.value
+    @dispatch 'change::players', playerNames
+
+  render: ->
+    require('./PlayerEntryList') @

@@ -20,11 +20,7 @@ div
         //-   label(for='title') 企画名
         //-   input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
         MaruBatsuForm(toWin=props.rule.rightsForWin, toLose=props.rule.wrongsForLose)
-        div(class='form-group')
-          label(for='players') 参加者
-          - for (i = 0; i < props.maxPlayers; i++)
-          input(type='text', class='form-control', style={margin:'5px'}, valueLink=linkState('player[' + i + ']'))
-          //- p(class='help-block') Example block-level help text here.
+        PlayerEntryList(playerNames=props.playerNames)
         button(type='button', class='btn btn-primary', onClick=handleSubmit) 開始！
 
   BootstrapFooter

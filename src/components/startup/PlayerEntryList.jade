@@ -1,0 +1,5 @@
+div(class='form-group')
+  label(for='players') 参加者
+  - for (idx = 0; idx < props.playerNames.length; idx++)
+    input(type='text', class='form-control', style={margin:'5px'}, defaultValue=props.playerNames[idx] data-index=idx onChange=renameEntry)
+  //- p(class='help-block') Example block-level help text here.
