@@ -34,13 +34,28 @@ StartupComponentActions =
 PlayerEntryList = React.createClass
   mixins: [
     Arda.mixin,
-    React.addons.LinkedStateMixin,
   ]
 
-  renameEntry: (e) ->
+  updateEntry: (updateTarget) ->
     playerNames = clone @props.playerNames
-    playerNames[e.target.getAttribute('data-index')] = e.target.value
+    playerNames[updateTarget.dataIndex] = updateTarget.name
     @dispatch 'change::players', playerNames
 
   render: ->
+    @PlayerEntry = PlayerEntry
     require('./PlayerEntryList') @
+
+
+PlayerEntry = React.createClass
+  mixins: [
+    Arda.mixin,
+  ]
+
+  changeName: (e) ->
+    updateData =
+      dataIndex: e.target.getAttribute('data-index')
+      name: e.target.value
+    @props.updateEntry(updateData)
+
+  render: ->
+    require('./PlayerEntry') @
