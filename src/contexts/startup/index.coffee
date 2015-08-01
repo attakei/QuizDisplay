@@ -4,7 +4,7 @@
 #
 # --------------------------------------
 ProgressContext = require('../progress').ProgressContext
-MaruBatsuRule = require('../_rules').MaruBatsuRule
+MaruBatsuRule = require('../../models/rules').MaruBatsuRule
 
 
 # 初期化画面用Context
@@ -13,12 +13,10 @@ class @StartupContext extends Arda.Context
     require('../../components/startup').StartupComponent
 
   initState: (props) ->
-    rule_ = new MaruBatsuRule
-    rule_.props = {toWin: 7, toLose: 3}
     cnt: 0
     programName: 'None title'
     maxPlayers: props.maxPlayers or 12
-    rule: rule_
+    rule: new MaruBatsuRule(7, 3)
 
   expandComponentProps: (props, state) ->
     cnt: state.cnt
@@ -30,8 +28,10 @@ class @StartupContext extends Arda.Context
     super
 
     subscribe 'submit', (form) ->
+      form.rule = @state.rule
       App.router.pushContext(ProgressContext, form)
 
     subscribe 'change::rule:param', (param) ->
-      @state.rule.props = param
+      @state.rule.rightsForWin = param.toWin
+      @state.rule.wrongsForLose = param.toLose
       @update (state) => state

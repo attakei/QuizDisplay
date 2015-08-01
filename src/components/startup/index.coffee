@@ -17,7 +17,6 @@ StartupComponentActions =
       val_ = '' if typeof val_ == "undefined"
       formData.playerNames.push(val_)
     # TODO: 仮に7◯3✕をセットする
-    formData.rule = @props.rule.getModel()
     @dispatch('submit', formData)
 
 
