@@ -1,3 +1,4 @@
+clone = require('clone')
 MaruBatsuForm = require('../_rules').MaruBatsuForm
 
 
@@ -10,16 +11,8 @@ StartupComponentActions =
     formData = {}
     # TODO: beta2以降で随時戻すことを検討する
     # formData.programName = @linkState('programName').value
-    rule = @props.rule
-    formData.programName = rule.props.toWin + '○' + rule.props.toLose + '✕'
-    formData.playerNames = []
-    for i in [0..@props.maxPlayers]
-      val_ = @linkState('player[' + i + ']').value
-      val_ = '' if typeof val_ == "undefined"
-      formData.playerNames.push(val_)
+    formData.programName = @linkState('programName').value or @props.rule.title()
     # TODO: 仮に7◯3✕をセットする
-    MaruBatsuRule = require('../../models/rules').MaruBatsuRule
-    formData.rule = new MaruBatsuRule(rule.props.toWin, rule.props.toLose)
     @dispatch('submit', formData)
 
 
@@ -32,5 +25,37 @@ StartupComponentActions =
 
   render: ->
     @BootstrapFooter = require('../common').BootstrapFooter
+    @PlayerEntryList = PlayerEntryList
     @MaruBatsuForm = MaruBatsuForm
+
     require("./template") @
+
+
+PlayerEntryList = React.createClass
+  mixins: [
+    Arda.mixin,
+  ]
+
+  updateEntry: (updateTarget) ->
+    playerNames = clone @props.playerNames
+    playerNames[updateTarget.dataIndex] = updateTarget.name
+    @dispatch 'change::players', playerNames
+
+  render: ->
+    @PlayerEntry = PlayerEntry
+    require('./PlayerEntryList') @
+
+
+PlayerEntry = React.createClass
+  mixins: [
+    Arda.mixin,
+  ]
+
+  changeName: (e) ->
+    updateData =
+      dataIndex: e.target.getAttribute('data-index')
+      name: e.target.value
+    @props.updateEntry(updateData)
+
+  render: ->
+    require('./PlayerEntry') @

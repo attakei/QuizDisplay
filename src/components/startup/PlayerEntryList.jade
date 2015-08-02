@@ -1,0 +1,5 @@
+div(class='form-group')
+  label(for='players') 参加者
+  - for (idx = 0; idx < props.playerNames.length; idx++)
+    PlayerEntry(playerName=props.playerNames[idx], dataIndex=idx, updateEntry=updateEntry)
+  //- p(class='help-block') Example block-level help text here.

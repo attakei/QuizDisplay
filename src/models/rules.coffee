@@ -25,6 +25,9 @@ class @MaruBatsuRule extends RuleBase
     @rightsForWin = rightsForWin
     @wrongsForLose = wrongsForLose
 
+  title: ->
+    @rightsForWin + '◯' + @wrongsForLose + '✕'
+
   judgeWin: (player) ->
     player.numOfRights >= @rightsForWin
 
