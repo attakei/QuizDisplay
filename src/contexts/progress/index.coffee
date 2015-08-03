@@ -30,20 +30,14 @@ class @ProgressContext extends Arda.Context
   delegate: (subscribe) ->
     super
 
-    subscribe 'try-answer', (playerId) ->
+    subscribe 'try::answer', (player) ->
       # 誰か一人でも解答権を持っている場合は、処理を進めない
       if @findAnswerPlayer() != null
-        console.debug('already answers')
+        console.log 'already answers'
         return
-      console.log @state.players
-      players_ = @state.players.map (player) ->
-        # 解答権を取りに行ける状態でないとステート更新しない
-        if player.id == playerId and player.state == PlayerState.Neutral
-          player.state = PlayerState.Answer
-        return player
-      @update (state) =>
-        state.players= players_
-        return state
+      if player.state == PlayerState.Neutral
+        player.state = PlayerState.Answer
+      @update (state) => state
 
     subscribe 'answer-right', ->
       answerPlayer = @findAnswerPlayer()

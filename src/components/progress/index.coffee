@@ -8,11 +8,6 @@ ProgressActions =
       elm = elm.parentNode
     return elm
 
-  tryAnswer: (e) ->
-    elm = @_findColumnNode(e)
-    console.debug(elm.getAttribute('data-playerid') + ': try answer.')
-    @dispatch 'try-answer', parseInt(elm.getAttribute('data-playerid'))
-
   answerRight: ->
     console.debug '正解'
     @dispatch 'answer-right'
@@ -32,6 +27,13 @@ ProgressActions =
 
 
 Player = React.createClass
+  mixins: [
+    Arda.mixin
+  ]
+
+  tryAnswer: (e)->
+    @dispatch 'try::answer', @props.player
+
   render: ->
     @PlayerState = PlayerState
     require("./Player") @
