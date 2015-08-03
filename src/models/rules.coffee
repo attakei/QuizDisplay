@@ -40,12 +40,12 @@ class RuleBase
 n○m✕形式ルール
 ###
 class @MaruBatsuRule extends RuleBase
-  constructor: (rightsForWin, wrongsForLose) ->
-    @rightsForWin = rightsForWin
-    @wrongsForLose = wrongsForLose
+  constructor: (toWin, toLose) ->
+    @toWin = toWin
+    @toLose = toLose
 
   title: ->
-    @rightsForWin + '◯' + @wrongsForLose + '✕'
+    @toWin + '◯' + @toLose + '✕'
 
   _decideRight: (player) ->
     player.rights++
@@ -54,18 +54,18 @@ class @MaruBatsuRule extends RuleBase
     player.wrongs++
 
   judgeWin: (player) ->
-    player.rights >= @rightsForWin
+    player.rights >= @toWin
 
   judgeLose: (player) ->
-    player.wrongs >= @wrongsForLose
+    player.wrongs >= @toLose
 
   displayPositive: (player) ->
-    if player.state == PlayerState.Win or player.rights >= @rightsForWin
+    if player.state == PlayerState.Win or player.rights >= @toWin
       return '勝抜'
     '◯ ' + player.rights
 
   displayNegative: (player) ->
-    if player.state == PlayerState.Lose or player.wrongs >= @wrongsForLose
+    if player.state == PlayerState.Lose or player.wrongs >= @toLose
       return '失格'
     '✕ ' + player.wrongs
 
