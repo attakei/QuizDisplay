@@ -24,9 +24,9 @@ class RuleBase
   judge: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
       return PlayerState.None
-    if @judgeWin(player)
+    if @_judgeWin(player)
       nextState = PlayerState.Win
-    else if @judgeLose(player)
+    else if @_judgeLose(player)
       nextState = PlayerState.Lose
     else
       nextState = PlayerState.Neutral
@@ -51,10 +51,10 @@ class @MaruBatsuRule extends RuleBase
   _decideWrong: (player) ->
     player.wrongs++
 
-  judgeWin: (player) ->
+  _judgeWin: (player) ->
     player.rights >= @toWin
 
-  judgeLose: (player) ->
+  _judgeLose: (player) ->
     player.wrongs >= @toLose
 
   displayPositive: (player) ->
@@ -71,10 +71,10 @@ class @MaruBatsuRule extends RuleBase
 class @PointsRule extends RuleBase
   constructor: (@scoreToWin=10, @scoreToLose=null, @scoreForRight=1, @scoreForWrong=-1) ->
 
-  judgeWin: (player) ->
+  _judgeWin: (player) ->
     @calcScore(player) >= @scoreToWin
 
-  judgeLose: (player) ->
+  _judgeLose: (player) ->
     @scoreToLose != null and @calcScore(player) <= @scoreToLose
 
   calcScore: (player) ->

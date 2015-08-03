@@ -40,19 +40,19 @@ describe 'MaruBatsuRule test', () ->
       rule.decide(player, rules.Decision.Wrong)
       assert.equal 1, player.wrongs
 
-  it '#judgeWin', () ->
+  it '#_judgeWin', () ->
     rule = new TestTargetRule(7, 3)
     player = {rights: 6}
-    assert.equal false, rule.judgeWin(player)
+    assert.equal false, rule._judgeWin(player)
     player.rights++
-    assert.equal true, rule.judgeWin(player)
+    assert.equal true, rule._judgeWin(player)
 
-  it '#judgeLose', () ->
+  it '#_judgeLose', () ->
     rule = new TestTargetRule(7, 3)
     player = {wrongs: 2}
-    assert.equal false, rule.judgeLose(player)
+    assert.equal false, rule._judgeLose(player)
     player.wrongs++
-    assert.equal true, rule.judgeLose(player)
+    assert.equal true, rule._judgeLose(player)
 
   describe '#judge', () ->
     rule = new TestTargetRule(7, 3)
@@ -195,36 +195,36 @@ describe 'PointsRule', () ->
       player = {rights: 0, wrongs: 2, state: PlayerState.Neutral}
       assert.equal '失格', rule.displayNegative(player)
 
-  it '#judgeWin', () ->
+  it '#_judgeWin', () ->
     rule = new TestTargetRule()
     player = {rights: 9, wrongs: 0}
-    assert.equal false, rule.judgeWin(player)
+    assert.equal false, rule._judgeWin(player)
     player.rights++
-    assert.equal true, rule.judgeWin(player)
+    assert.equal true, rule._judgeWin(player)
     player.wrongs++
-    assert.equal false, rule.judgeWin(player)
+    assert.equal false, rule._judgeWin(player)
     player.rights++
-    assert.equal true, rule.judgeWin(player)
+    assert.equal true, rule._judgeWin(player)
 
-  describe '#judgeLose', () ->
+  describe '#_judgeLose', () ->
     it 'has scoreToLose', () ->
       rule = new TestTargetRule(10, -3)
       player = {rights: 0, wrongs: 2}
-      assert.equal false, rule.judgeLose(player)
+      assert.equal false, rule._judgeLose(player)
       player.wrongs++
-      assert.equal true, rule.judgeLose(player)
+      assert.equal true, rule._judgeLose(player)
       player.rights++
-      assert.equal false, rule.judgeLose(player)
+      assert.equal false, rule._judgeLose(player)
       player.wrongs++
-      assert.equal true, rule.judgeLose(player)
+      assert.equal true, rule._judgeLose(player)
 
     it 'does not have scoreToLose', () ->
       rule = new TestTargetRule(10)
       player = {rights: 0, wrongs: 2}
-      assert.equal false, rule.judgeLose(player)
+      assert.equal false, rule._judgeLose(player)
       player.wrongs++
-      assert.equal false, rule.judgeLose(player)
+      assert.equal false, rule._judgeLose(player)
       player.rights++
-      assert.equal false, rule.judgeLose(player)
+      assert.equal false, rule._judgeLose(player)
       player.wrongs++
-      assert.equal false, rule.judgeLose(player)
+      assert.equal false, rule._judgeLose(player)
