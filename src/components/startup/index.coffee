@@ -35,11 +35,6 @@ PlayerEntryList = React.createClass
     Arda.mixin,
   ]
 
-  updateEntry: (updateTarget) ->
-    playerNames = clone @props.playerNames
-    playerNames[updateTarget.dataIndex] = updateTarget.name
-    @dispatch 'change::players', playerNames
-
   render: ->
     @PlayerEntry = PlayerEntry
     require('./PlayerEntryList') @
@@ -54,7 +49,7 @@ PlayerEntry = React.createClass
     updateData =
       dataIndex: e.target.getAttribute('data-index')
       name: e.target.value
-    @props.updateEntry(updateData)
+    @dispatch 'change::players', updateData
 
   render: ->
     require('./PlayerEntry') @

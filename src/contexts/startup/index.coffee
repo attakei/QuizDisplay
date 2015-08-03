@@ -41,6 +41,6 @@ class @StartupContext extends Arda.Context
       @state.rule.toLose = param.toLose
       @update (state) => state
 
-    subscribe 'change::players', (param) ->
-      @state.playerNames = param
+    subscribe 'change::players', (updateData) ->
+      @state.playerNames[updateData.dataIndex] = updateData.name
       @update (state) => state
