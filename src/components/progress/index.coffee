@@ -1,4 +1,5 @@
 PlayerState = require('../../models/players').PlayerState
+Decision    = require('../../models/rules').Decision
 
 
 ProgressActions =
@@ -7,20 +8,6 @@ ProgressActions =
     if elm.getAttribute != 'col-md-1'
       elm = elm.parentNode
     return elm
-
-  answerRight: ->
-    console.debug '正解'
-    @dispatch 'answer-right'
-
-  answerWrong: ->
-    console.debug '誤答'
-    @dispatch 'answer-wrong'
-
-  throughAnswer: ->
-    @dispatch 'through-answer'
-
-  resetAnswer: ->
-    @dispatch 'reset-answer'
 
   endProgress: ->
     @dispatch 'end-progress'
@@ -40,6 +27,22 @@ Player = React.createClass
 
 
 JudgePanel = React.createClass
+  mixins: [
+    Arda.mixin
+  ]
+
+  answerRight: ->
+    @dispatch 'answer::decide', Decision.Right
+
+  answerWrong: ->
+    @dispatch 'answer::decide', Decision.Wrong
+
+  throughAnswer: ->
+    @dispatch 'through-answer'
+
+  resetAnswer: ->
+    @dispatch 'reset-answer'
+
   render: ->
     require("./JudgePanel") @
 
