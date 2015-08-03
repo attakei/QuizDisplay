@@ -2,9 +2,23 @@
 # ルール系モデル
 # --------------------------------------
 PlayerState = require('./players').PlayerState
+Enum        = require('enum')
+
+
+# 解答者の状態
+#
+@Decision = Decision =
+  new Enum([
+    'Right'  # 正解
+    'Wrong'  # 不正解
+  ])
 
 
 class RuleBase
+  decide: (player, decision) ->
+    if decision == Decision.Right
+      @_decideRight(player)
+
   judge: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
       return PlayerState.None
@@ -17,6 +31,8 @@ class RuleBase
     player.state = nextState
     return nextState
 
+@RuleBase = RuleBase
+
 
 ###
 n○m✕形式ルール
@@ -28,6 +44,9 @@ class @MaruBatsuRule extends RuleBase
 
   title: ->
     @rightsForWin + '◯' + @wrongsForLose + '✕'
+
+  _decideRight: (player) ->
+    player.rights++
 
   judgeWin: (player) ->
     player.rights >= @rightsForWin

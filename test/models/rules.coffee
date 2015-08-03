@@ -1,13 +1,33 @@
 # --------------------------------------
 # ルール系モデルのテストケース
 # --------------------------------------
-assert = require("assert")
-rules = require('../../src/models/rules')
+assert      = require("assert")
+rules       = require('../../src/models/rules')
 PlayerState = require('../../src/models/players').PlayerState
+
+
+class RuleImpl extends rules.RuleBase
+  _decideRight: (player) ->
+    return true
+
+
+describe 'RuleBase tests', () ->
+  rule = new RuleImpl
+  player = {}
+
+  it '#decide with right', () ->
+    assert.equal true, rule.decide(player, rules.Decision.Right)
 
 
 describe 'MaruBatsuRule test', () ->
   TestTargetRule = rules.MaruBatsuRule
+  rule = new rules.MaruBatsuRule(4, 2)
+
+  describe '#decide', () ->
+    it 'test win', () ->
+      player = {rights: 0}
+      rule.decide(player, rules.Decision.Right)
+      assert.equal 1, player.rights
 
   it '#judgeWin', () ->
     rule = new TestTargetRule(7, 3)
