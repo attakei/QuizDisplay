@@ -4,6 +4,7 @@
 #
 # --------------------------------------
 {Player, PlayerState} = require('../../models/players')
+Decision              = require('../../models/rules').Decision
 
 
 class @ProgressContext extends Arda.Context
@@ -46,14 +47,14 @@ class @ProgressContext extends Arda.Context
 
     subscribe 'answer-right', ->
       answerPlayer = @findAnswerPlayer()
-      answerPlayer.doRight()
+      @props.rule.decide(answerPlayer, Decision.Right)
       @props.rule.judge(answerPlayer)
       @state.quizCount++;
       @update (state) => state
 
     subscribe 'answer-wrong', ->
       answerPlayer = @findAnswerPlayer()
-      answerPlayer.doWrong()
+      @props.rule.decide(answerPlayer, Decision.Wrong)
       @props.rule.judge(answerPlayer)
       @state.quizCount++;
       @update (state) => state
