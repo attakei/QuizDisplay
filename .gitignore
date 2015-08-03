@@ -29,3 +29,4 @@ node_modules
 # gulp destination path
 /lib
 /public
+/trial
