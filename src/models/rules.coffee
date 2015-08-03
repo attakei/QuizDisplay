@@ -3,6 +3,7 @@
 # --------------------------------------
 PlayerState = require('./players').PlayerState
 
+
 class RuleBase
   judge: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
