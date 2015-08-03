@@ -17,16 +17,16 @@ Enum = require 'enum'
 
 class @Player
   constructor: (@id, @name) ->
-    @numOfRights = 0
-    @numOfWrongs = 0
+    @rights = 0
+    @wrongs = 0
     @state = PlayerState.Neutral
 
   doRight: ->
-    @numOfRights++
+    @rights++
     @state = PlayerState.Neutral
 
   doWrong: ->
-    @numOfWrongs++
+    @wrongs++
     @state = PlayerState.Neutral
 
   vname: ->
@@ -48,4 +48,4 @@ class @ScorePlayer extends @Player
     ''
 
   calcScore: ->
-    @numOfRights - @numOfWrongs
+    @rights - @wrongs
