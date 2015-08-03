@@ -24,7 +24,6 @@ StartupComponentActions =
   ]
 
   render: ->
-    @BootstrapFooter = require('../common').BootstrapFooter
     @PlayerEntryList = PlayerEntryList
     @MaruBatsuForm = MaruBatsuForm
 

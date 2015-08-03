@@ -58,7 +58,6 @@ ViewControlPanel = React.createClass
   ]
 
   render: ->
-    @BootstrapFooter = require('../common').BootstrapFooter
     @JudgePanel = JudgePanel
     @ViewControlPanel = ViewControlPanel
     @Player = Player
