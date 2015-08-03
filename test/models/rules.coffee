@@ -10,6 +10,9 @@ class RuleImpl extends rules.RuleBase
   _decideRight: (player) ->
     return true
 
+  _decideWrong: (player) ->
+    return false
+
 
 describe 'RuleBase tests', () ->
   rule = new RuleImpl
@@ -18,16 +21,24 @@ describe 'RuleBase tests', () ->
   it '#decide with right', () ->
     assert.equal true, rule.decide(player, rules.Decision.Right)
 
+  it '#decide with wrong', () ->
+    assert.equal false, rule.decide(player, rules.Decision.Wrong)
+
 
 describe 'MaruBatsuRule test', () ->
   TestTargetRule = rules.MaruBatsuRule
   rule = new rules.MaruBatsuRule(4, 2)
 
   describe '#decide', () ->
-    it 'test win', () ->
+    it 'test right', () ->
       player = {rights: 0}
       rule.decide(player, rules.Decision.Right)
       assert.equal 1, player.rights
+
+    it 'test wrong', () ->
+      player = {wrongs: 0}
+      rule.decide(player, rules.Decision.Wrong)
+      assert.equal 1, player.wrongs
 
   it '#judgeWin', () ->
     rule = new TestTargetRule(7, 3)

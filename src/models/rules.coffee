@@ -18,6 +18,8 @@ class RuleBase
   decide: (player, decision) ->
     if decision == Decision.Right
       @_decideRight(player)
+    else if decision == Decision.Wrong
+      @_decideWrong(player)
 
   judge: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
@@ -47,6 +49,9 @@ class @MaruBatsuRule extends RuleBase
 
   _decideRight: (player) ->
     player.rights++
+
+  _decideWrong: (player) ->
+    player.wrongs++
 
   judgeWin: (player) ->
     player.rights >= @rightsForWin
