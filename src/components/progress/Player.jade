@@ -1,4 +1,4 @@
-div(class='col-md-1 player-column', onClick=tryAnswer, data-playerid=props.player.id)
+div(class='col-md-1 player-column', onClick=tryAnswer)
     if props.player.state == PlayerState.Answer
         p(class='text-center player-id', style={backgroundColor: 'yellow'})= (props.player.id)
     else
