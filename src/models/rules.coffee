@@ -30,20 +30,20 @@ class @MaruBatsuRule extends RuleBase
     @rightsForWin + '◯' + @wrongsForLose + '✕'
 
   judgeWin: (player) ->
-    player.numOfRights >= @rightsForWin
+    player.rights >= @rightsForWin
 
   judgeLose: (player) ->
-    player.numOfWrongs >= @wrongsForLose
+    player.wrongs >= @wrongsForLose
 
   displayPositive: (player) ->
-    if player.state == PlayerState.Win or player.numOfRights >= @rightsForWin
+    if player.state == PlayerState.Win or player.rights >= @rightsForWin
       return '勝抜'
-    '◯ ' + player.numOfRights
+    '◯ ' + player.rights
 
   displayNegative: (player) ->
-    if player.state == PlayerState.Lose or player.numOfWrongs >= @wrongsForLose
+    if player.state == PlayerState.Lose or player.wrongs >= @wrongsForLose
       return '失格'
-    '✕ ' + player.numOfWrongs
+    '✕ ' + player.wrongs
 
 
 class @PointsRule extends RuleBase
@@ -60,7 +60,7 @@ class @PointsRule extends RuleBase
     @scoreToLose != null and @calcScore(player) <= @scoreToLose
 
   calcScore: (player) ->
-    return player.numOfRights * @scoreForRight + player.numOfWrongs * @scoreForWrong
+    return player.rights * @scoreForRight + player.wrongs * @scoreForWrong
 
   displayPositive: (player) ->
     score = @calcScore(player)
