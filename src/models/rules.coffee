@@ -40,9 +40,7 @@ class RuleBase
 n○m✕形式ルール
 ###
 class @MaruBatsuRule extends RuleBase
-  constructor: (toWin, toLose) ->
-    @toWin = toWin
-    @toLose = toLose
+  constructor: (@toWin, @toLose) ->
 
   title: ->
     @toWin + '◯' + @toLose + '✕'
@@ -71,11 +69,7 @@ class @MaruBatsuRule extends RuleBase
 
 
 class @PointsRule extends RuleBase
-  constructor: (scoreToWin=10, scoreToLose=null, scoreForRight=1, scoreForWrong=-1) ->
-    @scoreToWin = scoreToWin
-    @scoreToLose = scoreToLose
-    @scoreForRight = scoreForRight
-    @scoreForWrong = scoreForWrong
+  constructor: (@scoreToWin=10, @scoreToLose=null, @scoreForRight=1, @scoreForWrong=-1) ->
 
   judgeWin: (player) ->
     @calcScore(player) >= @scoreToWin

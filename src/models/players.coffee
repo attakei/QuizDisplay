@@ -16,9 +16,7 @@ Enum = require 'enum'
 
 
 class @Player
-  constructor: (id, name) ->
-    @id = id
-    @name = name
+  constructor: (@id, @name) ->
     @numOfRights = 0
     @numOfWrongs = 0
     @state = PlayerState.Neutral
