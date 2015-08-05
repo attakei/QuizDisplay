@@ -1,5 +1,5 @@
 PlayerState = require('../../models/players').PlayerState
-Decision    = require('../../models/rules').Decision
+Judge       = require('../../models/rules').Judge
 
 
 ProgressActions =
@@ -32,10 +32,10 @@ JudgePanel = React.createClass
   ]
 
   answerRight: ->
-    @dispatch 'answer::decide', Decision.Right
+    @dispatch 'answer::decide', Judge.Right
 
   answerWrong: ->
-    @dispatch 'answer::decide', Decision.Wrong
+    @dispatch 'answer::decide', Judge.Wrong
 
   throughAnswer: ->
     @dispatch 'answer::through'
