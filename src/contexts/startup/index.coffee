@@ -31,7 +31,7 @@ class @StartupContext extends Arda.Context
   delegate: (subscribe) ->
     super
 
-    subscribe 'submit', (form) ->
+    subscribe 'start::program', (form) ->
       form.rule = @state.rule
       form.playerNames = @state.playerNames
       App.router.pushContext(ProgressContext, form)
@@ -41,6 +41,6 @@ class @StartupContext extends Arda.Context
       @state.rule.toLose = param.toLose
       @update (state) => state
 
-    subscribe 'change::players', (param) ->
-      @state.playerNames = param
+    subscribe 'change::players', (updateData) ->
+      @state.playerNames[updateData.dataIndex] = updateData.name
       @update (state) => state

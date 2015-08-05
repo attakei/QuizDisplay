@@ -30,46 +30,30 @@ class @ProgressContext extends Arda.Context
   delegate: (subscribe) ->
     super
 
-    subscribe 'try-answer', (playerId) ->
+    subscribe 'try::answer', (player) ->
       # 誰か一人でも解答権を持っている場合は、処理を進めない
       if @findAnswerPlayer() != null
-        console.debug('already answers')
+        console.log 'already answers'
         return
-      console.log @state.players
-      players_ = @state.players.map (player) ->
-        # 解答権を取りに行ける状態でないとステート更新しない
-        if player.id == playerId and player.state == PlayerState.Neutral
-          player.state = PlayerState.Answer
-        return player
-      @update (state) =>
-        state.players= players_
-        return state
+      if player.state == PlayerState.Neutral
+        player.state = PlayerState.Answer
+      @update (state) => state
 
-    subscribe 'answer-right', ->
+    subscribe 'answer::decide', (decision) ->
       answerPlayer = @findAnswerPlayer()
-      @props.rule.decide(answerPlayer, Decision.Right)
+      @props.rule.decide(answerPlayer, decision)
       @props.rule.judge(answerPlayer)
       @state.quizCount++;
       @update (state) => state
 
-    subscribe 'answer-wrong', ->
-      answerPlayer = @findAnswerPlayer()
-      @props.rule.decide(answerPlayer, Decision.Wrong)
-      @props.rule.judge(answerPlayer)
+    subscribe 'answer::through', ->
       @state.quizCount++;
       @update (state) => state
 
-    subscribe 'through-answer', ->
-      @state.quizCount++;
-      @update (state) => state
-
-    subscribe 'reset-answer', ->
-      players_ = @state.players
-      for player in players_
+    subscribe 'answer::reset', ->
+      for player in @state.players
         player.state = PlayerState.Neutral
-      @update (state) =>
-        state.players= players_
-        return state
+      @update (state) => state
 
     subscribe 'end-progress', ->
       App.router.popContext()

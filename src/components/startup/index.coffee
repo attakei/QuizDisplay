@@ -13,7 +13,7 @@ StartupComponentActions =
     # formData.programName = @linkState('programName').value
     formData.programName = @linkState('programName').value or @props.rule.title()
     # TODO: 仮に7◯3✕をセットする
-    @dispatch('submit', formData)
+    @dispatch 'start::program', formData
 
 
 @StartupComponent = React.createClass
@@ -24,7 +24,6 @@ StartupComponentActions =
   ]
 
   render: ->
-    @BootstrapFooter = require('../common').BootstrapFooter
     @PlayerEntryList = PlayerEntryList
     @MaruBatsuForm = MaruBatsuForm
 
@@ -35,11 +34,6 @@ PlayerEntryList = React.createClass
   mixins: [
     Arda.mixin,
   ]
-
-  updateEntry: (updateTarget) ->
-    playerNames = clone @props.playerNames
-    playerNames[updateTarget.dataIndex] = updateTarget.name
-    @dispatch 'change::players', playerNames
 
   render: ->
     @PlayerEntry = PlayerEntry
@@ -55,7 +49,7 @@ PlayerEntry = React.createClass
     updateData =
       dataIndex: e.target.getAttribute('data-index')
       name: e.target.value
-    @props.updateEntry(updateData)
+    @dispatch 'change::players', updateData
 
   render: ->
     require('./PlayerEntry') @

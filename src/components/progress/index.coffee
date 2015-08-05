@@ -1,4 +1,5 @@
 PlayerState = require('../../models/players').PlayerState
+Decision    = require('../../models/rules').Decision
 
 
 ProgressActions =
@@ -8,36 +9,40 @@ ProgressActions =
       elm = elm.parentNode
     return elm
 
-  tryAnswer: (e) ->
-    elm = @_findColumnNode(e)
-    console.debug(elm.getAttribute('data-playerid') + ': try answer.')
-    @dispatch 'try-answer', parseInt(elm.getAttribute('data-playerid'))
-
-  answerRight: ->
-    console.debug '正解'
-    @dispatch 'answer-right'
-
-  answerWrong: ->
-    console.debug '誤答'
-    @dispatch 'answer-wrong'
-
-  throughAnswer: ->
-    @dispatch 'through-answer'
-
-  resetAnswer: ->
-    @dispatch 'reset-answer'
-
   endProgress: ->
     @dispatch 'end-progress'
 
 
 Player = React.createClass
+  mixins: [
+    Arda.mixin
+  ]
+
+  tryAnswer: (e)->
+    @dispatch 'try::answer', @props.player
+
   render: ->
     @PlayerState = PlayerState
     require("./Player") @
 
 
 JudgePanel = React.createClass
+  mixins: [
+    Arda.mixin
+  ]
+
+  answerRight: ->
+    @dispatch 'answer::decide', Decision.Right
+
+  answerWrong: ->
+    @dispatch 'answer::decide', Decision.Wrong
+
+  throughAnswer: ->
+    @dispatch 'answer::through'
+
+  resetAnswer: ->
+    @dispatch 'answer::reset'
+
   render: ->
     require("./JudgePanel") @
 
@@ -53,7 +58,6 @@ ViewControlPanel = React.createClass
   ]
 
   render: ->
-    @BootstrapFooter = require('../common').BootstrapFooter
     @JudgePanel = JudgePanel
     @ViewControlPanel = ViewControlPanel
     @Player = Player
