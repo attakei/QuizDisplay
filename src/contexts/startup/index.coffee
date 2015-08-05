@@ -31,7 +31,7 @@ class @StartupContext extends Arda.Context
   delegate: (subscribe) ->
     super
 
-    subscribe 'submit', (form) ->
+    subscribe 'start::program', (form) ->
       form.rule = @state.rule
       form.playerNames = @state.playerNames
       App.router.pushContext(ProgressContext, form)

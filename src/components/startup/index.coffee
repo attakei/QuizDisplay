@@ -13,7 +13,7 @@ StartupComponentActions =
     # formData.programName = @linkState('programName').value
     formData.programName = @linkState('programName').value or @props.rule.title()
     # TODO: 仮に7◯3✕をセットする
-    @dispatch('submit', formData)
+    @dispatch 'start::program', formData
 
 
 @StartupComponent = React.createClass
