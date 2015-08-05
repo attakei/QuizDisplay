@@ -46,7 +46,7 @@ class @ProgressContext extends Arda.Context
       @state.quizCount++;
       @update (state) => state
 
-    subscribe 'through-answer', ->
+    subscribe 'answer::through', ->
       @state.quizCount++;
       @update (state) => state
 

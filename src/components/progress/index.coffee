@@ -38,7 +38,7 @@ JudgePanel = React.createClass
     @dispatch 'answer::decide', Decision.Wrong
 
   throughAnswer: ->
-    @dispatch 'through-answer'
+    @dispatch 'answer::through'
 
   resetAnswer: ->
     @dispatch 'answer::reset'
