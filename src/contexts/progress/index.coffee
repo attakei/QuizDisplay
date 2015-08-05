@@ -39,10 +39,10 @@ class @ProgressContext extends Arda.Context
         player.state = PlayerState.Answer
       @update (state) => state
 
-    subscribe 'answer::decide', (decision) ->
+    subscribe 'answer::decide', (judgeResult) ->
       answerPlayer = @findAnswerPlayer()
-      @props.rule.decide(answerPlayer, decision)
-      @props.rule.judge(answerPlayer)
+      @props.rule.judge(answerPlayer, judgeResult)
+      answerPlayer.state = @props.rule.checkNextState(answerPlayer)
       @state.quizCount++;
       @update (state) => state
 

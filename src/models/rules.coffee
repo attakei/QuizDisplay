@@ -5,9 +5,9 @@ PlayerState = require('./players').PlayerState
 Enum        = require('enum')
 
 
-# 解答者の状態
+# 正誤判定用Enum
 #
-@Decision = Decision =
+@Judge = Judge =
   new Enum([
     'Right'  # 正解
     'Wrong'  # 不正解
@@ -15,22 +15,22 @@ Enum        = require('enum')
 
 
 class RuleBase
-  decide: (player, decision) ->
-    if decision == Decision.Right
-      @_decideRight(player)
-    else if decision == Decision.Wrong
-      @_decideWrong(player)
+  judge: (player, judgeResult) ->
+    if judgeResult == Judge.Right
+      @_judgeRight(player)
+    else if judgeResult == Judge.Wrong
+      @_judgeWrong(player)
 
-  judge: (player)->
+  checkNextState: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
-      return PlayerState.None
-    if @_judgeWin(player)
+      return player.state
+    if @_checkStateWin(player)
       nextState = PlayerState.Win
-    else if @_judgeLose(player)
+    else if @_checkStateLose(player)
       nextState = PlayerState.Lose
     else
       nextState = PlayerState.Neutral
-    player.state = nextState
+#    player.state = nextState
     return nextState
 
 @RuleBase = RuleBase
@@ -45,16 +45,16 @@ class @MaruBatsuRule extends RuleBase
   title: ->
     @toWin + '◯' + @toLose + '✕'
 
-  _decideRight: (player) ->
+  _judgeRight: (player) ->
     player.rights++
 
-  _decideWrong: (player) ->
+  _judgeWrong: (player) ->
     player.wrongs++
 
-  _judgeWin: (player) ->
+  _checkStateWin: (player) ->
     player.rights >= @toWin
 
-  _judgeLose: (player) ->
+  _checkStateLose: (player) ->
     player.wrongs >= @toLose
 
   displayPositive: (player) ->
