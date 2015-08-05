@@ -3,7 +3,7 @@ stripDebug = require('gulp-strip-debug')
 less = require('gulp-less')
 coffee = require('gulp-coffee')
 jade = require('gulp-jade')
-reactJade = require('gulp-react-jade')
+reactJade = require('@mizchi/gulp-react-jade')
 
 config = require('../config')
 
