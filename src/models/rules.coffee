@@ -21,16 +21,16 @@ class RuleBase
     else if decision == Decision.Wrong
       @_decideWrong(player)
 
-  judge: (player)->
+  checkNextState: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
-      return PlayerState.None
-    if @_judgeWin(player)
+      return player.state
+    if @_checkStateWin(player)
       nextState = PlayerState.Win
-    else if @_judgeLose(player)
+    else if @_checkStateLose(player)
       nextState = PlayerState.Lose
     else
       nextState = PlayerState.Neutral
-    player.state = nextState
+#    player.state = nextState
     return nextState
 
 @RuleBase = RuleBase
@@ -51,10 +51,10 @@ class @MaruBatsuRule extends RuleBase
   _decideWrong: (player) ->
     player.wrongs++
 
-  _judgeWin: (player) ->
+  _checkStateWin: (player) ->
     player.rights >= @toWin
 
-  _judgeLose: (player) ->
+  _checkStateLose: (player) ->
     player.wrongs >= @toLose
 
   displayPositive: (player) ->

@@ -40,48 +40,48 @@ describe 'MaruBatsuRule test', () ->
       rule.decide(player, rules.Decision.Wrong)
       assert.equal 1, player.wrongs
 
-  it '#_judgeWin', () ->
+  it '#_checkStateWin', () ->
     rule = new TestTargetRule(7, 3)
     player = {rights: 6}
-    assert.equal false, rule._judgeWin(player)
+    assert.equal false, rule._checkStateWin(player)
     player.rights++
-    assert.equal true, rule._judgeWin(player)
+    assert.equal true, rule._checkStateWin(player)
 
-  it '#_judgeLose', () ->
+  it '#_checkStateLose', () ->
     rule = new TestTargetRule(7, 3)
     player = {wrongs: 2}
-    assert.equal false, rule._judgeLose(player)
+    assert.equal false, rule._checkStateLose(player)
     player.wrongs++
-    assert.equal true, rule._judgeLose(player)
+    assert.equal true, rule._checkStateLose(player)
 
-  describe '#judge', () ->
+  describe '#checkNextState', () ->
     rule = new TestTargetRule(7, 3)
 
     it 'If num of rights is more then rules, it change state', () ->
       player = {rights: 6, state: PlayerState.Neutral}
-      assert.equal PlayerState.Neutral, rule.judge(player)
+      assert.equal PlayerState.Neutral, rule.checkNextState(player)
       player.rights++
-      assert.equal PlayerState.Win, rule.judge(player)
-      assert.equal PlayerState.Win, player.state
+      assert.equal PlayerState.Win, rule.checkNextState(player)
+#      assert.equal PlayerState.Win, player.state
 
     it 'If num of wrongs is more then rules, change state to Lose', () ->
       player = {wrongs: 2, state: PlayerState.Neutral}
-      assert.equal PlayerState.Neutral, rule.judge(player)
+      assert.equal PlayerState.Neutral, rule.checkNextState(player)
       player.wrongs++
-      assert.equal PlayerState.Lose, rule.judge(player)
-      assert.equal PlayerState.Lose, player.state
+      assert.equal PlayerState.Lose, rule.checkNextState(player)
+#      assert.equal PlayerState.Lose, player.state
 
     it 'If state is already Win, it do not change state', () ->
       player = {rights: 7, wrongs: 2, state: PlayerState.Win}
-      assert.equal PlayerState.None, rule.judge(player)
+      assert.equal PlayerState.Win, rule.checkNextState(player)
       player.wrongs++
-      assert.equal PlayerState.None, rule.judge(player)
+      assert.equal PlayerState.Win, rule.checkNextState(player)
 
     it 'If state is already Win, it do not change state', () ->
       player = {rights: 6, wrongs: 3, state: PlayerState.Lose}
-      assert.equal PlayerState.None, rule.judge(player)
+      assert.equal PlayerState.Lose, rule.checkNextState(player)
       player.rights++
-      assert.equal PlayerState.None, rule.judge(player)
+      assert.equal PlayerState.Lose, rule.checkNextState(player)
 
   describe '#displayPositive', () ->
     rule = new TestTargetRule(7, 3)
