@@ -41,7 +41,7 @@ JudgePanel = React.createClass
     @dispatch 'through-answer'
 
   resetAnswer: ->
-    @dispatch 'reset-answer'
+    @dispatch 'answer::reset'
 
   render: ->
     require("./JudgePanel") @

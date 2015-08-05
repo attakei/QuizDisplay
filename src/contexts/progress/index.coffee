@@ -50,13 +50,10 @@ class @ProgressContext extends Arda.Context
       @state.quizCount++;
       @update (state) => state
 
-    subscribe 'reset-answer', ->
-      players_ = @state.players
-      for player in players_
+    subscribe 'answer::reset', ->
+      for player in @state.players
         player.state = PlayerState.Neutral
-      @update (state) =>
-        state.players= players_
-        return state
+      @update (state) => state
 
     subscribe 'end-progress', ->
       App.router.popContext()
