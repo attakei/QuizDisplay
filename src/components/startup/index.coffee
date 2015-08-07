@@ -1,5 +1,6 @@
 clone = require('clone')
 MaruBatsuForm = require('../_rules').MaruBatsuForm
+PointsRuleForm = require('../_rules').PointsRuleForm
 
 
 # InitComponent用mixn
@@ -26,6 +27,7 @@ StartupComponentActions =
   render: ->
     @PlayerEntryList = PlayerEntryList
     @MaruBatsuForm = MaruBatsuForm
+    @PointsRuleForm = PointsRuleForm
 
     require("./template") @
 

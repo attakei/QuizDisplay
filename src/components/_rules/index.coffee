@@ -17,3 +17,13 @@ clone = require('clone')
     param = clone @props
     param.toLose = +e.target.value
     @dispatch 'change::rule:param', param
+
+
+@PointsRuleForm = React.createClass
+  mixins: [
+    Arda.mixin
+  ]
+
+  render: ->
+    console.log @props.rule
+    require('./PointsRuleForm') @
