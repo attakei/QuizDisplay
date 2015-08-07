@@ -15,11 +15,30 @@ Enum        = require('enum')
 
 
 class RuleBase
+  # 正誤判定処理
+  #
+  # @example ある解答者が正解時
+  #   rule = new RuleBase()
+  #   player = {}
+  #   rule.judge(player, Judge.Right)
+  #
+  # @param [Player] 解答者
+  # @param [Judge] 正誤判定
   judge: (player, judgeResult) ->
     if judgeResult == Judge.Right
       @_judgeRight(player)
     else if judgeResult == Judge.Wrong
       @_judgeWrong(player)
+
+  # 正解処理
+  # オーバライドしない場合は正解数を増やす
+  _judgeRight: (player) ->
+    player.rights++
+
+  # 誤答処理
+  # オーバライドしない場合は誤答数を増やす
+  _judgeWrong: (player) ->
+    player.wrongs++
 
   checkNextState: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
@@ -45,12 +64,6 @@ class @MaruBatsuRule extends RuleBase
   title: ->
     @toWin + '◯' + @toLose + '✕'
 
-  _judgeRight: (player) ->
-    player.rights++
-
-  _judgeWrong: (player) ->
-    player.wrongs++
-
   _checkStateWin: (player) ->
     player.rights >= @toWin
 
@@ -70,6 +83,9 @@ class @MaruBatsuRule extends RuleBase
 
 class @PointsRule extends RuleBase
   constructor: (@scoreToWin=10, @scoreToLose=null, @scoreForRight=1, @scoreForWrong=-1) ->
+
+  title: ->
+    @scoreToWin + 'points'
 
   _judgeWin: (player) ->
     @calcScore(player) >= @scoreToWin

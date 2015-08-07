@@ -195,6 +195,19 @@ describe 'PointsRule', () ->
       player = {rights: 0, wrongs: 2, state: PlayerState.Neutral}
       assert.equal '失格', rule.displayNegative(player)
 
+  describe '#judge', () ->
+    rule = new TestTargetRule()
+
+    it 'test right', () ->
+      player = {rights: 0}
+      rule.judge(player, rules.Judge.Right)
+      assert.equal 1, player.rights
+
+    it 'test wrong', () ->
+      player = {wrongs: 0}
+      rule.judge(player, rules.Judge.Wrong)
+      assert.equal 1, player.wrongs
+
   it '#_judgeWin', () ->
     rule = new TestTargetRule()
     player = {rights: 9, wrongs: 0}
