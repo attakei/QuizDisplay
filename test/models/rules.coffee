@@ -231,37 +231,3 @@ describe 'PointsRule', () ->
       assert.equal false, rule._checkStateLose(player)
       player.wrongs++
       assert.equal false, rule._checkStateLose(player)
-
-  it '#_judgeWin', () ->
-    rule = new TestTargetRule()
-    player = {rights: 9, wrongs: 0}
-    assert.equal false, rule._judgeWin(player)
-    player.rights++
-    assert.equal true, rule._judgeWin(player)
-    player.wrongs++
-    assert.equal false, rule._judgeWin(player)
-    player.rights++
-    assert.equal true, rule._judgeWin(player)
-
-  describe '#_judgeLose', () ->
-    it 'has scoreToLose', () ->
-      rule = new TestTargetRule(10, -3)
-      player = {rights: 0, wrongs: 2}
-      assert.equal false, rule._judgeLose(player)
-      player.wrongs++
-      assert.equal true, rule._judgeLose(player)
-      player.rights++
-      assert.equal false, rule._judgeLose(player)
-      player.wrongs++
-      assert.equal true, rule._judgeLose(player)
-
-    it 'does not have scoreToLose', () ->
-      rule = new TestTargetRule(10)
-      player = {rights: 0, wrongs: 2}
-      assert.equal false, rule._judgeLose(player)
-      player.wrongs++
-      assert.equal false, rule._judgeLose(player)
-      player.rights++
-      assert.equal false, rule._judgeLose(player)
-      player.wrongs++
-      assert.equal false, rule._judgeLose(player)

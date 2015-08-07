@@ -96,12 +96,6 @@ class @PointsRule extends RuleBase
   _checkStateLose: (player) ->
     @scoreToLose != null and @calcScore(player) <= @scoreToLose
 
-  _judgeWin: (player) ->
-    @calcScore(player) >= @scoreToWin
-
-  _judgeLose: (player) ->
-    @scoreToLose != null and @calcScore(player) <= @scoreToLose
-
   calcScore: (player) ->
     return player.rights * @scoreForRight + player.wrongs * @scoreForWrong
 
