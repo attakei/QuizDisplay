@@ -1,7 +1,7 @@
 # --------------------------------------
 # ルール系モデルのテストケース
 # --------------------------------------
-require '../../src/globals'
+require '../spec_helper'
 assert         = require("assert")
 StartupContext = require('../../src/contexts/startup').StartupContext
 
@@ -31,3 +31,10 @@ describe 'MaruBatsuRule test', () ->
       state_.playerNames[1] = 'test'
       props_ = context.expandComponentProps({}, state_)
       assert.equal 'test', props_.playerNames[1]
+
+  # describe '#subscribers', () ->
+  #   it 'next prgress context', () ->
+  #     router = new Arda.Router(Arda.DefaultLayout, document.body)
+  #     router.pushContext(StartupContext, {}).then (context) =>
+  #       assert context instanceof Arda.Context
+  #       context.emit 'bar'
