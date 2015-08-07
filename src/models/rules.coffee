@@ -40,6 +40,9 @@ class RuleBase
   _judgeWrong: (player) ->
     player.wrongs++
 
+  # 解答者の現状から次の状態を決める
+  #
+  # @param [Player] 解答者
   checkNextState: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
       return player.state
@@ -86,6 +89,12 @@ class @PointsRule extends RuleBase
 
   title: ->
     @scoreToWin + 'points'
+
+  _checkStateWin: (player) ->
+    @calcScore(player) >= @scoreToWin
+
+  _checkStateLose: (player) ->
+    @scoreToLose != null and @calcScore(player) <= @scoreToLose
 
   _judgeWin: (player) ->
     @calcScore(player) >= @scoreToWin
