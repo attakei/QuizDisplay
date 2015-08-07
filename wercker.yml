@@ -16,3 +16,8 @@ deploy:
     - lukevivier/gh-pages:
         token: $GIT_TOKEN
         basedir: public
+    - attakei/ftp-deploy:
+        destination: ftp://$FTP_HOSTNAME/quizdisplay.attakei.net/$WERCKER_GIT_BRANCH
+        username: $FTP_USERNAME
+        password: $FTP_PASSWORD
+        target: public
