@@ -25,5 +25,4 @@ clone = require('clone')
   ]
 
   render: ->
-    console.log @props.rule
     require('./PointsRuleForm') @
