@@ -7,12 +7,12 @@ div(class="form-horizontal")
 
     label(class='col-sm-1 control-label') 誤答時
     div(class='col-sm-2')
-      input(type='text', class='form-control', defaultValue=props.rule.scoreForWrong)
+      input(type='text', class='form-control', name='scoreForWrong', defaultValue=props.rule.scoreForWrong, onChange=changeRuleParam)
 
   div(class='form-group')
     label(class='col-sm-1 control-label') 勝抜条件
     div(class='col-sm-2')
-      input(type='text', class='form-control', defaultValue=props.rule.toWin)
+      input(type='text', class='form-control', name='toWin', defaultValue=props.rule.toWin, onChange=changeRuleParam)
 
     label(class='col-sm-1 control-label') 失格条件
     div(class='col-sm-2')
