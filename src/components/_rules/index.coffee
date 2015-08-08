@@ -26,3 +26,8 @@ clone = require('clone')
 
   render: ->
     require('./PointsRuleForm') @
+
+  changeRuleParam: (e) ->
+    param = {}
+    param[e.target.name] = +e.target.value
+    @dispatch 'change::rule:param', param

@@ -37,9 +37,13 @@ class @StartupContext extends Arda.Context
       App.router.pushContext(ProgressContext, form)
 
     subscribe 'change::rule:param', (param) ->
-      @state.rule.toWin = param.toWin
-      @state.rule.toLose = param.toLose
-      @update (state) => state
+#      @state.rule.toWin = param.toWin
+#      @state.rule.toLose = param.toLose
+#      @update (state) => state
+      @update (state) =>
+        for key, value of param
+          state.rule[key] = value
+        state
 
     subscribe 'change::players', (updateData) ->
       @state.playerNames[updateData.dataIndex] = updateData.name
