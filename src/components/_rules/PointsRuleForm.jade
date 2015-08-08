@@ -16,10 +16,10 @@ div(class="form-horizontal")
 
     label(class='col-sm-1 control-label') 失格条件
     div(class='col-sm-2')
-      input(type='text', class='form-control', defaultValue=props.rule.toLose disabled=(props.rule.toLose == null))
+      input(type='text', class='form-control', name='toLose', valueLink=linkState('toLose'), disabled=(state.toLose == null))
 
     div(class='col-sm-3')
       div(class='checkbox')
         label
-          input(type='checkbox' checked=(props.rule.toLose == null))
+          input(type='checkbox' defaultChecked=(state.toLose == null), onChange=toggleToLose)
           | 失格なし
