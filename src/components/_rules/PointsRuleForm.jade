@@ -1,24 +1,25 @@
-div(class='form-group')
-  label +n/+m
-  div(class='form-inline')
-    div(class='form-group')
-      label= '正解時：'
+div(class="form-horizontal")
+  p +n/+m
+  div(class='form-group')
+    label(class='col-sm-1 control-label') 正解時
+    div(class='col-sm-2')
       input(type='text', class='form-control', defaultValue=props.rule.scoreForRight)
 
-    div(class='form-group')
-      label= '誤答時：'
+    label(class='col-sm-1 control-label') 誤答時
+    div(class='col-sm-2')
       input(type='text', class='form-control', defaultValue=props.rule.scoreForWrong)
 
-
-    div(class='form-group')
-      label 勝抜条件：
+  div(class='form-group')
+    label(class='col-sm-1 control-label') 勝抜条件
+    div(class='col-sm-2')
       input(type='text', class='form-control', defaultValue=props.rule.toWin)
-      | pts
 
-    div(class='form-group')
-      label 失格条件：
+    label(class='col-sm-1 control-label') 失格条件
+    div(class='col-sm-2')
       input(type='text', class='form-control', defaultValue=props.rule.toLose)
-      | pts
-      | (失格なし
-      input(type='checkbox' class='form-control' checked=(props.rule.toLose == null))
-      | )
+
+    div(class='col-sm-3')
+      div(class='checkbox')
+        label
+          input(type='checkbox' checked=(props.rule.toLose == null))
+          | 失格なし
