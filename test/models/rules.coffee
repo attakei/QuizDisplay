@@ -134,14 +134,14 @@ describe 'PointsRule', () ->
       rule = new TestTargetRule()
       assert.equal 10, rule.toWin
       assert.equal 1, rule.scoreForRight
-      assert.equal null, rule.toLose
+      assert.equal -3, rule.toLose
       assert.equal -1, rule.scoreForWrong
       assert.equal false, rule.hasLose
 
     it 'specify arg', () ->
-      rule = new TestTargetRule(2)
+      rule = new TestTargetRule(2, -1)
       assert.equal 2, rule.toWin
-      assert.equal null, rule.toLose
+      assert.equal -1, rule.toLose
       assert.equal -1, rule.scoreForWrong
       rule = new TestTargetRule(10,-2)
       assert.equal -2, rule.toLose
