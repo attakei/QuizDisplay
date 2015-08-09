@@ -6,4 +6,5 @@ global.navigator = window.navigator
 
 # Assert
 global.assert = require 'power-assert'
+
 require '../src/globals'
