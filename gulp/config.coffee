@@ -12,5 +12,9 @@ config.webpack =
     resolve:
       extensions: ['', '.js']
 
+config.packageJson = [
+  'version'
+  'main'
+]
 
 module.exports = config
