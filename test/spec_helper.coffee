@@ -7,4 +7,12 @@ global.navigator = window.navigator
 # Assert
 global.assert = require 'power-assert'
 
-require '../src/globals'
+# Application core
+global.Promise   = require 'bluebird'
+global.React     = require 'react/addons'
+global.Arda      = require 'arda'
+global.App ?= {}
+
+# TODO：当面はテストでは不要なのでコメントアウト
+# App.packageJson = require('json!./package.json')
+
