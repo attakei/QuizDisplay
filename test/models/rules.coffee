@@ -136,6 +136,7 @@ describe 'PointsRule', () ->
       assert.equal 1, rule.scoreForRight
       assert.equal null, rule.toLose
       assert.equal -1, rule.scoreForWrong
+      assert.equal false, rule.hasLose
 
     it 'specify arg', () ->
       rule = new TestTargetRule(2)
@@ -218,15 +219,16 @@ describe 'PointsRule', () ->
       assert.equal true, rule._checkStateWin(player)
 
   describe '#_checkStateLose', () ->
-    it 'has toLose', () ->
+    it 'has lose', () ->
       rule = new TestTargetRule(10, -10)
+      rule.hasLose = true
       player = {rights: 0, wrongs: 9, state: PlayerState.Neutral}
       assert.equal false, rule._checkStateLose(player)
       player.wrongs++
       assert.equal true, rule._checkStateLose(player)
 
     it 'not has toLose', () ->
-      rule = new TestTargetRule(10)
+      rule = new TestTargetRule(10, -10)
       player = {rights: 0, wrongs: 9, state: PlayerState.Neutral}
       assert.equal false, rule._checkStateLose(player)
       player.wrongs++

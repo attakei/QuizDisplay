@@ -85,7 +85,7 @@ class @MaruBatsuRule extends RuleBase
 
 
 class @PointsRule extends RuleBase
-  constructor: (@toWin=10, @toLose=null, @scoreForRight=1, @scoreForWrong=-1) ->
+  constructor: (@toWin=10, @toLose=-3, @scoreForRight=1, @scoreForWrong=-1, @hasLose=false) ->
 
   title: ->
     @toWin + 'points'
@@ -94,7 +94,7 @@ class @PointsRule extends RuleBase
     @calcScore(player) >= @toWin
 
   _checkStateLose: (player) ->
-    @toLose != null and @calcScore(player) <= @toLose
+    @hasLose and @calcScore(player) <= @toLose
 
   calcScore: (player) ->
     return player.rights * @scoreForRight + player.wrongs * @scoreForWrong

@@ -34,15 +34,9 @@ clone = require('clone')
   changeRuleParam: (e) ->
     param = {}
     param[e.target.name] = +e.target.value
-    @setState
-      toLose: param.toLose or @props.toLose
     @dispatch 'change::rule:param', param
 
   toggleToLose: (e) ->
-    if e.target.checked
-      param = {toLose: null}
-    else
-      param = {toLose: -10}
-    @setState
-      toLose: param.toLose
+    param = {}
+    param.hasLose = not e.target.checked
     @dispatch 'change::rule:param', param
