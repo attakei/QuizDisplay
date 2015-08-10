@@ -20,7 +20,7 @@ div
         //- div(class='form-group')
         //-   label(for='title') 企画名
         //-   input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
-        MaruBatsuForm(toWin=props.rule.toWin, toLose=props.rule.toLose)
+        MaruBatsuForm(rule=props.rule)
         //- PointsRuleForm(rule=props.rule)
         PlayerEntryList(playerNames=props.playerNames)
         button(type='button', class='btn btn-primary', onClick=handleSubmit) 開始！

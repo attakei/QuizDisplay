@@ -8,14 +8,9 @@ clone = require('clone')
   render: ->
     require('./MaruBatsuForm') @
 
-  changeToWin: (e) ->
-    param = clone @props
-    param.toWin = +e.target.value
-    @dispatch 'change::rule:param', param
-
-  changeToLose: (e) ->
-    param = clone @props
-    param.toLose = +e.target.value
+  changeRuleParam: (e) ->
+    param = {}
+    param[e.target.name] = +e.target.value
     @dispatch 'change::rule:param', param
 
 

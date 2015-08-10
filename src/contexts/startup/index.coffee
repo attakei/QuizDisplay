@@ -18,7 +18,7 @@ class @StartupContext extends Arda.Context
       programName: 'None title'
       maxPlayers: props.maxPlayers or 12
       # rule: new PointsRule(10, -3, 1, -1)
-      rule: new MaruBatsuRule()
+      rule: new MaruBatsuRule(7, 3)
     data.playerNames = ('' for _ in [0...data.maxPlayers])
     data
 
