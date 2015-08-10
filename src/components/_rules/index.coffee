@@ -1,5 +1,15 @@
 clone = require('clone')
 
+
+@RuleSelector = React.createClass
+  mixins: [
+    Arda.mixin
+  ]
+
+  render: ->
+    require('./RuleSelector') @
+
+
 @MaruBatsuRuleForm = React.createClass
   mixins: [
     Arda.mixin

@@ -20,6 +20,7 @@ div
         //- div(class='form-group')
         //-   label(for='title') 企画名
         //-   input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
+        RuleSelector(currentRule=props.rule)
         MaruBatsuRuleForm(rule=props.rule)
         //- PointsRuleForm(rule=props.rule)
         PlayerEntryList(playerNames=props.playerNames)
