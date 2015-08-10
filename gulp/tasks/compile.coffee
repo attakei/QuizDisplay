@@ -12,7 +12,7 @@ config = require('../config')
 gulp.task 'compile', (callback) ->
   runSequence = require('run-sequence')
   runSequence(
-    ['compile:jade:js' ,'compile:coffee', 'compile:less' ,'compile:jade:html'],
+    ['compile:jade:js' ,'compile:coffee', 'compile:less' ,'compile:jade:html', 'compile:packageJson'],
     callback
   )
 
