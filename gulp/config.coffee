@@ -28,4 +28,9 @@ config.electron =
       CFBundleVersion: '0.0.1'
       # icon: 'gulp-electron.icns'
 
+config.packageJson = [
+  'version'
+  'main'
+]
+
 module.exports = config

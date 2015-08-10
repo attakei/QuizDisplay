@@ -3,7 +3,8 @@ stripDebug = require('gulp-strip-debug')
 less = require('gulp-less')
 coffee = require('gulp-coffee')
 jade = require('gulp-jade')
-reactJade = require('gulp-react-jade')
+reactJade = require('@mizchi/gulp-react-jade')
+jsonTransform = require('gulp-json-transform')
 
 config = require('../config')
 
@@ -11,7 +12,7 @@ config = require('../config')
 gulp.task 'compile', (callback) ->
   runSequence = require('run-sequence')
   runSequence(
-    ['compile:jade:js' ,'compile:coffee', 'compile:less' ,'compile:jade:html'],
+    ['compile:jade:js' ,'compile:coffee', 'compile:less' ,'compile:jade:html', 'compile:packageJson'],
     callback
   )
 
@@ -35,6 +36,17 @@ gulp.task 'compile:less', ->
   gulp.src('src/css/**/*.less')
   .pipe(less())
   .pipe(gulp.dest(config.dest.compile + '/css'))
+
+gulp.task 'compile:packageJson', ->
+  gulp.src('package.json')
+    .pipe(jsonTransform((data) ->
+      ret = {}
+      for key, val of data
+        if key in config.packageJson
+          ret[key] = val
+      ret
+    ))
+    .pipe(gulp.dest(config.dest.compile))
 
 gulp.task 'copy:index', ->
   gulp.src(config.dest.compile + '/html/index.html')

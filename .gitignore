@@ -29,5 +29,6 @@ node_modules
 # gulp destination path
 /lib
 /public
-cache
-dist
+/cache
+/dist
+/trial
