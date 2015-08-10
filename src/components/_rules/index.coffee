@@ -1,12 +1,12 @@
 clone = require('clone')
 
-@MaruBatsuForm = React.createClass
+@MaruBatsuRuleForm = React.createClass
   mixins: [
     Arda.mixin
   ]
 
   render: ->
-    require('./MaruBatsuForm') @
+    require('./MaruBatsuRuleForm') @
 
   changeRuleParam: (e) ->
     param = {}

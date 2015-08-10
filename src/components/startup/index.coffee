@@ -1,5 +1,5 @@
 clone = require('clone')
-MaruBatsuForm = require('../_rules').MaruBatsuForm
+MaruBatsuRuleForm = require('../_rules').MaruBatsuRuleForm
 PointsRuleForm = require('../_rules').PointsRuleForm
 
 
@@ -26,7 +26,7 @@ StartupComponentActions =
 
   render: ->
     @PlayerEntryList = PlayerEntryList
-    @MaruBatsuForm = MaruBatsuForm
+    @MaruBatsuRuleForm = MaruBatsuRuleForm
     @PointsRuleForm = PointsRuleForm
 
     require("./template") @
