@@ -41,6 +41,8 @@ class @ProgressContext extends Arda.Context
 
     subscribe 'answer::decide', (judgeResult) ->
       answerPlayer = @findAnswerPlayer()
+      if answerPlayer == null
+        return
       @props.rule.judge(answerPlayer, judgeResult)
       answerPlayer.state = @props.rule.checkNextState(answerPlayer)
       @state.quizCount++;
