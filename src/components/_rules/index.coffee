@@ -7,6 +7,10 @@ clone = require('clone')
   ]
 
   render: ->
+    @idx = 0
+    for idx in @props.rules
+      if @props.rules[idx] == @props.currentRule
+        @idx = idx
     require('./RuleSelector') @
 
 

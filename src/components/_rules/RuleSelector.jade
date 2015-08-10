@@ -1,2 +1,5 @@
 div(class="form-horizontal")
-  select
+  select(class="form-control" value=idx)
+    - for idx in props.rules
+      - console.log(idx)
+      option(value=idx)= idx

@@ -17,9 +17,12 @@ class @StartupContext extends Arda.Context
       cnt: 0
       programName: 'None title'
       maxPlayers: props.maxPlayers or 12
-      # rule: new PointsRule(10, -3, 1, -1)
-      rule: new MaruBatsuRule(7, 3)
     data.playerNames = ('' for _ in [0...data.maxPlayers])
+    data.rules = [
+      new MaruBatsuRule(7, 3)
+      , new PointsRule(10, -3, 1, -1)
+    ]
+    data.currentRule = data.rules[0]
     data
 
   expandComponentProps: (props, state) ->
@@ -27,7 +30,8 @@ class @StartupContext extends Arda.Context
     programName: state.programName
     maxPlayers: state.maxPlayers
     playerNames: state.playerNames
-    rule: state.rule
+    rules: state.rules
+    currentRule: state.currentRule
 
   delegate: (subscribe) ->
     super
