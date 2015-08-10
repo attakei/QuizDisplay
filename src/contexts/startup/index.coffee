@@ -4,7 +4,7 @@
 #
 # --------------------------------------
 ProgressContext = require('../progress').ProgressContext
-PointsRule = require('../../models/rules').PointsRule
+{MaruBatsuRule, PointsRule} = require('../../models/rules')
 
 
 # 初期化画面用Context
@@ -17,7 +17,8 @@ class @StartupContext extends Arda.Context
       cnt: 0
       programName: 'None title'
       maxPlayers: props.maxPlayers or 12
-      rule: new PointsRule(10, -3, 1, -1)
+      # rule: new PointsRule(10, -3, 1, -1)
+      rule: new MaruBatsuRule(7, 3)
     data.playerNames = ('' for _ in [0...data.maxPlayers])
     data
 
