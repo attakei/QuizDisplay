@@ -1,5 +1,22 @@
 clone = require('clone')
 
+
+@RuleSelector = React.createClass
+  mixins: [
+    Arda.mixin
+  ]
+
+  render: ->
+    @idx = 0
+    for idx in @props.rules
+      if @props.rules[idx] == @props.currentRule
+        @idx = idx
+    require('./RuleSelector') @
+
+  selectRule: (e) ->
+    @dispatch 'change::rule', +e.target.value
+
+
 @MaruBatsuRuleForm = React.createClass
   mixins: [
     Arda.mixin

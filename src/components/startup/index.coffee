@@ -1,7 +1,10 @@
 clone = require('clone')
-MaruBatsuRuleForm = require('../_rules').MaruBatsuRuleForm
-PointsRuleForm = require('../_rules').PointsRuleForm
+{RuleSelector, MaruBatsuRuleForm, PointsRuleForm} = require('../_rules')
 
+Rules = [
+  MaruBatsuRuleForm,
+  PointsRuleForm
+]
 
 # InitComponent用mixn
 StartupComponentActions =
@@ -12,7 +15,7 @@ StartupComponentActions =
     formData = {}
     # TODO: beta2以降で随時戻すことを検討する
     # formData.programName = @linkState('programName').value
-    formData.programName = @linkState('programName').value or @props.rule.title()
+    formData.programName = @linkState('programName').value or @props.currentRule.title()
     # TODO: 仮に7◯3✕をセットする
     @dispatch 'start::program', formData
 
@@ -26,8 +29,8 @@ StartupComponentActions =
 
   render: ->
     @PlayerEntryList = PlayerEntryList
-    @MaruBatsuRuleForm = MaruBatsuRuleForm
-    @PointsRuleForm = PointsRuleForm
+    @RuleSelector = RuleSelector
+    @RulrForm = Rules[@props.rules.indexOf(@props.currentRule)]
 
     require("./template") @
 

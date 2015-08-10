@@ -64,6 +64,9 @@ n○m✕形式ルール
 class @MaruBatsuRule extends RuleBase
   constructor: (@toWin, @toLose) ->
 
+  baseTitle:
+    'n○m✕形式'
+
   title: ->
     @toWin + '◯' + @toLose + '✕'
 
@@ -86,6 +89,9 @@ class @MaruBatsuRule extends RuleBase
 
 class @PointsRule extends RuleBase
   constructor: (@toWin=10, @toLose=-3, @scoreForRight=1, @scoreForWrong=-1, @hasLose=false) ->
+
+  baseTitle:
+    '+n/-m形式'
 
   title: ->
     @toWin + 'points'
