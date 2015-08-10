@@ -13,6 +13,9 @@ clone = require('clone')
         @idx = idx
     require('./RuleSelector') @
 
+  selectRule: (e) ->
+    @dispatch 'change::rule', +e.target.value
+
 
 @MaruBatsuRuleForm = React.createClass
   mixins: [

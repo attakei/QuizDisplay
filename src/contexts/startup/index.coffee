@@ -37,9 +37,14 @@ class @StartupContext extends Arda.Context
     super
 
     subscribe 'start::program', (form) ->
-      form.rule = @state.rule
+      form.rule = @state.currentRule
       form.playerNames = @state.playerNames
       App.router.pushContext(ProgressContext, form)
+
+    subscribe 'change::rule', (index) ->
+      @update (state) =>
+        state.currentRule = state.rules[index]
+        state
 
     subscribe 'change::rule:param', (param) ->
 #      @state.rule.toWin = param.toWin
@@ -47,7 +52,7 @@ class @StartupContext extends Arda.Context
 #      @update (state) => state
       @update (state) =>
         for key, value of param
-          state.rule[key] = value
+          state.currentRule[key] = value
         state
 
     subscribe 'change::players', (updateData) ->

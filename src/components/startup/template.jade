@@ -21,7 +21,7 @@ div
         //-   label(for='title') 企画名
         //-   input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
         RuleSelector(rules=props.rules, currentRule=props.currentRule)
-        MaruBatsuRuleForm(rule=props.currentRule)
+        RulrForm(rule=props.currentRule)
         //- PointsRuleForm(rule=props.rule)
         PlayerEntryList(playerNames=props.playerNames)
         button(type='button', class='btn btn-primary', onClick=handleSubmit) 開始！
