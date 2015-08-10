@@ -29,6 +29,7 @@ config.electron =
       # icon: 'gulp-electron.icns'
 
 config.packageJson = [
+  'name'
   'version'
   'main'
 ]

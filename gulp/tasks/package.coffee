@@ -44,7 +44,10 @@ gulp.task 'webpack', ->
 
 
 gulp.task 'atom:json', (callback) ->
-  gulp.src(['package.json', config.dest.compile + '/' + config.electron.packageJson.main])
+  gulp.src([
+      config.dest.compile + '/' + 'package.json',
+      config.dest.compile + '/' + config.electron.packageJson.main
+    ])
     .pipe(gulp.dest(config.dest.package))
 
 
