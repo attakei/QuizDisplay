@@ -1,5 +1,4 @@
 div(class="form-horizontal")
   select(class="form-control" value=idx)
-    - for idx in props.rules
-      - console.log(idx)
-      option(value=idx)= idx
+    - for rule, idx in props.rules
+      option(value=idx)= rule.baseTitle
