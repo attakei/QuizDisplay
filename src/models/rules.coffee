@@ -2,65 +2,112 @@
 # ルール系モデル
 # --------------------------------------
 PlayerState = require('./players').PlayerState
+Enum        = require('enum')
+
+
+# 正誤判定用Enum
+#
+@Judge = Judge =
+  new Enum([
+    'Right'  # 正解
+    'Wrong'  # 不正解
+  ])
+
 
 class RuleBase
-  judge: (player)->
+  # 正誤判定処理
+  #
+  # @example ある解答者が正解時
+  #   rule = new RuleBase()
+  #   player = {}
+  #   rule.judge(player, Judge.Right)
+  #
+  # @param [Player] 解答者
+  # @param [Judge] 正誤判定
+  judge: (player, judgeResult) ->
+    if judgeResult == Judge.Right
+      @_judgeRight(player)
+    else if judgeResult == Judge.Wrong
+      @_judgeWrong(player)
+
+  # 正解処理
+  # オーバライドしない場合は正解数を増やす
+  _judgeRight: (player) ->
+    player.rights++
+
+  # 誤答処理
+  # オーバライドしない場合は誤答数を増やす
+  _judgeWrong: (player) ->
+    player.wrongs++
+
+  # 解答者の現状から次の状態を決める
+  #
+  # @param [Player] 解答者
+  checkNextState: (player)->
     if player.state == PlayerState.Win or player.state == PlayerState.Lose
-      return PlayerState.None
-    if @judgeWin(player)
+      return player.state
+    if @_checkStateWin(player)
       nextState = PlayerState.Win
-    else if @judgeLose(player)
+    else if @_checkStateLose(player)
       nextState = PlayerState.Lose
     else
       nextState = PlayerState.Neutral
-    player.state = nextState
+#    player.state = nextState
     return nextState
+
+@RuleBase = RuleBase
 
 
 ###
 n○m✕形式ルール
 ###
 class @MaruBatsuRule extends RuleBase
-  constructor: (rightsForWin, wrongsForLose) ->
-    @rightsForWin = rightsForWin
-    @wrongsForLose = wrongsForLose
+  constructor: (@toWin, @toLose) ->
 
-  judgeWin: (player) ->
-    player.numOfRights >= @rightsForWin
+  baseTitle:
+    'n○m✕形式'
 
-  judgeLose: (player) ->
-    player.numOfWrongs >= @wrongsForLose
+  title: ->
+    @toWin + '◯' + @toLose + '✕'
+
+  _checkStateWin: (player) ->
+    player.rights >= @toWin
+
+  _checkStateLose: (player) ->
+    player.wrongs >= @toLose
 
   displayPositive: (player) ->
-    if player.state == PlayerState.Win or player.numOfRights >= @rightsForWin
+    if player.state == PlayerState.Win or player.rights >= @toWin
       return '勝抜'
-    '◯ ' + player.numOfRights
+    '◯ ' + player.rights
 
   displayNegative: (player) ->
-    if player.state == PlayerState.Lose or player.numOfWrongs >= @wrongsForLose
+    if player.state == PlayerState.Lose or player.wrongs >= @toLose
       return '失格'
-    '✕ ' + player.numOfWrongs
+    '✕ ' + player.wrongs
 
 
 class @PointsRule extends RuleBase
-  constructor: (scoreToWin=10, scoreToLose=null, scoreForRight=1, scoreForWrong=-1) ->
-    @scoreToWin = scoreToWin
-    @scoreToLose = scoreToLose
-    @scoreForRight = scoreForRight
-    @scoreForWrong = scoreForWrong
+  constructor: (@toWin=10, @toLose=-3, @scoreForRight=1, @scoreForWrong=-1, @hasLose=false) ->
 
-  judgeWin: (player) ->
-    @calcScore(player) >= @scoreToWin
+  baseTitle:
+    '+n/-m形式'
 
-  judgeLose: (player) ->
-    @scoreToLose != null and @calcScore(player) <= @scoreToLose
+  title: ->
+    @toWin + 'points'
+
+  _checkStateWin: (player) ->
+    @calcScore(player) >= @toWin
+
+  _checkStateLose: (player) ->
+    @hasLose and @calcScore(player) <= @toLose
 
   calcScore: (player) ->
-    return player.numOfRights * @scoreForRight + player.numOfWrongs * @scoreForWrong
+    return player.rights * @scoreForRight + player.wrongs * @scoreForWrong
 
   displayPositive: (player) ->
     score = @calcScore(player)
-    if score >= @scoreToWin
+    if score >= @toWin
       return '勝抜'
     else if score >= 0
       return score + ' pts'
@@ -68,7 +115,7 @@ class @PointsRule extends RuleBase
 
   displayNegative: (player) ->
     score = @calcScore(player)
-    if @scoreToLose != null and score <= @scoreToLose
+    if @toLose != null and score <= @toLose
       return '失格'
     if score < 0
       return score + ' pts'

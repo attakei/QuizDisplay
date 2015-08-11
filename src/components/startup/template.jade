@@ -11,7 +11,9 @@ div
               | menu
               span(class='caret')/
             ul(class='dropdown-menu')
+              //- li: a(onClick=resetForm) リセット
               //- li: a(onClick=goToCredit) クレジット
+              li: a= 'ver: ' + App.packageJson.version
 
   div(class='container')
     div(class='row')
@@ -19,12 +21,8 @@ div
         //- div(class='form-group')
         //-   label(for='title') 企画名
         //-   input(type='text', class='form-control', id='programName', valueLink=linkState('programName'))
-        MaruBatsuForm(toWin=props.rule.props.toWin, toLose=props.rule.props.toLose)
-        div(class='form-group')
-          label(for='players') 参加者
-          - for (i = 0; i < props.maxPlayers; i++)
-          input(type='text', class='form-control', style={margin:'5px'}, valueLink=linkState('player[' + i + ']'))
-          //- p(class='help-block') Example block-level help text here.
+        RuleSelector(rules=props.rules, currentRule=props.currentRule)
+        RulrForm(rule=props.currentRule)
+        //- PointsRuleForm(rule=props.rule)
+        PlayerEntryList(playerNames=props.playerNames)
         button(type='button', class='btn btn-primary', onClick=handleSubmit) 開始！
-
-  BootstrapFooter

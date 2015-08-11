@@ -1,0 +1,25 @@
+div(class="form-horizontal")
+  h3 +n/+m
+  div(class='form-group')
+    label(class='col-sm-2 control-label') 正解時
+    div(class='col-sm-2')
+      input(type='text', class='form-control', name='scoreForRight', defaultValue=props.rule.scoreForRight, onChange=changeRuleParam)
+
+    label(class='col-sm-2 control-label') 誤答時
+    div(class='col-sm-2')
+      input(type='text', class='form-control', name='scoreForWrong', defaultValue=props.rule.scoreForWrong, onChange=changeRuleParam)
+
+  div(class='form-group')
+    label(class='col-sm-2 control-label') 勝抜条件
+    div(class='col-sm-2')
+      input(type='text', class='form-control', name='toWin', defaultValue=props.rule.toWin, onChange=changeRuleParam)
+
+    label(class='col-sm-2 control-label') 失格条件
+    div(class='col-sm-2')
+      input(type='text', class='form-control', name='toLose', defaultValue=props.rule.toLose, disabled=!props.rule.hasLose, onChange=changeRuleParam)
+
+    div(class='col-sm-3')
+      div(class='checkbox')
+        label
+          input(type='checkbox' defaultChecked=!props.rule.hasLose, onChange=toggleToLose)
+          | 失格なし
