@@ -1,19 +1,54 @@
 clone = require('clone')
 
-@MaruBatsuForm = React.createClass
+
+@RuleSelector = React.createClass
   mixins: [
     Arda.mixin
   ]
 
   render: ->
-    require('./MaruBatsuForm') @
+    @idx = 0
+    for idx in @props.rules
+      if @props.rules[idx] == @props.currentRule
+        @idx = idx
+    require('./RuleSelector') @
 
-  changeToWin: (e) ->
-    param = clone @props
-    param.toWin = +e.target.value
+  selectRule: (e) ->
+    @dispatch 'change::rule', +e.target.value
+
+
+@MaruBatsuRuleForm = React.createClass
+  mixins: [
+    Arda.mixin
+  ]
+
+  render: ->
+    require('./MaruBatsuRuleForm') @
+
+  changeRuleParam: (e) ->
+    param = {}
+    param[e.target.name] = +e.target.value
     @dispatch 'change::rule:param', param
 
-  changeToLose: (e) ->
-    param = clone @props
-    param.toLose = +e.target.value
+
+@PointsRuleForm = React.createClass
+  mixins: [
+    Arda.mixin,
+    React.addons.LinkedStateMixin,
+  ]
+
+  getInitialState: ->
+    toLose: @props.rule.toLose or null
+
+  render: ->
+    require('./PointsRuleForm') @
+
+  changeRuleParam: (e) ->
+    param = {}
+    param[e.target.name] = +e.target.value
+    @dispatch 'change::rule:param', param
+
+  toggleToLose: (e) ->
+    param = {}
+    param.hasLose = not e.target.checked
     @dispatch 'change::rule:param', param

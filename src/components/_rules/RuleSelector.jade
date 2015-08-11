@@ -1,0 +1,4 @@
+div(class="form-horizontal")
+  select(class="form-control" defaultValue=idx, onChange=selectRule)
+    - for rule, idx in props.rules
+      option(value=idx)= rule.baseTitle
