@@ -132,18 +132,19 @@ describe 'PointsRule', () ->
   describe '#constructor', () ->
     it 'default', () ->
       rule = new TestTargetRule()
-      assert.equal 10, rule.scoreToWin
+      assert.equal 10, rule.toWin
       assert.equal 1, rule.scoreForRight
-      assert.equal null, rule.scoreToLose
+      assert.equal -3, rule.toLose
       assert.equal -1, rule.scoreForWrong
+      assert.equal false, rule.hasLose
 
     it 'specify arg', () ->
-      rule = new TestTargetRule(2)
-      assert.equal 2, rule.scoreToWin
-      assert.equal null, rule.scoreToLose
+      rule = new TestTargetRule(2, -1)
+      assert.equal 2, rule.toWin
+      assert.equal -1, rule.toLose
       assert.equal -1, rule.scoreForWrong
       rule = new TestTargetRule(10,-2)
-      assert.equal -2, rule.scoreToLose
+      assert.equal -2, rule.toLose
 
   describe '#calcScore', () ->
     it 'default', () ->
@@ -195,36 +196,40 @@ describe 'PointsRule', () ->
       player = {rights: 0, wrongs: 2, state: PlayerState.Neutral}
       assert.equal '失格', rule.displayNegative(player)
 
-  it '#_judgeWin', () ->
+  describe '#judge', () ->
     rule = new TestTargetRule()
-    player = {rights: 9, wrongs: 0}
-    assert.equal false, rule._judgeWin(player)
-    player.rights++
-    assert.equal true, rule._judgeWin(player)
-    player.wrongs++
-    assert.equal false, rule._judgeWin(player)
-    player.rights++
-    assert.equal true, rule._judgeWin(player)
 
-  describe '#_judgeLose', () ->
-    it 'has scoreToLose', () ->
-      rule = new TestTargetRule(10, -3)
-      player = {rights: 0, wrongs: 2}
-      assert.equal false, rule._judgeLose(player)
-      player.wrongs++
-      assert.equal true, rule._judgeLose(player)
-      player.rights++
-      assert.equal false, rule._judgeLose(player)
-      player.wrongs++
-      assert.equal true, rule._judgeLose(player)
+    it 'test right', () ->
+      player = {rights: 0}
+      rule.judge(player, rules.Judge.Right)
+      assert.equal 1, player.rights
 
-    it 'does not have scoreToLose', () ->
-      rule = new TestTargetRule(10)
-      player = {rights: 0, wrongs: 2}
-      assert.equal false, rule._judgeLose(player)
-      player.wrongs++
-      assert.equal false, rule._judgeLose(player)
+    it 'test wrong', () ->
+      player = {wrongs: 0}
+      rule.judge(player, rules.Judge.Wrong)
+      assert.equal 1, player.wrongs
+
+  describe '#_checkStateWin', () ->
+    rule = new TestTargetRule()
+
+    it '', ->
+      player = {rights: 9, wrongs: 0, state: PlayerState.Neutral}
+      assert.equal false, rule._checkStateWin(player)
       player.rights++
-      assert.equal false, rule._judgeLose(player)
+      assert.equal true, rule._checkStateWin(player)
+
+  describe '#_checkStateLose', () ->
+    it 'has lose', () ->
+      rule = new TestTargetRule(10, -10)
+      rule.hasLose = true
+      player = {rights: 0, wrongs: 9, state: PlayerState.Neutral}
+      assert.equal false, rule._checkStateLose(player)
       player.wrongs++
-      assert.equal false, rule._judgeLose(player)
+      assert.equal true, rule._checkStateLose(player)
+
+    it 'not has toLose', () ->
+      rule = new TestTargetRule(10, -10)
+      player = {rights: 0, wrongs: 9, state: PlayerState.Neutral}
+      assert.equal false, rule._checkStateLose(player)
+      player.wrongs++
+      assert.equal false, rule._checkStateLose(player)
